@@ -14,6 +14,7 @@ from transformers.models.llama.modeling_llama import (
     LlamaDynamicNTKScalingRotaryEmbedding,
     rotate_half,
     repeat_kv,
+    ACT2FN,
     LlamaMLP,
     LlamaRMSNorm,
     LlamaDecoderLayer,
@@ -103,7 +104,7 @@ class PtAttention(nn.Module):
         Modifications compared to standard transformers (Llama):
         1. It ties the weights between the query, key, value and output projections.
         2. It applies the rotary position embedding to the value and output tensors.
-        3. TODO: The output tensor is a sum of two tensors from the attention outputs.
+        3. TODO: The output tensor is a sum of two tensors from the attention outputs. (impossible for causal attention)
         4. TODO: Mask the diagonal of the attention matrix. (Maybe it should be done in other classes?)
         """
         super().__init__()
@@ -272,6 +273,24 @@ class PtAttention(nn.Module):
         return attn_output, attn_weights, past_key_value
 
 
+class PtMLP(LlamaMLP):
+    def __init__(self, config):
+        super(LlamaMLP, self).__init__()
+        self.config = config
+        self.hidden_size = config.hidden_size
+        self.intermediate_size = config.intermediate_size
+        self.gate_proj = nn.Linear(self.hidden_size, self.intermediate_size, bias=False)
+        self.up_proj = nn.Linear(self.hidden_size, self.intermediate_size, bias=False)
+        self.down_proj = TransposedLinear(self.intermediate_size, self.hidden_size, bias=False)
+        self.act_fn = ACT2FN[config.hidden_act]
+        self._tie_proj_weights()
+    
+    def _tie_proj_weights(self):
+        """
+        Tie the weights between the query, key, and value projections.
+        """
+        self.up_proj.weight = self.down_proj.weight
+
 
 class PtDecoderLayer(LlamaDecoderLayer):
     def __init__(self, config: PtConfig):
@@ -282,7 +301,7 @@ class PtDecoderLayer(LlamaDecoderLayer):
             # if not getattr(config, "_flash_attn_2_enabled", False)
             # else LlamaFlashAttention2(config=config)
         )
-        self.mlp = LlamaMLP(config)
+        self.mlp = PtMLP(config)
         self.input_layernorm = LlamaRMSNorm(config.hidden_size, eps=config.rms_norm_eps)
         self.post_attention_layernorm = LlamaRMSNorm(config.hidden_size, eps=config.rms_norm_eps)
 
