@@ -43,6 +43,7 @@ accelerate launch run_clm.py \
     --save_steps 200 \
     --evaluation_strategy steps \
     --eval_steps 200 \
+    --logging_steps 50 \
     --load_best_model_at_end True \
     --metric_for_best_model eval_loss \
     --report_to none \
