@@ -64,6 +64,36 @@ def apply_rotary_pos_emb_o(o, cos, sin, position_ids, unsqueeze_dim=1):
     o_embed = (o * cos) - (rotate_half(o) * sin)
     return o_embed
 
+class TransposedLinear(nn.Linear):
+    """
+    Same as Linear, but we store the transpose of the weight
+    """
+    def __init__(self, in_features: int, out_features: int, bias: bool = True,
+                 device=None, dtype=None) -> None:
+        factory_kwargs = {'device': device, 'dtype': dtype}
+        super(nn.Linear, self).__init__()
+        self.in_features = in_features
+        self.out_features = out_features
+        self.weight = nn.Parameter(torch.empty((in_features, out_features), **factory_kwargs))
+        if bias:
+            self.bias = nn.Parameter(torch.empty(out_features, **factory_kwargs))
+        else:
+            self.register_parameter('bias', None)
+        self.reset_parameters()
+    
+    def reset_parameters(self) -> None:
+        # Setting a=sqrt(5) in kaiming_uniform is the same as initializing with
+        # uniform(-1/sqrt(in_features), 1/sqrt(in_features)). For details, see
+        # https://github.com/pytorch/pytorch/issues/57109
+        nn.init.kaiming_uniform_(self.weight, a=math.sqrt(5), mode='fan_out')
+        if self.bias is not None:
+            fan_in, _ = nn.init._calculate_fan_in_and_fan_out(self.weight.T)
+            bound = 1 / math.sqrt(fan_in) if fan_in > 0 else 0
+            nn.init.uniform_(self.bias, -bound, bound)
+    
+    def forward(self, input: torch.Tensor) -> torch.Tensor:
+        return F.linear(input, self.weight.T, self.bias)
+
 
 class PtAttention(nn.Module):
     """Multi-channel update from 'Probabilistic Transformer' paper"""
@@ -97,7 +127,7 @@ class PtAttention(nn.Module):
         self.q_proj = nn.Linear(self.hidden_size, self.num_heads * self.head_dim)
         self.k_proj = nn.Linear(self.hidden_size, self.num_key_value_heads * self.head_dim)
         self.v_proj = nn.Linear(self.hidden_size, self.num_key_value_heads * self.head_dim)
-        self.o_proj = nn.Linear(self.num_heads * self.head_dim, self.hidden_size)
+        self.o_proj = TransposedLinear(self.num_heads * self.head_dim, self.hidden_size)
         self._tie_qkvo_weights()
         self._init_rope()
 
@@ -133,7 +163,7 @@ class PtAttention(nn.Module):
         Tie the weights between the query, key, and value projections.
         """
         self.v_proj.weight = self.k_proj.weight
-        self.o_proj.weight = self.q_proj.weight.T
+        self.o_proj.weight = self.q_proj.weight
 
     def _shape(self, tensor: torch.Tensor, seq_len: int, bsz: int):
         return tensor.view(bsz, seq_len, self.num_heads, self.head_dim).transpose(1, 2).contiguous()
