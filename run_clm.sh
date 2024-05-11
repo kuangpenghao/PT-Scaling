@@ -21,7 +21,7 @@ echo "Slurm job id: $SLURM_JOB_ID"
 #  - to enable wandb, use `--report_to wandb`
 accelerate launch run_clm.py \
     --tokenizer_name TinyLlama/TinyLlama-1.1B-intermediate-step-955k-token-2T \
-    --config_name configs/pt_tiny.json \
+    --config_name configs/pt_medium.json \
     --dataset_name wikitext \
     --dataset_config_name wikitext-103-raw-v1 \
     --per_device_train_batch_size 32 \
@@ -47,7 +47,7 @@ accelerate launch run_clm.py \
     --load_best_model_at_end True \
     --metric_for_best_model eval_loss \
     --report_to none \
-    --run_name pt-tiny-test \
+    --run_name pt-medium-test \
     --overwrite_output_dir \
-    --output_dir outputs/pt-tiny-test
+    --output_dir outputs/pt-medium-test
 
