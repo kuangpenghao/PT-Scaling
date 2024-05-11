@@ -24,11 +24,11 @@ accelerate launch run_clm.py \
     --config_name configs/pt_medium.json \
     --dataset_name wikitext \
     --dataset_config_name wikitext-103-raw-v1 \
-    --per_device_train_batch_size 32 \
-    --per_device_eval_batch_size 32 \
+    --per_device_train_batch_size 16 \
+    --per_device_eval_batch_size 16 \
     --auto_find_batch_size \
     --gradient_accumulation_steps 1 \
-    --block_size 1024 \
+    --block_size 2048 \
     --lr_scheduler_type cosine \
     --warmup_ratio 0.015 \
     --learning_rate 3e-4 \
