@@ -29,3 +29,21 @@ logger = logging.get_logger(__name__)
 class PtConfig(LlamaConfig):
     model_type = "pt"
     keys_to_ignore_at_inference = ["past_key_values"]
+
+    def __init__(
+        self,
+        use_shared_kv: bool = False,
+        use_shared_qo: bool = False,
+        use_shared_mlp: bool = False,
+        use_squared_softmax_pre_attn: bool = False,
+        use_squared_softmax_post_attn: bool = False,
+        use_squared_softmax_final: bool = False,
+        **kwargs,
+    ):
+        super().__init__(**kwargs)
+        self.use_shared_kv = use_shared_kv
+        self.use_shared_qo = use_shared_qo
+        self.use_shared_mlp = use_shared_mlp
+        self.use_squared_softmax_pre_attn = use_squared_softmax_pre_attn
+        self.use_squared_softmax_post_attn = use_squared_softmax_post_attn
+        self.use_squared_softmax_final = use_squared_softmax_final

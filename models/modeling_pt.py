@@ -96,6 +96,21 @@ class TransposedLinear(nn.Linear):
         return F.linear(input, self.weight.T, self.bias)
 
 
+class SquaredSoftmax(nn.Module):
+    def __init__(self, hidden_size, eps=1e-6):
+        super().__init__()
+        self.weight = nn.Parameter(torch.ones(hidden_size))
+        self.variance_epsilon = eps
+    
+    def forward(self, hidden_states: torch.Tensor):
+        input_dtype = hidden_states.dtype
+        hidden_states = hidden_states.to(torch.float32)
+        hidden_states = hidden_states.pow(2)
+        variance = hidden_states.mean(-1, keepdim=True)
+        hidden_states = hidden_states / (variance + self.variance_epsilon)
+        return self.weight * hidden_states.to(input_dtype)
+
+
 class PtAttention(nn.Module):
     """Multi-channel update from 'Probabilistic Transformer' paper"""
 
@@ -163,8 +178,11 @@ class PtAttention(nn.Module):
         """
         Tie the weights between the query, key, and value projections.
         """
-        self.v_proj.weight = self.k_proj.weight
-        self.o_proj.weight = self.q_proj.weight
+        if self.config.use_shared_kv:
+            self.v_proj.weight = self.k_proj.weight
+        
+        if self.config.use_shared_qo:
+            self.o_proj.weight = self.q_proj.weight
 
     def _shape(self, tensor: torch.Tensor, seq_len: int, bsz: int):
         return tensor.view(bsz, seq_len, self.num_heads, self.head_dim).transpose(1, 2).contiguous()
@@ -289,7 +307,8 @@ class PtMLP(LlamaMLP):
         """
         Tie the weights between the query, key, and value projections.
         """
-        self.up_proj.weight = self.down_proj.weight
+        if self.config.use_shared_mlp:
+            self.up_proj.weight = self.down_proj.weight
 
 
 class PtDecoderLayer(LlamaDecoderLayer):
@@ -302,8 +321,10 @@ class PtDecoderLayer(LlamaDecoderLayer):
             # else LlamaFlashAttention2(config=config)
         )
         self.mlp = PtMLP(config)
-        self.input_layernorm = LlamaRMSNorm(config.hidden_size, eps=config.rms_norm_eps)
-        self.post_attention_layernorm = LlamaRMSNorm(config.hidden_size, eps=config.rms_norm_eps)
+        layernorm = SquaredSoftmax if config.use_squared_softmax_pre_attn else LlamaRMSNorm
+        self.input_layernorm = layernorm(config.hidden_size, eps=config.rms_norm_eps)
+        layernorm = SquaredSoftmax if config.use_squared_softmax_post_attn else LlamaRMSNorm
+        self.post_attention_layernorm = layernorm(config.hidden_size, eps=config.rms_norm_eps)
 
 
 class PtModel(LlamaModel):
@@ -315,7 +336,8 @@ class PtModel(LlamaModel):
 
         self.embed_tokens = nn.Embedding(config.vocab_size, config.hidden_size, self.padding_idx)
         self.layers = nn.ModuleList([PtDecoderLayer(config) for _ in range(config.num_hidden_layers)])
-        self.norm = LlamaRMSNorm(config.hidden_size, eps=config.rms_norm_eps)
+        layernorm = SquaredSoftmax if config.use_squared_softmax_final else LlamaRMSNorm
+        self.norm = layernorm(config.hidden_size, eps=config.rms_norm_eps)
 
         self.gradient_checkpointing = False
         # Initialize weights and apply final processing
