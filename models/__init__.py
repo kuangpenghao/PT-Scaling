@@ -1,7 +1,7 @@
 from .configuration_pt import PtConfig
-from .modeling_pt import PtModel, PtForCausalLM
+from .modeling_pt import PtModel, PtForMaskedLM
 
-from transformers import AutoConfig, AutoModel, AutoModelForCausalLM
+from transformers import AutoConfig, AutoModel, AutoModelForMaskedLM
 AutoConfig.register("pt", PtConfig)
 AutoModel.register(PtConfig, PtModel)
-AutoModelForCausalLM.register(PtConfig, PtForCausalLM)
+AutoModelForMaskedLM.register(PtConfig, PtForMaskedLM)
