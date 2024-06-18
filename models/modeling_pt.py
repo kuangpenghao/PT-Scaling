@@ -208,6 +208,8 @@ class PtTopicModeling(nn.Module):
         if self.potential_func == "square":
             self.squared_softmax = SquaredSoftmax(self.dim_g, eps=config.squared_softmax_eps)
         
+        self._init_binary()
+        
     def _init_binary(self):
         nn.init.kaiming_uniform_(self.binary_factor, a=math.sqrt(5))
 
@@ -218,7 +220,7 @@ class PtTopicModeling(nn.Module):
             qg = F.softmax(qg, dim=-1)
         elif self.potential_func == "abs":
             qg = F.relu(qg)
-            qg = F.normalize(qg, p=1, dim=-1)
+            qg = F.normalize(qg, p=1, dim=-1, eps=1e-6)
         elif self.potential_func == "square":
             qg = self.squared_softmax(qg)
         else:

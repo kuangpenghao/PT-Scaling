@@ -28,6 +28,7 @@ python run_mlm.py \
     --per_device_eval_batch_size 8 \
     --do_train \
     --do_eval \
+    --learning_rate 3e-4 \
     --num_train_epochs 1 \
     --save_total_limit 1 \
     --logging_steps 1 \
