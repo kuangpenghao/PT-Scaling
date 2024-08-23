@@ -28,9 +28,9 @@ logger = logging.get_logger(__name__)
 
 class PtConfig(PretrainedConfig):
     r"""
-    This is the configuration class to store the configuration of a [`LlamaModel`]. It is used to instantiate an LLaMA
+    This is the configuration class to store the configuration of a [`PtModel`]. It is used to instantiate an Pt
     model according to the specified arguments, defining the model architecture. Instantiating a configuration with the
-    defaults will yield a similar configuration to that of the LLaMA-7B.
+    defaults will yield a similar configuration to that of the Llama-7B.
 
     Configuration objects inherit from [`PretrainedConfig`] and can be used to control the model outputs. Read the
     documentation from [`PretrainedConfig`] for more information.
@@ -38,8 +38,8 @@ class PtConfig(PretrainedConfig):
 
     Args:
         vocab_size (`int`, *optional*, defaults to 32000):
-            Vocabulary size of the LLaMA model. Defines the number of different tokens that can be represented by the
-            `inputs_ids` passed when calling [`LlamaModel`]
+            Vocabulary size of the Pt model. Defines the number of different tokens that can be represented by the
+            `inputs_ids` passed when calling [`PtModel`]
         dim_z (`int`, *optional*, defaults to 4096):
             Dimension of the hidden representations.
         dim_g (`int`, *optional*, defaults to 11008):
@@ -47,16 +47,21 @@ class PtConfig(PretrainedConfig):
         num_iterations (`int`, *optional*, defaults to 32):
             Number of hidden layers in the Transformer decoder.
         num_channels (`int`, *optional*, defaults to 32):
-            Number of attention heads for each attention layer in the Transformer decoder.
-        potential_func_g (`str` or `function`, *optional*, defaults to `"silu"`):
-            The non-linear activation function (function or string) in the decoder.
+            Number of channels for head-selection. Counterparts of attention heads for each attention layer in the
+            Transformer decoder.
+        potential_func_g (`str` or `function`, *optional*, defaults to `"abs"`):
+            The potential function for G nodes. Counterparts of non-linear activation function in Transformer decoder.
+            Options:
+            - `"exp"`: Counterpart of softmax function.
+            - `"abs"`: Absolute value of the input.
+            - `"square"`: Counterpart of squared softmax function.
         max_position_embeddings (`int`, *optional*, defaults to 2048):
             The maximum sequence length that this model might ever be used with. Llama 1 supports up to 2048 tokens,
             Llama 2 up to 4096, CodeLlama up to 16384.
         initializer_range (`float`, *optional*, defaults to 0.02):
             The standard deviation of the truncated_normal_initializer for initializing all weight matrices.
         squared_softmax_eps (`float`, *optional*, defaults to 1e-06):
-            The epsilon used by the rms normalization layers.
+            The epsilon used by the squared softmax potential function. Counterpart of eps of rms normalization layers.
         pad_token_id (`int`, *optional*):
             Padding token id.
         bos_token_id (`int`, *optional*, defaults to 1):
@@ -81,6 +86,11 @@ class PtConfig(PretrainedConfig):
             The dropout ratio for the attention probabilities.
         classifier_dropout (`float`, *optional*):
             The dropout ratio for the classification head.
+        regularize_z (`float`, *optional*, defaults to 1):
+            The regularization strength for Z nodes. Usually set to 1.
+        regularize_h (`float`, *optional*, defaults to 1):
+            The regularization strength for H nodes. Usually set to 1/d, where d is the dimension of the hidden
+            representations (label set size of Z nodes).
 
 
     ```python

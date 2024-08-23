@@ -22,7 +22,7 @@
     "dropout_prob_h": 0.1,
     "classifier_dropout": null,
     "regularize_z": 1,
-    "regularize_h": 1,
+    "regularize_h": 0.001953125,
     "hidden_size": 512,
     "hidden_act": "silu",
     "layer_norm_eps": 1e-05,
