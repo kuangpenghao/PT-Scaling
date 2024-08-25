@@ -15,7 +15,7 @@
     "max_position_embeddings": 2048,
     "initializer_range": 0.02,
     "squared_softmax_eps": 1e-6,
-    "tie_word_embeddings": true,
+    "tie_word_embeddings": false,
     "rope_theta": 10000.0,
     "rope_scaling": null,
     "dropout_prob_z": 0.1,
