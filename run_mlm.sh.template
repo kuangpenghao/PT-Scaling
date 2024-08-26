@@ -1,7 +1,12 @@
+# use `config_overrides` to tune the hyperparameters
+# e.g. --config_overrides dropout_prob_z=0.1,dropout_prob_h=0.1
+# the default config is in the file specified in `config_name`.
+# use `--report_to wandb` to enable wandb
+
 python run_mlm.py \
     --tokenizer_name TinyLlama/TinyLlama-1.1B-intermediate-step-955k-token-2T \
-    --config_name configs/tinypt.json \
-    --config_overrides potential_func_g=square \
+    --config_name configs/pt_tiny.json \
+    --config_overrides potential_func_g=square,regularize_h=0.001953125 \
     --dataset_name wikitext \
     --dataset_config_name wikitext-103-raw-v1 \
     --per_device_train_batch_size 1 \
