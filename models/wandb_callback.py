@@ -10,7 +10,7 @@ from transformers import (
     TrainerState, 
     TrainingArguments
 )
-
+from transformers.trainer_pt_utils import find_batch_size
 from transformers.integrations import WandbCallback as OriginWandbCallback
 
 class WandbCallback(OriginWandbCallback):
@@ -27,7 +27,8 @@ class WandbCallback(OriginWandbCallback):
         
         sharpness = 0
         for step, inputs in tqdm(enumerate(eval_dataloader), total=len(eval_dataloader)):
-            sharpness += self.hessian_norm_proxy(inputs, model)
+            observed_batch_size = find_batch_size(inputs)
+            sharpness += self.hessian_norm_proxy(inputs, model) * observed_batch_size
         
         print(f"Sharpness: {sharpness}")
         self._wandb.log({"eval/sharpness": sharpness, "train/global_step": state.global_step, "train/epoch": state.epoch})
@@ -60,7 +61,8 @@ class WandbCallback(OriginWandbCallback):
         outputs = model(**inputs)
         loss = outputs["loss"] if isinstance(outputs, dict) else outputs[0]
 
-        avg_diff = - loss.item()
+        t_theta = loss
+        t_deltas = []
 
         for _ in range(n_repeats):
 
@@ -73,7 +75,9 @@ class WandbCallback(OriginWandbCallback):
             outputs = torch.func.functional_call(model, noised_params, (), kwargs=inputs, tie_weights=False)
             loss = outputs["loss"] if isinstance(outputs, dict) else outputs[0]
             
-            avg_diff += loss.item() / n_repeats
+            t_deltas.append(loss.item())
+
+        avg_diff = sum((t_theta - t_delta)**2 for t_delta in t_deltas) / n_repeats
 
         return avg_diff
 
