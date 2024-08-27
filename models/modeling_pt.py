@@ -92,8 +92,10 @@ class PtHeadSelection(nn.Module):
         self._init_rope()
     
     def _init_ternary(self):
-        nn.init.kaiming_uniform_(self.ternary_factor_u, a=math.sqrt(5))
-        nn.init.kaiming_uniform_(self.ternary_factor_v, a=math.sqrt(5))
+        # nn.init.kaiming_uniform_(self.ternary_factor_u, a=math.sqrt(5))
+        # nn.init.kaiming_uniform_(self.ternary_factor_v, a=math.sqrt(5))
+        nn.init.normal_(self.ternary_factor_u, mean=0.0, std=1/self.ternary_rank)
+        nn.init.normal_(self.ternary_factor_v, mean=0.0, std=1/self.ternary_rank)
 
     def _init_rope(self):
         """we follow rope in llama"""
