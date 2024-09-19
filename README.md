@@ -26,6 +26,7 @@ bash run_mlm.sh
 | ------------------------ | ---------- |
 | `configs/pt_tiny.json`   | 34M        |
 | `configs/pt_medium.json` | 40M        |
+| `configs/pt_base.json`   | 53M        |
 | `configs/tinypt.json`    | 89M        |
 
 ## TODO
