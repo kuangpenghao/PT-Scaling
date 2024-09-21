@@ -49,7 +49,13 @@ class PtConfig(PretrainedConfig):
         num_channels (`int`, *optional*, defaults to 32):
             Number of channels for head-selection. Counterparts of attention heads for each attention layer in the
             Transformer decoder.
-        potential_func_g (`str` or `function`, *optional*, defaults to `"abs"`):
+        potential_func_z (`str` or `function`, *optional*, defaults to `"square"`):
+            The potential function for Z nodes. Counterparts of non-linear activation function in Transformer decoder.
+            Options:
+            - `"exp"`: Counterpart of softmax function.
+            - `"abs"`: Absolute value of the input.
+            - `"square"`: Counterpart of squared softmax function.
+        potential_func_g (`str` or `function`, *optional*, defaults to `"square"`):
             The potential function for G nodes. Counterparts of non-linear activation function in Transformer decoder.
             Options:
             - `"exp"`: Counterpart of softmax function.
@@ -60,8 +66,12 @@ class PtConfig(PretrainedConfig):
             Llama 2 up to 4096, CodeLlama up to 16384.
         initializer_range (`float`, *optional*, defaults to 0.02):
             The standard deviation of the truncated_normal_initializer for initializing all weight matrices.
-        squared_softmax_eps (`float`, *optional*, defaults to 1e-06):
-            The epsilon used by the squared softmax potential function. Counterpart of eps of rms normalization layers.
+        binary_initializer_range (`float`, *optional*, defaults to 0.02):
+            The standard deviation of the truncated_normal_initializer for initializing all binary factor weight matrices.
+        ternary_initializer_range (`float`, *optional*, defaults to 0.02):
+            The standard deviation of the truncated_normal_initializer for initializing all ternary factor weight matrices.
+        potential_eps (`float`, *optional*, defaults to 1e-06):
+            The epsilon used by the potential function. Counterpart of eps of rms normalization layers.
         pad_token_id (`int`, *optional*):
             Padding token id.
         bos_token_id (`int`, *optional*, defaults to 1):
@@ -89,8 +99,11 @@ class PtConfig(PretrainedConfig):
         regularize_z (`float`, *optional*, defaults to 1):
             The regularization strength for Z nodes. Usually set to 1.
         regularize_h (`float`, *optional*, defaults to 1):
-            The regularization strength for H nodes. Usually set to 1/d, where d is the dimension of the hidden
+            The regularization strength for H nodes. Usually set to 1/d_z, where d_z is the dimension of the hidden
             representations (label set size of Z nodes).
+        regularize_g (`float`, *optional*, defaults to 1):
+            The regularization strength for G nodes. Usually set to 1/(d_g*d_z), where d_g is the dimension of the MLP
+            representations (label set size of G nodes).
 
 
     ```python
@@ -115,10 +128,13 @@ class PtConfig(PretrainedConfig):
         num_iterations=32,
         num_channels=32,
         ternary_rank=None,
-        potential_func_g="abs",
+        potential_func_z="square",
+        potential_func_g="square",
         max_position_embeddings=2048,
         initializer_range=0.02,
-        squared_softmax_eps=1e-6,
+        binary_initializer_range=0.02,
+        ternary_initializer_range=0.02,
+        potential_eps=1e-6,
         pad_token_id=None,
         bos_token_id=1,
         eos_token_id=2,
@@ -128,8 +144,9 @@ class PtConfig(PretrainedConfig):
         dropout_prob_z=0.1,
         dropout_prob_h=0.1,
         classifier_dropout=None,
-        regularize_z=1,
-        regularize_h=1,
+        regularize_z=1.0,
+        regularize_h=1.0,
+        regularize_g=1.0,
         **kwargs,
     ):
         self.vocab_size = vocab_size
@@ -144,9 +161,12 @@ class PtConfig(PretrainedConfig):
             ternary_rank = dim_z // num_channels
 
         self.ternary_rank = ternary_rank
+        self.potential_func_z = potential_func_z
         self.potential_func_g = potential_func_g
         self.initializer_range = initializer_range
-        self.squared_softmax_eps = squared_softmax_eps
+        self.binary_initializer_range = binary_initializer_range
+        self.ternary_initializer_range = ternary_initializer_range
+        self.potential_eps = potential_eps
         self.rope_theta = rope_theta
         self.rope_scaling = rope_scaling
         self._rope_scaling_validation()
@@ -156,6 +176,7 @@ class PtConfig(PretrainedConfig):
         self.classifier_dropout = classifier_dropout
         self.regularize_z = regularize_z
         self.regularize_h = regularize_h
+        self.regularize_g = regularize_g
 
         # prediction head config
         self.hidden_size = dim_z

@@ -58,18 +58,44 @@ class RopeApplier:
 
 
 class SquaredSoftmax(nn.Module):
-    def __init__(self, hidden_size, eps=1e-6):
+    def __init__(self, dim=-1, eps=1e-6):
         super().__init__()
-        self.weight = nn.Parameter(torch.ones(hidden_size))
-        self.variance_epsilon = eps
+        self.dim = dim
+        self.eps = eps
     
     def forward(self, hidden_states: torch.Tensor):
         input_dtype = hidden_states.dtype
         hidden_states = hidden_states.to(torch.float32)
         hidden_states = hidden_states.pow(2)
-        variance = hidden_states.mean(-1, keepdim=True)
-        hidden_states = hidden_states / (variance + self.variance_epsilon)
-        return self.weight * hidden_states.to(input_dtype)
+        hidden_states = F.normalize(hidden_states, p=1, dim=self.dim, eps=self.eps)
+        return hidden_states.to(input_dtype)
+
+
+class AbsNormalization(nn.Module):
+    def __init__(self, dim=-1, eps=1e-6):
+        super().__init__()
+        self.dim = dim
+        self.eps = eps
+    
+    def forward(self, hidden_states: torch.Tensor):
+        input_dtype = hidden_states.dtype
+        hidden_states = hidden_states.to(torch.float32)
+        hidden_states = F.relu(hidden_states)
+        hidden_states = F.normalize(hidden_states, p=1, dim=self.dim, eps=self.eps)
+        return hidden_states.to(input_dtype)
+
+
+class Softmax(nn.Softmax):
+    # This is a workaround to allow passing the eps
+    def __init__(self, dim=-1, eps=None):
+        super().__init__(dim=dim)
+
+
+POTENTIAL2ACT = {
+    "exp": Softmax,
+    "abs": AbsNormalization,
+    "square": SquaredSoftmax,
+}
 
 
 class PtHeadSelection(nn.Module):
@@ -92,10 +118,8 @@ class PtHeadSelection(nn.Module):
         self._init_rope()
     
     def _init_ternary(self):
-        # nn.init.kaiming_uniform_(self.ternary_factor_u, a=math.sqrt(5))
-        # nn.init.kaiming_uniform_(self.ternary_factor_v, a=math.sqrt(5))
-        nn.init.normal_(self.ternary_factor_u, mean=0.0, std=1/self.ternary_rank)
-        nn.init.normal_(self.ternary_factor_v, mean=0.0, std=1/self.ternary_rank)
+        nn.init.normal_(self.ternary_factor_u, mean=0.0, std=self.config.ternary_initializer_range)
+        nn.init.normal_(self.ternary_factor_v, mean=0.0, std=self.config.ternary_initializer_range)
 
     def _init_rope(self):
         """we follow rope in llama"""
@@ -128,7 +152,7 @@ class PtHeadSelection(nn.Module):
     def forward(
         self,
         qz: torch.Tensor,
-        head_mask: Optional[torch.Tensor] = None,
+        dependency_mask: Optional[torch.Tensor] = None,
         position_ids: Optional[torch.LongTensor] = None,
         output_heads: bool = False,
     ) -> Tuple[torch.Tensor, Optional[torch.Tensor]]:
@@ -155,12 +179,12 @@ class PtHeadSelection(nn.Module):
                 f" {message_F.size()}"
             )
 
-        if head_mask is not None:
-            if head_mask.size() != (bsz, 1, seq_len, seq_len):
+        if dependency_mask is not None:
+            if dependency_mask.size() != (bsz, 1, seq_len, seq_len):
                 raise ValueError(
-                    f"Attention mask should be of size {(bsz, 1, seq_len, seq_len)}, but is {head_mask.size()}"
+                    f"Attention mask should be of size {(bsz, 1, seq_len, seq_len)}, but is {dependency_mask.size()}"
                 )
-            message_F = message_F + head_mask # need mask diag
+            message_F = message_F + dependency_mask # need mask diag
 
         # upcast attention to fp32
         qh = nn.functional.softmax(message_F / self.config.regularize_h, dim=-1, dtype=torch.float32).to(qz_u.dtype)
@@ -199,37 +223,23 @@ class PtHeadSelection(nn.Module):
 
 class PtTopicModeling(nn.Module):
     """Topic modeling w/ global nodes."""
-    def __init__(self, config):
+    def __init__(self, config: PtConfig):
         super().__init__()
         self.config = config
         self.dim_z = config.dim_z
         self.dim_g = config.dim_g
         self.binary_factor = nn.Parameter(torch.empty(self.dim_g, self.dim_z))
-        self.potential_func = config.potential_func_g
-
-        if self.potential_func == "square":
-            self.squared_softmax = SquaredSoftmax(self.dim_g, eps=config.squared_softmax_eps)
+        self.act = POTENTIAL2ACT[config.potential_func_g](dim=-1, eps=config.potential_eps)
         
         self._init_binary()
         
     def _init_binary(self):
-        nn.init.kaiming_uniform_(self.binary_factor, a=math.sqrt(5))
+        nn.init.normal_(self.binary_factor, mean=0.0, std=self.config.binary_initializer_range)
 
     def forward(self, qz: torch.Tensor):
         qg = nn.functional.linear(qz, self.binary_factor)
-
-        if self.potential_func == "exp":
-            qg = F.softmax(qg, dim=-1)
-        elif self.potential_func == "abs":
-            qg = F.relu(qg)
-            qg = F.normalize(qg, p=1, dim=-1, eps=1e-6)
-        elif self.potential_func == "square":
-            qg = self.squared_softmax(qg)
-        else:
-            raise ValueError(f"Unknown potential function {self.potential_func}")
-        
+        qg = self.act(qg / self.config.regularize_g)
         message_G = qg @ self.binary_factor
-        
         return message_G
 
 class PtEncoderIterator(nn.Module):
@@ -243,20 +253,20 @@ class PtEncoderIterator(nn.Module):
             # else PtFlashHeadSelection2(config=config)
         )
         self.topic_modeling = PtTopicModeling(config)
-        self.norm = SquaredSoftmax(config.dim_z, eps=config.squared_softmax_eps)
+        self.norm = POTENTIAL2ACT[config.potential_func_z](dim=-1, eps=config.potential_eps)
     
     def forward(
         self,
         unary_potentials: torch.Tensor,
         qz: torch.Tensor,
-        head_mask: Optional[torch.Tensor] = None,
+        dependency_mask: Optional[torch.Tensor] = None,
         position_ids: Optional[torch.LongTensor] = None,
         output_heads: Optional[bool] = False,
     ) -> Tuple[torch.FloatTensor, Optional[torch.FloatTensor]]:
         """
         Args:
             qz (`torch.FloatTensor`): input to the layer of shape `(batch, seq_len, embed_dim)`
-            head_mask (`torch.FloatTensor`, *optional*):
+            dependency_mask (`torch.FloatTensor`, *optional*):
                 attention mask of size `(batch_size, sequence_length)` if flash attention is used or `(batch_size, 1,
                 query_sequence_length, key_sequence_length)` if default attention is used.
             output_heads (`bool`, *optional*):
@@ -271,7 +281,7 @@ class PtEncoderIterator(nn.Module):
         # head selection
         m1, qh = self.head_selection(
             qz=qz,
-            head_mask=head_mask,
+            dependency_mask=dependency_mask,
             position_ids=position_ids,
             output_heads=output_heads,
         )
@@ -330,7 +340,7 @@ class PtModel(PtPreTrainedModel):
 
         self.unary_factors = nn.Embedding(config.vocab_size, config.dim_z, self.padding_idx)
         self.iterator = PtEncoderIterator(config)
-        self.norm = SquaredSoftmax(config.dim_z, eps=config.squared_softmax_eps)
+        self.norm = POTENTIAL2ACT[config.potential_func_z](dim=-1, eps=config.potential_eps)
 
         self.gradient_checkpointing = False
         # Initialize weights and apply final processing
@@ -345,7 +355,7 @@ class PtModel(PtPreTrainedModel):
     def forward(
         self,
         input_ids: torch.LongTensor = None,
-        head_mask: Optional[torch.Tensor] = None,
+        attention_mask: Optional[torch.Tensor] = None,
         position_ids: Optional[torch.LongTensor] = None,
         unary_potentials: Optional[torch.FloatTensor] = None,
         output_heads: Optional[bool] = None,
@@ -382,16 +392,16 @@ class PtModel(PtPreTrainedModel):
         if getattr(self.config, "_flash_attn_2_enabled", False):
             # 2d mask is passed through the layers
             raise ValueError("Flash attention 2 is not supported in PtModel when masking diagonals")
-            head_mask = head_mask if (head_mask is not None and 0 in head_mask) else None
+            attention_mask = attention_mask if (attention_mask is not None and 0 in attention_mask) else None
         else:
             attn_mask_converter = AttentionMaskConverter(is_causal=False)
-            head_mask = attn_mask_converter.to_4d(
-                head_mask, seq_length, seq_length, dtype=unary_potentials.dtype
+            attention_mask = attn_mask_converter.to_4d(
+                attention_mask, seq_length, seq_length, dtype=unary_potentials.dtype
             )
             
             # mask diagonals
-            diag_mask = torch.eye(seq_length, dtype=head_mask.dtype, device=head_mask.device).unsqueeze(0).unsqueeze(0)
-            head_mask = head_mask.masked_fill(diag_mask.to(torch.bool), torch.finfo(head_mask.dtype).min)
+            diag_mask = torch.eye(seq_length, dtype=attention_mask.dtype, device=attention_mask.device).unsqueeze(0).unsqueeze(0)
+            attention_mask = attention_mask.masked_fill(diag_mask.to(torch.bool), torch.finfo(attention_mask.dtype).min)
 
         # embed positions
         qz = unary_potentials
@@ -407,7 +417,7 @@ class PtModel(PtPreTrainedModel):
             iter_outputs = self.iterator(
                 unary_potentials,
                 qz,
-                head_mask=head_mask,
+                dependency_mask=attention_mask,
                 position_ids=position_ids,
                 output_heads=output_heads,
             )
@@ -457,7 +467,7 @@ class PtForMaskedLM(PtPreTrainedModel):
         attention_mask: Optional[torch.Tensor] = None,
         token_type_ids: Optional[torch.Tensor] = None,
         position_ids: Optional[torch.Tensor] = None,
-        head_mask: Optional[torch.Tensor] = None,
+        dependency_mask: Optional[torch.Tensor] = None,
         inputs_embeds: Optional[torch.Tensor] = None,
         encoder_hidden_states: Optional[torch.Tensor] = None,
         encoder_attention_mask: Optional[torch.Tensor] = None,
@@ -477,7 +487,7 @@ class PtForMaskedLM(PtPreTrainedModel):
 
         outputs = self.model(
             input_ids,
-            head_mask=attention_mask,
+            attention_mask=attention_mask,
             position_ids=position_ids,
             unary_potentials=inputs_embeds,
             output_heads=output_attentions,
@@ -485,7 +495,7 @@ class PtForMaskedLM(PtPreTrainedModel):
             return_dict=return_dict,
         )
 
-        sequence_output = outputs[0]
+        sequence_output = outputs[0] * self.config.dim_z # this constant is to scale the logits
         prediction_scores = self.cls(sequence_output)
 
         masked_lm_loss = None
