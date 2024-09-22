@@ -5,7 +5,7 @@
 
 python run_mlm.py \
     --tokenizer_name TinyLlama/TinyLlama-1.1B-intermediate-step-955k-token-2T \
-    --config_name configs/pt_tiny.json \
+    --config_name configs/pt_base.json \
     --config_overrides potential_func_g=square \
     --dataset_name wikitext \
     --dataset_config_name wikitext-103-raw-v1 \
@@ -14,7 +14,7 @@ python run_mlm.py \
     --gradient_accumulation_steps 1 \
     --do_train \
     --do_eval \
-    --learning_rate 6e-4 \
+    --learning_rate 3e-4 \
     --num_train_epochs 1 \
     --save_total_limit 1 \
     --logging_steps 50 \

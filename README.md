@@ -47,39 +47,48 @@ The config (see below), and the training hyperparameters (learning rate, learnin
     "model_type": "pt",
 
     // model structure, will change the number of parameters, not priority
-    "dim_z": 512,
-    "dim_g": 1024,
-    "num_iterations": 8,
-    "num_channels": 8,
+    "dim_z": 768,
+    "dim_g": 3072,
+    "num_iterations": 12,
+    "num_channels": 12,
     "ternary_rank": 64,
 
     // model structure, needs to be tuned
+    "potential_func_z": "square",
     "potential_func_g": "abs",
 
     // no need to change
-    "max_position_embeddings": 1024,
+    "max_position_embeddings": 512,
 
     // model initialization, needs to be tuned
     // you may change the codes if necessary
     "initializer_range": 0.02,
+    "binary_initializer_range": 0.2,
+    "ternary_initializer_range": 0.2,
+
+    // model scaling, needs to be tuned
+    "binary_factor_scaling": 1.0,
+    "ternary_factor_scaling": 1.0,
+    "classifier_amplifier": 768.0,
 
     // no need to change
-    "squared_softmax_eps": 1e-6,
+    "potential_eps": 1e-6,
     "tie_word_embeddings": false,
     "rope_theta": 10000.0,
     "rope_scaling": null,
 
     // dropout, needs to be tuned
-    "dropout_prob_z": 0.1,
-    "dropout_prob_h": 0.1,
+    "dropout_prob_z": 0.0,
+    "dropout_prob_h": 0.0,
     "classifier_dropout": null,
 
     // regularization, needs to be tuned, important
-    "regularize_z": 1,
-    "regularize_h": 0.001953125,
+    "regularize_z": 1.0,
+    "regularize_h": 0.013,
+    "regularize_g": 1.0,
 
     // no need to change
-    "hidden_size": 512,
+    "hidden_size": 768,
     "hidden_act": "silu",
     "layer_norm_eps": 1e-05,
     "output_heads": false,
