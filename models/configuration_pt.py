@@ -55,7 +55,7 @@ class PtConfig(PretrainedConfig):
             - `"exp"`: Counterpart of softmax function.
             - `"abs"`: Absolute value of the input.
             - `"square"`: Counterpart of squared softmax function.
-        potential_func_g (`str` or `function`, *optional*, defaults to `"square"`):
+        potential_func_g (`str` or `function`, *optional*, defaults to `"abs"`):
             The potential function for G nodes. Counterparts of non-linear activation function in Transformer decoder.
             Options:
             - `"exp"`: Counterpart of softmax function.
@@ -70,6 +70,15 @@ class PtConfig(PretrainedConfig):
             The standard deviation of the truncated_normal_initializer for initializing all binary factor weight matrices.
         ternary_initializer_range (`float`, *optional*, defaults to 0.02):
             The standard deviation of the truncated_normal_initializer for initializing all ternary factor weight matrices.
+        binary_factor_scaling (`float`, *optional*, defaults to 1.0):
+            The scaling factor for the binary factor weight matrices. This is meant to keep the binary factor weights
+            small, so that it is easier to optimize. Usually set to 1.0.
+        ternary_factor_scaling (`float`, *optional*, defaults to 1.0):
+            The scaling factor for the ternary factor weight matrices. This is meant to keep the ternary factor weights
+            small, so that it is easier to optimize. Usually set to 1.0.
+        classifier_amplifier (`float`, *optional*, defaults to 1.0):
+            The scaling factor for the classifier head. This is meant to keep the classifier weights small, so that it
+            is easier to optimize. Usually set to dim_z.
         potential_eps (`float`, *optional*, defaults to 1e-06):
             The epsilon used by the potential function. Counterpart of eps of rms normalization layers.
         pad_token_id (`int`, *optional*):
@@ -99,11 +108,9 @@ class PtConfig(PretrainedConfig):
         regularize_z (`float`, *optional*, defaults to 1):
             The regularization strength for Z nodes. Usually set to 1.
         regularize_h (`float`, *optional*, defaults to 1):
-            The regularization strength for H nodes. Usually set to 1/d_z, where d_z is the dimension of the hidden
-            representations (label set size of Z nodes).
+            The regularization strength for H nodes. Usually set to 1/dim_z**2.
         regularize_g (`float`, *optional*, defaults to 1):
-            The regularization strength for G nodes. Usually set to 1/(d_g*d_z), where d_g is the dimension of the MLP
-            representations (label set size of G nodes).
+            The regularization strength for G nodes. Usually set to 1/dim_z.
 
 
     ```python
@@ -129,11 +136,14 @@ class PtConfig(PretrainedConfig):
         num_channels=32,
         ternary_rank=None,
         potential_func_z="square",
-        potential_func_g="square",
+        potential_func_g="abs",
         max_position_embeddings=2048,
         initializer_range=0.02,
         binary_initializer_range=0.02,
         ternary_initializer_range=0.02,
+        binary_factor_scaling=1.0,
+        ternary_factor_scaling=1.0,
+        classifier_amplifier=1.0,
         potential_eps=1e-6,
         pad_token_id=None,
         bos_token_id=1,
@@ -166,6 +176,9 @@ class PtConfig(PretrainedConfig):
         self.initializer_range = initializer_range
         self.binary_initializer_range = binary_initializer_range
         self.ternary_initializer_range = ternary_initializer_range
+        self.binary_factor_scaling = binary_factor_scaling
+        self.ternary_factor_scaling = ternary_factor_scaling
+        self.classifier_amplifier = classifier_amplifier
         self.potential_eps = potential_eps
         self.rope_theta = rope_theta
         self.rope_scaling = rope_scaling

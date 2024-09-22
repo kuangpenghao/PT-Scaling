@@ -159,8 +159,8 @@ class PtHeadSelection(nn.Module):
 
         bsz, seq_len, _ = qz.size()
 
-        qz_u = nn.functional.linear(qz, self.ternary_factor_u)
-        qz_v = nn.functional.linear(qz, self.ternary_factor_v)
+        qz_u = nn.functional.linear(qz, self.ternary_factor_u) * self.config.ternary_factor_scaling
+        qz_v = nn.functional.linear(qz, self.ternary_factor_v) * self.config.ternary_factor_scaling
 
         qz_u = qz_u.view(bsz, seq_len, self.num_channels, self.ternary_rank).transpose(1, 2)
         qz_v = qz_v.view(bsz, seq_len, self.num_channels, self.ternary_rank).transpose(1, 2)
@@ -213,7 +213,7 @@ class PtHeadSelection(nn.Module):
         qh_v1 = qh_v1.reshape(bsz, seq_len, self.num_channels * self.ternary_rank)
         qh_v2 = qh_v2.reshape(bsz, seq_len, self.num_channels * self.ternary_rank)
 
-        message_G = torch.matmul(qh_v1, self.ternary_factor_u) + torch.matmul(qh_v2, self.ternary_factor_v)
+        message_G = (torch.matmul(qh_v1, self.ternary_factor_u) + torch.matmul(qh_v2, self.ternary_factor_v)) * self.config.ternary_factor_scaling
 
         if not output_heads:
             qh = None
@@ -237,9 +237,9 @@ class PtTopicModeling(nn.Module):
         nn.init.normal_(self.binary_factor, mean=0.0, std=self.config.binary_initializer_range)
 
     def forward(self, qz: torch.Tensor):
-        qg = nn.functional.linear(qz, self.binary_factor)
+        qg = nn.functional.linear(qz, self.binary_factor) * self.config.binary_factor_scaling
         qg = self.act(qg / self.config.regularize_g)
-        message_G = qg @ self.binary_factor
+        message_G = qg @ self.binary_factor * self.config.binary_factor_scaling
         return message_G
 
 class PtEncoderIterator(nn.Module):
@@ -495,7 +495,7 @@ class PtForMaskedLM(PtPreTrainedModel):
             return_dict=return_dict,
         )
 
-        sequence_output = outputs[0] * self.config.dim_z # this constant is to scale the logits
+        sequence_output = outputs[0] * self.config.classifier_amplifier
         prediction_scores = self.cls(sequence_output)
 
         masked_lm_loss = None
