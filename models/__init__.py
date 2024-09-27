@@ -10,3 +10,6 @@ from transformers import AutoConfig, AutoModel, AutoModelForMaskedLM
 AutoConfig.register("pt", PtConfig)
 AutoModel.register(PtConfig, PtModel)
 AutoModelForMaskedLM.register(PtConfig, PtForMaskedLM)
+
+from .modeling_llama import LlamaConfig, LlamaForMaskedLM
+AutoModelForMaskedLM.register(LlamaConfig, LlamaForMaskedLM)
