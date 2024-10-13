@@ -1,6 +1,5 @@
 {
     "_name_or_path": "meta-llama/Llama-2-7b-hf",
-    "_flash_attn_2_enabled": true,
     "architectures": [
       "LlamaForMaskedLM"
     ],
