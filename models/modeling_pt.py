@@ -11,8 +11,6 @@ from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss
 
 from transformers.models.llama.modeling_llama import (
     LlamaRotaryEmbedding,
-    LlamaLinearScalingRotaryEmbedding,
-    LlamaDynamicNTKScalingRotaryEmbedding,
     rotate_half,
 )
 from transformers.models.bert.modeling_bert import BertOnlyMLMHead, MaskedLMOutput
@@ -30,15 +28,14 @@ logger = logging.get_logger(__name__)
 
 
 class RopeApplier:
-    def __init__(self, cos, sin, position_ids, unsqueeze_dim=1) -> None:
+    def __init__(self, cos, sin, position_ids=None, unsqueeze_dim=1) -> None:
         """Applies Rotary Position Embedding to the query, key and value tensors.
 
         Args:
             cos (`torch.Tensor`): The cosine part of the rotary embedding.
             sin (`torch.Tensor`): The sine part of the rotary embedding.
-            position_ids (`torch.Tensor`):
-                The position indices of the tokens corresponding to the query, key and value tensors. For example, this can be
-                used to pass offsetted position ids when working with a KV-cache.
+            position_ids (`torch.Tensor`, *optional*):
+                Deprecated and unused.
             unsqueeze_dim (`int`, *optional*, defaults to 1):
                 The 'unsqueeze_dim' argument specifies the dimension along which to unsqueeze cos[position_ids] and
                 sin[position_ids] so that they can be properly broadcasted to the dimensions of q and k. For example, note
@@ -47,8 +44,8 @@ class RopeApplier:
                 cos[position_ids] and sin[position_ids] broadcastable to the shapes of q and k. Similarly, if q and k have
                 the shape [batch_size, seq_len, heads, head_dim], then set unsqueeze_dim=2.
         """
-        self.cos = cos[position_ids].unsqueeze(unsqueeze_dim)
-        self.sin = sin[position_ids].unsqueeze(unsqueeze_dim)
+        self.cos = cos.unsqueeze(unsqueeze_dim)
+        self.sin = sin.unsqueeze(unsqueeze_dim)
 
     def apply(self, qkv):
         return (qkv * self.cos) + (rotate_half(qkv) * self.sin)
@@ -115,39 +112,10 @@ class PtHeadSelection(nn.Module):
         self.ternary_factor_v = nn.Parameter(torch.empty(self.num_channels * self.ternary_rank, self.dim_z))
         self.dropout = nn.Dropout(config.dropout_prob_h)
         self._init_ternary()
-        self._init_rope()
     
     def _init_ternary(self):
         nn.init.normal_(self.ternary_factor_u, mean=0.0, std=self.config.ternary_initializer_range)
         nn.init.normal_(self.ternary_factor_v, mean=0.0, std=self.config.ternary_initializer_range)
-
-    def _init_rope(self):
-        """we follow rope in llama"""
-        if self.config.rope_scaling is None:
-            self.rotary_emb = LlamaRotaryEmbedding(
-                self.ternary_rank,
-                max_position_embeddings=self.max_position_embeddings,
-                base=self.rope_theta,
-            )
-        else:
-            scaling_type = self.config.rope_scaling["type"]
-            scaling_factor = self.config.rope_scaling["factor"]
-            if scaling_type == "linear":
-                self.rotary_emb = LlamaLinearScalingRotaryEmbedding(
-                    self.ternary_rank,
-                    max_position_embeddings=self.max_position_embeddings,
-                    scaling_factor=scaling_factor,
-                    base=self.rope_theta,
-                )
-            elif scaling_type == "dynamic":
-                self.rotary_emb = LlamaDynamicNTKScalingRotaryEmbedding(
-                    self.ternary_rank,
-                    max_position_embeddings=self.max_position_embeddings,
-                    scaling_factor=scaling_factor,
-                    base=self.rope_theta,
-                )
-            else:
-                raise ValueError(f"Unknown RoPE scaling type {scaling_type}")
 
     def forward(
         self,
@@ -155,6 +123,7 @@ class PtHeadSelection(nn.Module):
         dependency_mask: Optional[torch.Tensor] = None,
         position_ids: Optional[torch.LongTensor] = None,
         output_dependencies: bool = False,
+        position_embeddings: Optional[Tuple[torch.Tensor, torch.Tensor]] = None
     ) -> Tuple[torch.Tensor, Optional[torch.Tensor]]:
 
         bsz, seq_len, _ = qz.size()
@@ -165,7 +134,7 @@ class PtHeadSelection(nn.Module):
         qz_u = qz_u.view(bsz, seq_len, self.num_channels, self.ternary_rank).transpose(1, 2)
         qz_v = qz_v.view(bsz, seq_len, self.num_channels, self.ternary_rank).transpose(1, 2)
 
-        cos, sin = self.rotary_emb(qz_v, seq_len=seq_len)
+        cos, sin = position_embeddings
         rope_applier = RopeApplier(cos, sin, position_ids)
         qz_uo = rope_applier.apply_o(qz_u)
         qz_u = rope_applier.apply(qz_u)
@@ -247,11 +216,7 @@ class PtEncoderIterator(nn.Module):
         super().__init__()
         self.config = config
         self.dim_z = config.dim_z
-        self.head_selection = (
-            PtHeadSelection(config=config)
-            # if not getattr(config, "_flash_attn_2_enabled", False)
-            # else PtFlashHeadSelection2(config=config)
-        )
+        self.head_selection = PtHeadSelection(config=config)
         self.topic_modeling = PtTopicModeling(config)
         self.norm = POTENTIAL2ACT[config.potential_func_z](dim=-1, eps=config.potential_eps)
     
@@ -262,6 +227,7 @@ class PtEncoderIterator(nn.Module):
         dependency_mask: Optional[torch.Tensor] = None,
         position_ids: Optional[torch.LongTensor] = None,
         output_dependencies: Optional[bool] = False,
+        position_embeddings: Optional[Tuple[torch.Tensor, torch.Tensor]] = None,
     ) -> Tuple[torch.FloatTensor, Optional[torch.FloatTensor]]:
         """
         Args:
@@ -284,6 +250,7 @@ class PtEncoderIterator(nn.Module):
             dependency_mask=dependency_mask,
             position_ids=position_ids,
             output_dependencies=output_dependencies,
+            position_embeddings=position_embeddings,
         )
 
         # topic modeling
@@ -342,6 +309,13 @@ class PtModel(PtPreTrainedModel):
         self.iterator = PtEncoderIterator(config)
         self.norm = POTENTIAL2ACT[config.potential_func_z](dim=-1, eps=config.potential_eps)
 
+        # XXX: This is a workaround to initialize the rotary embeddings
+        config_copy = PtConfig.from_dict(config.to_dict())
+        config_copy.head_dim = config.ternary_rank
+        config_copy.hidden_size = config.dim_z
+        config_copy.num_attention_heads = config.num_channels
+        self.rotary_emb = LlamaRotaryEmbedding(config=config_copy)
+
         self.gradient_checkpointing = False
         # Initialize weights and apply final processing
         self.post_init()
@@ -362,9 +336,9 @@ class PtModel(PtPreTrainedModel):
         output_qzs: Optional[bool] = None,
         return_dict: Optional[bool] = None,
     ) -> Union[Tuple, PtModelOutput]:
-        output_dependencies = output_dependencies if output_dependencies is not None else self.config.output_dependencies
+        output_dependencies = output_dependencies if output_dependencies is not None else self.config.output_attentions
         output_qzs = (
-            output_qzs if output_qzs is not None else self.config.output_qzs
+            output_qzs if output_qzs is not None else self.config.output_hidden_states
         )
         return_dict = return_dict if return_dict is not None else self.config.use_return_dict
         
@@ -389,6 +363,9 @@ class PtModel(PtPreTrainedModel):
 
         # embed positions
         qz = unary_potentials
+        
+        # create position embeddings to be shared across the decoder layers
+        position_embeddings = self.rotary_emb(qz, position_ids)
 
         # decoder layers
         all_qzs = () if output_qzs else None
@@ -404,6 +381,7 @@ class PtModel(PtPreTrainedModel):
                 dependency_mask=dependency_mask,
                 position_ids=position_ids,
                 output_dependencies=output_dependencies,
+                position_embeddings=position_embeddings,
             )
 
             qz = iter_outputs[0]
@@ -433,7 +411,7 @@ class PtModel(PtPreTrainedModel):
         
         attn_mask_converter = AttentionMaskConverter(is_causal=False)
         dependency_mask = attn_mask_converter.to_4d(
-            dependency_mask, seq_length, seq_length, dtype=unary_potentials.dtype
+            dependency_mask, seq_length, dtype=unary_potentials.dtype
         )
         
         # mask diagonals
@@ -468,7 +446,6 @@ class PtForMaskedLM(PtPreTrainedModel):
         attention_mask: Optional[torch.Tensor] = None,
         token_type_ids: Optional[torch.Tensor] = None,
         position_ids: Optional[torch.Tensor] = None,
-        dependency_mask: Optional[torch.Tensor] = None,
         inputs_embeds: Optional[torch.Tensor] = None,
         encoder_hidden_states: Optional[torch.Tensor] = None,
         encoder_attention_mask: Optional[torch.Tensor] = None,
@@ -488,7 +465,7 @@ class PtForMaskedLM(PtPreTrainedModel):
 
         outputs = self.model(
             input_ids,
-            attention_mask=attention_mask,
+            dependency_mask=attention_mask,
             position_ids=position_ids,
             unary_potentials=inputs_embeds,
             output_dependencies=output_attentions,

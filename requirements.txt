@@ -1,6 +1,5 @@
-transformers == 4.35.2
-accelerate >= 0.20.1
+transformers >= 4.43.0, <= 4.45.2
+accelerate >= 0.34.2
 datasets
 evaluate
 scikit-learn
-deepspeed
