@@ -34,4 +34,4 @@ bash run_mlm.sh
 
 ### Hyperparameter tuning
 
-llama-base: attention_dropout, learning_rate
+bert-base: the performance is incredibly bad. May need further tuning.

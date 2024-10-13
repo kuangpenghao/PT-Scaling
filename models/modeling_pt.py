@@ -11,8 +11,6 @@ from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss
 
 from transformers.models.llama.modeling_llama import (
     LlamaRotaryEmbedding,
-    LlamaLinearScalingRotaryEmbedding,
-    LlamaDynamicNTKScalingRotaryEmbedding,
     rotate_half,
 )
 from transformers.models.bert.modeling_bert import BertOnlyMLMHead, MaskedLMOutput
@@ -30,15 +28,14 @@ logger = logging.get_logger(__name__)
 
 
 class RopeApplier:
-    def __init__(self, cos, sin, position_ids, unsqueeze_dim=1) -> None:
+    def __init__(self, cos, sin, position_ids=None, unsqueeze_dim=1) -> None:
         """Applies Rotary Position Embedding to the query, key and value tensors.
 
         Args:
             cos (`torch.Tensor`): The cosine part of the rotary embedding.
             sin (`torch.Tensor`): The sine part of the rotary embedding.
-            position_ids (`torch.Tensor`):
-                The position indices of the tokens corresponding to the query, key and value tensors. For example, this can be
-                used to pass offsetted position ids when working with a KV-cache.
+            position_ids (`torch.Tensor`, *optional*):
+                Deprecated and unused.
             unsqueeze_dim (`int`, *optional*, defaults to 1):
                 The 'unsqueeze_dim' argument specifies the dimension along which to unsqueeze cos[position_ids] and
                 sin[position_ids] so that they can be properly broadcasted to the dimensions of q and k. For example, note
@@ -47,8 +44,8 @@ class RopeApplier:
                 cos[position_ids] and sin[position_ids] broadcastable to the shapes of q and k. Similarly, if q and k have
                 the shape [batch_size, seq_len, heads, head_dim], then set unsqueeze_dim=2.
         """
-        self.cos = cos[position_ids].unsqueeze(unsqueeze_dim)
-        self.sin = sin[position_ids].unsqueeze(unsqueeze_dim)
+        self.cos = cos.unsqueeze(unsqueeze_dim)
+        self.sin = sin.unsqueeze(unsqueeze_dim)
 
     def apply(self, qkv):
         return (qkv * self.cos) + (rotate_half(qkv) * self.sin)
@@ -115,46 +112,18 @@ class PtHeadSelection(nn.Module):
         self.ternary_factor_v = nn.Parameter(torch.empty(self.num_channels * self.ternary_rank, self.dim_z))
         self.dropout = nn.Dropout(config.dropout_prob_h)
         self._init_ternary()
-        self._init_rope()
     
     def _init_ternary(self):
         nn.init.normal_(self.ternary_factor_u, mean=0.0, std=self.config.ternary_initializer_range)
         nn.init.normal_(self.ternary_factor_v, mean=0.0, std=self.config.ternary_initializer_range)
-
-    def _init_rope(self):
-        """we follow rope in llama"""
-        if self.config.rope_scaling is None:
-            self.rotary_emb = LlamaRotaryEmbedding(
-                self.ternary_rank,
-                max_position_embeddings=self.max_position_embeddings,
-                base=self.rope_theta,
-            )
-        else:
-            scaling_type = self.config.rope_scaling["type"]
-            scaling_factor = self.config.rope_scaling["factor"]
-            if scaling_type == "linear":
-                self.rotary_emb = LlamaLinearScalingRotaryEmbedding(
-                    self.ternary_rank,
-                    max_position_embeddings=self.max_position_embeddings,
-                    scaling_factor=scaling_factor,
-                    base=self.rope_theta,
-                )
-            elif scaling_type == "dynamic":
-                self.rotary_emb = LlamaDynamicNTKScalingRotaryEmbedding(
-                    self.ternary_rank,
-                    max_position_embeddings=self.max_position_embeddings,
-                    scaling_factor=scaling_factor,
-                    base=self.rope_theta,
-                )
-            else:
-                raise ValueError(f"Unknown RoPE scaling type {scaling_type}")
 
     def forward(
         self,
         qz: torch.Tensor,
         dependency_mask: Optional[torch.Tensor] = None,
         position_ids: Optional[torch.LongTensor] = None,
-        output_heads: bool = False,
+        output_dependencies: bool = False,
+        position_embeddings: Optional[Tuple[torch.Tensor, torch.Tensor]] = None
     ) -> Tuple[torch.Tensor, Optional[torch.Tensor]]:
 
         bsz, seq_len, _ = qz.size()
@@ -165,7 +134,7 @@ class PtHeadSelection(nn.Module):
         qz_u = qz_u.view(bsz, seq_len, self.num_channels, self.ternary_rank).transpose(1, 2)
         qz_v = qz_v.view(bsz, seq_len, self.num_channels, self.ternary_rank).transpose(1, 2)
 
-        cos, sin = self.rotary_emb(qz_v, seq_len=seq_len)
+        cos, sin = position_embeddings
         rope_applier = RopeApplier(cos, sin, position_ids)
         qz_uo = rope_applier.apply_o(qz_u)
         qz_u = rope_applier.apply(qz_u)
@@ -215,7 +184,7 @@ class PtHeadSelection(nn.Module):
 
         message_G = (torch.matmul(qh_v1, self.ternary_factor_u) + torch.matmul(qh_v2, self.ternary_factor_v)) * self.config.ternary_factor_scaling
 
-        if not output_heads:
+        if not output_dependencies:
             qh = None
 
         return message_G, qh
@@ -247,11 +216,7 @@ class PtEncoderIterator(nn.Module):
         super().__init__()
         self.config = config
         self.dim_z = config.dim_z
-        self.head_selection = (
-            PtHeadSelection(config=config)
-            # if not getattr(config, "_flash_attn_2_enabled", False)
-            # else PtFlashHeadSelection2(config=config)
-        )
+        self.head_selection = PtHeadSelection(config=config)
         self.topic_modeling = PtTopicModeling(config)
         self.norm = POTENTIAL2ACT[config.potential_func_z](dim=-1, eps=config.potential_eps)
     
@@ -261,7 +226,8 @@ class PtEncoderIterator(nn.Module):
         qz: torch.Tensor,
         dependency_mask: Optional[torch.Tensor] = None,
         position_ids: Optional[torch.LongTensor] = None,
-        output_heads: Optional[bool] = False,
+        output_dependencies: Optional[bool] = False,
+        position_embeddings: Optional[Tuple[torch.Tensor, torch.Tensor]] = None,
     ) -> Tuple[torch.FloatTensor, Optional[torch.FloatTensor]]:
         """
         Args:
@@ -269,7 +235,7 @@ class PtEncoderIterator(nn.Module):
             dependency_mask (`torch.FloatTensor`, *optional*):
                 attention mask of size `(batch_size, sequence_length)` if flash attention is used or `(batch_size, 1,
                 query_sequence_length, key_sequence_length)` if default attention is used.
-            output_heads (`bool`, *optional*):
+            output_dependencies (`bool`, *optional*):
                 Whether or not to return the attentions tensors of all attention layers. See `attentions` under
                 returned tensors for more detail.
         """
@@ -283,7 +249,8 @@ class PtEncoderIterator(nn.Module):
             qz=qz,
             dependency_mask=dependency_mask,
             position_ids=position_ids,
-            output_heads=output_heads,
+            output_dependencies=output_dependencies,
+            position_embeddings=position_embeddings,
         )
 
         # topic modeling
@@ -297,7 +264,7 @@ class PtEncoderIterator(nn.Module):
 
         outputs = (qz,)
 
-        if output_heads:
+        if output_dependencies:
             outputs += (qh,)
 
         return outputs
@@ -342,6 +309,13 @@ class PtModel(PtPreTrainedModel):
         self.iterator = PtEncoderIterator(config)
         self.norm = POTENTIAL2ACT[config.potential_func_z](dim=-1, eps=config.potential_eps)
 
+        # XXX: This is a workaround to initialize the rotary embeddings
+        config_copy = PtConfig.from_dict(config.to_dict())
+        config_copy.head_dim = config.ternary_rank
+        config_copy.hidden_size = config.dim_z
+        config_copy.num_attention_heads = config.num_channels
+        self.rotary_emb = LlamaRotaryEmbedding(config=config_copy)
+
         self.gradient_checkpointing = False
         # Initialize weights and apply final processing
         self.post_init()
@@ -355,29 +329,26 @@ class PtModel(PtPreTrainedModel):
     def forward(
         self,
         input_ids: torch.LongTensor = None,
-        attention_mask: Optional[torch.Tensor] = None,
+        dependency_mask: Optional[torch.Tensor] = None,
         position_ids: Optional[torch.LongTensor] = None,
         unary_potentials: Optional[torch.FloatTensor] = None,
-        output_heads: Optional[bool] = None,
+        output_dependencies: Optional[bool] = None,
         output_qzs: Optional[bool] = None,
         return_dict: Optional[bool] = None,
     ) -> Union[Tuple, PtModelOutput]:
-        output_heads = output_heads if output_heads is not None else self.config.output_heads
+        output_dependencies = output_dependencies if output_dependencies is not None else self.config.output_attentions
         output_qzs = (
-            output_qzs if output_qzs is not None else self.config.output_qzs
+            output_qzs if output_qzs is not None else self.config.output_hidden_states
         )
-
         return_dict = return_dict if return_dict is not None else self.config.use_return_dict
+        
+        if (input_ids is None) ^ (unary_potentials is not None):
+            raise ValueError("You must specify exactly one of input_ids or inputs_embeds")
 
-        # retrieve input_ids and unary_potentials
-        if input_ids is not None and unary_potentials is not None:
-            raise ValueError("You cannot specify both input_ids and unary_potentials at the same time")
-        elif input_ids is not None:
-            batch_size, seq_length = input_ids.shape[:2]
-        elif unary_potentials is not None:
-            batch_size, seq_length = unary_potentials.shape[:2]
-        else:
-            raise ValueError("You have to specify either input_ids or unary_potentials")
+        if unary_potentials is None:
+            unary_potentials = self.unary_factors(input_ids)
+        
+        seq_length = unary_potentials.size(1)
 
         if position_ids is None:
             device = input_ids.device if input_ids is not None else unary_potentials.device
@@ -386,29 +357,19 @@ class PtModel(PtPreTrainedModel):
             )
             position_ids = position_ids.unsqueeze(0)
 
-        if unary_potentials is None:
-            unary_potentials = self.unary_factors(input_ids)
-
-        if getattr(self.config, "_flash_attn_2_enabled", False):
-            # 2d mask is passed through the layers
-            raise ValueError("Flash attention 2 is not supported in PtModel when masking diagonals")
-            attention_mask = attention_mask if (attention_mask is not None and 0 in attention_mask) else None
-        else:
-            attn_mask_converter = AttentionMaskConverter(is_causal=False)
-            attention_mask = attn_mask_converter.to_4d(
-                attention_mask, seq_length, seq_length, dtype=unary_potentials.dtype
-            )
-            
-            # mask diagonals
-            diag_mask = torch.eye(seq_length, dtype=attention_mask.dtype, device=attention_mask.device).unsqueeze(0).unsqueeze(0)
-            attention_mask = attention_mask.masked_fill(diag_mask.to(torch.bool), torch.finfo(attention_mask.dtype).min)
+        dependency_mask = self._update_dependency_mask(
+            dependency_mask, unary_potentials, output_dependencies
+        )
 
         # embed positions
         qz = unary_potentials
+        
+        # create position embeddings to be shared across the decoder layers
+        position_embeddings = self.rotary_emb(qz, position_ids)
 
         # decoder layers
         all_qzs = () if output_qzs else None
-        all_qhs = () if output_heads else None
+        all_qhs = () if output_dependencies else None
 
         for idx in range(self.config.num_iterations):
             if output_qzs:
@@ -417,14 +378,15 @@ class PtModel(PtPreTrainedModel):
             iter_outputs = self.iterator(
                 unary_potentials,
                 qz,
-                dependency_mask=attention_mask,
+                dependency_mask=dependency_mask,
                 position_ids=position_ids,
-                output_heads=output_heads,
+                output_dependencies=output_dependencies,
+                position_embeddings=position_embeddings,
             )
 
             qz = iter_outputs[0]
 
-            if output_heads:
+            if output_dependencies:
                 all_qhs += (iter_outputs[1],)
 
         # add hidden states from the last decoder layer
@@ -440,6 +402,23 @@ class PtModel(PtPreTrainedModel):
             all_qzs=all_qzs,
             all_qhs=all_qhs
         )
+    
+    def _update_dependency_mask(
+        self, dependency_mask: torch.Tensor, unary_potentials: torch.Tensor, output_dependencies: bool
+    ) -> torch.Tensor:
+        
+        seq_length = unary_potentials.size(1)
+        
+        attn_mask_converter = AttentionMaskConverter(is_causal=False)
+        dependency_mask = attn_mask_converter.to_4d(
+            dependency_mask, seq_length, dtype=unary_potentials.dtype
+        )
+        
+        # mask diagonals
+        diag_mask = torch.eye(seq_length, dtype=dependency_mask.dtype, device=dependency_mask.device).unsqueeze(0).unsqueeze(0)
+        dependency_mask = dependency_mask.masked_fill(diag_mask.to(torch.bool), torch.finfo(dependency_mask.dtype).min)
+
+        return dependency_mask
 
 
 class PtForMaskedLM(PtPreTrainedModel):
@@ -467,7 +446,6 @@ class PtForMaskedLM(PtPreTrainedModel):
         attention_mask: Optional[torch.Tensor] = None,
         token_type_ids: Optional[torch.Tensor] = None,
         position_ids: Optional[torch.Tensor] = None,
-        dependency_mask: Optional[torch.Tensor] = None,
         inputs_embeds: Optional[torch.Tensor] = None,
         encoder_hidden_states: Optional[torch.Tensor] = None,
         encoder_attention_mask: Optional[torch.Tensor] = None,
@@ -487,10 +465,10 @@ class PtForMaskedLM(PtPreTrainedModel):
 
         outputs = self.model(
             input_ids,
-            attention_mask=attention_mask,
+            dependency_mask=attention_mask,
             position_ids=position_ids,
             unary_potentials=inputs_embeds,
-            output_heads=output_attentions,
+            output_dependencies=output_attentions,
             output_qzs=output_hidden_states,
             return_dict=return_dict,
         )
