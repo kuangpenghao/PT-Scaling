@@ -154,7 +154,7 @@ class PtHeadSelection(nn.Module):
         qz: torch.Tensor,
         dependency_mask: Optional[torch.Tensor] = None,
         position_ids: Optional[torch.LongTensor] = None,
-        output_heads: bool = False,
+        output_dependencies: bool = False,
     ) -> Tuple[torch.Tensor, Optional[torch.Tensor]]:
 
         bsz, seq_len, _ = qz.size()
@@ -215,7 +215,7 @@ class PtHeadSelection(nn.Module):
 
         message_G = (torch.matmul(qh_v1, self.ternary_factor_u) + torch.matmul(qh_v2, self.ternary_factor_v)) * self.config.ternary_factor_scaling
 
-        if not output_heads:
+        if not output_dependencies:
             qh = None
 
         return message_G, qh
@@ -261,7 +261,7 @@ class PtEncoderIterator(nn.Module):
         qz: torch.Tensor,
         dependency_mask: Optional[torch.Tensor] = None,
         position_ids: Optional[torch.LongTensor] = None,
-        output_heads: Optional[bool] = False,
+        output_dependencies: Optional[bool] = False,
     ) -> Tuple[torch.FloatTensor, Optional[torch.FloatTensor]]:
         """
         Args:
@@ -269,7 +269,7 @@ class PtEncoderIterator(nn.Module):
             dependency_mask (`torch.FloatTensor`, *optional*):
                 attention mask of size `(batch_size, sequence_length)` if flash attention is used or `(batch_size, 1,
                 query_sequence_length, key_sequence_length)` if default attention is used.
-            output_heads (`bool`, *optional*):
+            output_dependencies (`bool`, *optional*):
                 Whether or not to return the attentions tensors of all attention layers. See `attentions` under
                 returned tensors for more detail.
         """
@@ -283,7 +283,7 @@ class PtEncoderIterator(nn.Module):
             qz=qz,
             dependency_mask=dependency_mask,
             position_ids=position_ids,
-            output_heads=output_heads,
+            output_dependencies=output_dependencies,
         )
 
         # topic modeling
@@ -297,7 +297,7 @@ class PtEncoderIterator(nn.Module):
 
         outputs = (qz,)
 
-        if output_heads:
+        if output_dependencies:
             outputs += (qh,)
 
         return outputs
@@ -355,29 +355,26 @@ class PtModel(PtPreTrainedModel):
     def forward(
         self,
         input_ids: torch.LongTensor = None,
-        attention_mask: Optional[torch.Tensor] = None,
+        dependency_mask: Optional[torch.Tensor] = None,
         position_ids: Optional[torch.LongTensor] = None,
         unary_potentials: Optional[torch.FloatTensor] = None,
-        output_heads: Optional[bool] = None,
+        output_dependencies: Optional[bool] = None,
         output_qzs: Optional[bool] = None,
         return_dict: Optional[bool] = None,
     ) -> Union[Tuple, PtModelOutput]:
-        output_heads = output_heads if output_heads is not None else self.config.output_heads
+        output_dependencies = output_dependencies if output_dependencies is not None else self.config.output_dependencies
         output_qzs = (
             output_qzs if output_qzs is not None else self.config.output_qzs
         )
-
         return_dict = return_dict if return_dict is not None else self.config.use_return_dict
+        
+        if (input_ids is None) ^ (unary_potentials is not None):
+            raise ValueError("You must specify exactly one of input_ids or inputs_embeds")
 
-        # retrieve input_ids and unary_potentials
-        if input_ids is not None and unary_potentials is not None:
-            raise ValueError("You cannot specify both input_ids and unary_potentials at the same time")
-        elif input_ids is not None:
-            batch_size, seq_length = input_ids.shape[:2]
-        elif unary_potentials is not None:
-            batch_size, seq_length = unary_potentials.shape[:2]
-        else:
-            raise ValueError("You have to specify either input_ids or unary_potentials")
+        if unary_potentials is None:
+            unary_potentials = self.unary_factors(input_ids)
+        
+        seq_length = unary_potentials.size(1)
 
         if position_ids is None:
             device = input_ids.device if input_ids is not None else unary_potentials.device
@@ -386,29 +383,16 @@ class PtModel(PtPreTrainedModel):
             )
             position_ids = position_ids.unsqueeze(0)
 
-        if unary_potentials is None:
-            unary_potentials = self.unary_factors(input_ids)
-
-        if getattr(self.config, "_flash_attn_2_enabled", False):
-            # 2d mask is passed through the layers
-            raise ValueError("Flash attention 2 is not supported in PtModel when masking diagonals")
-            attention_mask = attention_mask if (attention_mask is not None and 0 in attention_mask) else None
-        else:
-            attn_mask_converter = AttentionMaskConverter(is_causal=False)
-            attention_mask = attn_mask_converter.to_4d(
-                attention_mask, seq_length, seq_length, dtype=unary_potentials.dtype
-            )
-            
-            # mask diagonals
-            diag_mask = torch.eye(seq_length, dtype=attention_mask.dtype, device=attention_mask.device).unsqueeze(0).unsqueeze(0)
-            attention_mask = attention_mask.masked_fill(diag_mask.to(torch.bool), torch.finfo(attention_mask.dtype).min)
+        dependency_mask = self._update_dependency_mask(
+            dependency_mask, unary_potentials, output_dependencies
+        )
 
         # embed positions
         qz = unary_potentials
 
         # decoder layers
         all_qzs = () if output_qzs else None
-        all_qhs = () if output_heads else None
+        all_qhs = () if output_dependencies else None
 
         for idx in range(self.config.num_iterations):
             if output_qzs:
@@ -417,14 +401,14 @@ class PtModel(PtPreTrainedModel):
             iter_outputs = self.iterator(
                 unary_potentials,
                 qz,
-                dependency_mask=attention_mask,
+                dependency_mask=dependency_mask,
                 position_ids=position_ids,
-                output_heads=output_heads,
+                output_dependencies=output_dependencies,
             )
 
             qz = iter_outputs[0]
 
-            if output_heads:
+            if output_dependencies:
                 all_qhs += (iter_outputs[1],)
 
         # add hidden states from the last decoder layer
@@ -440,6 +424,23 @@ class PtModel(PtPreTrainedModel):
             all_qzs=all_qzs,
             all_qhs=all_qhs
         )
+    
+    def _update_dependency_mask(
+        self, dependency_mask: torch.Tensor, unary_potentials: torch.Tensor, output_dependencies: bool
+    ) -> torch.Tensor:
+        
+        seq_length = unary_potentials.size(1)
+        
+        attn_mask_converter = AttentionMaskConverter(is_causal=False)
+        dependency_mask = attn_mask_converter.to_4d(
+            dependency_mask, seq_length, seq_length, dtype=unary_potentials.dtype
+        )
+        
+        # mask diagonals
+        diag_mask = torch.eye(seq_length, dtype=dependency_mask.dtype, device=dependency_mask.device).unsqueeze(0).unsqueeze(0)
+        dependency_mask = dependency_mask.masked_fill(diag_mask.to(torch.bool), torch.finfo(dependency_mask.dtype).min)
+
+        return dependency_mask
 
 
 class PtForMaskedLM(PtPreTrainedModel):
@@ -490,7 +491,7 @@ class PtForMaskedLM(PtPreTrainedModel):
             attention_mask=attention_mask,
             position_ids=position_ids,
             unary_potentials=inputs_embeds,
-            output_heads=output_attentions,
+            output_dependencies=output_attentions,
             output_qzs=output_hidden_states,
             return_dict=return_dict,
         )
