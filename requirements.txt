@@ -1,0 +1,6 @@
+transformers == 4.35.2
+accelerate >= 0.20.1
+datasets
+evaluate
+scikit-learn
+deepspeed

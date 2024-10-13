@@ -1,5 +1,6 @@
 import math
 import warnings
+from dataclasses import dataclass
 from typing import List, Optional, Tuple, Union
 
 import torch
@@ -13,144 +14,118 @@ from transformers.models.llama.modeling_llama import (
     LlamaLinearScalingRotaryEmbedding,
     LlamaDynamicNTKScalingRotaryEmbedding,
     rotate_half,
-    repeat_kv,
-    ACT2FN,
-    LlamaMLP,
-    LlamaRMSNorm,
-    LlamaDecoderLayer,
-    LlamaModel,
-    LlamaForCausalLM
 )
+from transformers.models.bert.modeling_bert import BertOnlyMLMHead, MaskedLMOutput
 from transformers.utils import (
     logging,
+    ModelOutput
 )
+from transformers.modeling_utils import PreTrainedModel
+
+from transformers.modeling_attn_mask_utils import AttentionMaskConverter
 
 from .configuration_pt import PtConfig
 
 logger = logging.get_logger(__name__)
 
 
-def apply_rotary_pos_emb(q, k, v, cos, sin, position_ids, unsqueeze_dim=1):
-    """Applies Rotary Position Embedding to the query, key and value tensors.
+class RopeApplier:
+    def __init__(self, cos, sin, position_ids, unsqueeze_dim=1) -> None:
+        """Applies Rotary Position Embedding to the query, key and value tensors.
 
-    Args:
-        q (`torch.Tensor`): The query tensor.
-        k (`torch.Tensor`): The key tensor.
-        v (`torch.Tensor`): The value tensor.
-        cos (`torch.Tensor`): The cosine part of the rotary embedding.
-        sin (`torch.Tensor`): The sine part of the rotary embedding.
-        position_ids (`torch.Tensor`):
-            The position indices of the tokens corresponding to the query, key and value tensors. For example, this can be
-            used to pass offsetted position ids when working with a KV-cache.
-        unsqueeze_dim (`int`, *optional*, defaults to 1):
-            The 'unsqueeze_dim' argument specifies the dimension along which to unsqueeze cos[position_ids] and
-            sin[position_ids] so that they can be properly broadcasted to the dimensions of q and k. For example, note
-            that cos[position_ids] and sin[position_ids] have the shape [batch_size, seq_len, head_dim]. Then, if q and
-            k have the shape [batch_size, heads, seq_len, head_dim], then setting unsqueeze_dim=1 makes
-            cos[position_ids] and sin[position_ids] broadcastable to the shapes of q and k. Similarly, if q and k have
-            the shape [batch_size, seq_len, heads, head_dim], then set unsqueeze_dim=2.
-    Returns:
-        `tuple(torch.Tensor)` comprising of the query, key and value tensors rotated using the Rotary Position Embedding.
-    """
-    cos = cos[position_ids].unsqueeze(unsqueeze_dim)
-    sin = sin[position_ids].unsqueeze(unsqueeze_dim)
-    q_embed = (q * cos) + (rotate_half(q) * sin)
-    k_embed = (k * cos) + (rotate_half(k) * sin)
-    v_embed = (v * cos) + (rotate_half(v) * sin)
-    return q_embed, k_embed, v_embed
+        Args:
+            cos (`torch.Tensor`): The cosine part of the rotary embedding.
+            sin (`torch.Tensor`): The sine part of the rotary embedding.
+            position_ids (`torch.Tensor`):
+                The position indices of the tokens corresponding to the query, key and value tensors. For example, this can be
+                used to pass offsetted position ids when working with a KV-cache.
+            unsqueeze_dim (`int`, *optional*, defaults to 1):
+                The 'unsqueeze_dim' argument specifies the dimension along which to unsqueeze cos[position_ids] and
+                sin[position_ids] so that they can be properly broadcasted to the dimensions of q and k. For example, note
+                that cos[position_ids] and sin[position_ids] have the shape [batch_size, seq_len, head_dim]. Then, if q and
+                k have the shape [batch_size, heads, seq_len, head_dim], then setting unsqueeze_dim=1 makes
+                cos[position_ids] and sin[position_ids] broadcastable to the shapes of q and k. Similarly, if q and k have
+                the shape [batch_size, seq_len, heads, head_dim], then set unsqueeze_dim=2.
+        """
+        self.cos = cos[position_ids].unsqueeze(unsqueeze_dim)
+        self.sin = sin[position_ids].unsqueeze(unsqueeze_dim)
 
-def apply_rotary_pos_emb_o(o, cos, sin, position_ids, unsqueeze_dim=1):
-    cos = cos[position_ids].unsqueeze(unsqueeze_dim)
-    sin = sin[position_ids].unsqueeze(unsqueeze_dim)
-    o_embed = (o * cos) - (rotate_half(o) * sin)
-    return o_embed
-
-class TransposedLinear(nn.Linear):
-    """
-    Same as Linear, but we store the transpose of the weight
-    """
-    def __init__(self, in_features: int, out_features: int, bias: bool = True,
-                 device=None, dtype=None) -> None:
-        factory_kwargs = {'device': device, 'dtype': dtype}
-        super(nn.Linear, self).__init__()
-        self.in_features = in_features
-        self.out_features = out_features
-        self.weight = nn.Parameter(torch.empty((in_features, out_features), **factory_kwargs))
-        if bias:
-            self.bias = nn.Parameter(torch.empty(out_features, **factory_kwargs))
-        else:
-            self.register_parameter('bias', None)
-        self.reset_parameters()
+    def apply(self, qkv):
+        return (qkv * self.cos) + (rotate_half(qkv) * self.sin)
     
-    def reset_parameters(self) -> None:
-        # Setting a=sqrt(5) in kaiming_uniform is the same as initializing with
-        # uniform(-1/sqrt(in_features), 1/sqrt(in_features)). For details, see
-        # https://github.com/pytorch/pytorch/issues/57109
-        nn.init.kaiming_uniform_(self.weight, a=math.sqrt(5), mode='fan_out')
-        if self.bias is not None:
-            fan_in, _ = nn.init._calculate_fan_in_and_fan_out(self.weight.T)
-            bound = 1 / math.sqrt(fan_in) if fan_in > 0 else 0
-            nn.init.uniform_(self.bias, -bound, bound)
-    
-    def forward(self, input: torch.Tensor) -> torch.Tensor:
-        return F.linear(input, self.weight.T, self.bias)
+    def apply_o(self, o):
+        return (o * self.cos) - (rotate_half(o) * self.sin)
 
 
 class SquaredSoftmax(nn.Module):
-    def __init__(self, hidden_size, eps=1e-6):
+    def __init__(self, dim=-1, eps=1e-6):
         super().__init__()
-        self.weight = nn.Parameter(torch.ones(hidden_size))
-        self.variance_epsilon = eps
+        self.dim = dim
+        self.eps = eps
     
     def forward(self, hidden_states: torch.Tensor):
         input_dtype = hidden_states.dtype
         hidden_states = hidden_states.to(torch.float32)
         hidden_states = hidden_states.pow(2)
-        variance = hidden_states.mean(-1, keepdim=True)
-        hidden_states = hidden_states / (variance + self.variance_epsilon)
-        return self.weight * hidden_states.to(input_dtype)
+        hidden_states = F.normalize(hidden_states, p=1, dim=self.dim, eps=self.eps)
+        return hidden_states.to(input_dtype)
 
 
-class PtAttention(nn.Module):
-    """Multi-channel update from 'Probabilistic Transformer' paper"""
+class AbsNormalization(nn.Module):
+    def __init__(self, dim=-1, eps=1e-6):
+        super().__init__()
+        self.dim = dim
+        self.eps = eps
+    
+    def forward(self, hidden_states: torch.Tensor):
+        input_dtype = hidden_states.dtype
+        hidden_states = hidden_states.to(torch.float32)
+        hidden_states = F.relu(hidden_states)
+        hidden_states = F.normalize(hidden_states, p=1, dim=self.dim, eps=self.eps)
+        return hidden_states.to(input_dtype)
 
+
+class Softmax(nn.Softmax):
+    # This is a workaround to allow passing the eps
+    def __init__(self, dim=-1, eps=None):
+        super().__init__(dim=dim)
+
+
+POTENTIAL2ACT = {
+    "exp": Softmax,
+    "abs": AbsNormalization,
+    "square": SquaredSoftmax,
+}
+
+
+class PtHeadSelection(nn.Module):
+    """Multi-channel head selection from 'Probabilistic Transformer' paper"""
+    
     def __init__(self, config: PtConfig):
-        """
-        Modifications compared to standard transformers (Llama):
-        1. It ties the weights between the query, key, value and output projections.
-        2. It applies the rotary position embedding to the value and output tensors.
-        3. TODO: The output tensor is a sum of two tensors from the attention outputs. (impossible for causal attention)
-        4. TODO: Mask the diagonal of the attention matrix. (Maybe it should be done in other classes?)
-        """
         super().__init__()
         self.config = config
-        self.hidden_size = config.hidden_size
-        self.num_heads = config.num_attention_heads
-        self.head_dim = self.hidden_size // self.num_heads
-        self.num_key_value_heads = config.num_key_value_heads
-        self.num_key_value_groups = self.num_heads // self.num_key_value_heads
+        self.dim_z = config.dim_z
+        self.num_channels = config.num_channels
+        self.ternary_rank = config.ternary_rank
         self.max_position_embeddings = config.max_position_embeddings
         self.rope_theta = config.rope_theta
-        self.is_causal = True
+        self.is_causal = False
 
-        if (self.head_dim * self.num_heads) != self.hidden_size:
-            raise ValueError(
-                f"hidden_size must be divisible by num_heads (got `hidden_size`: {self.hidden_size}"
-                f" and `num_heads`: {self.num_heads})."
-            )
-        if config.attention_bias:
-            raise ValueError("Attention bias is not supported in PtAttention.")
-        self.q_proj = nn.Linear(self.hidden_size, self.num_heads * self.head_dim)
-        self.k_proj = nn.Linear(self.hidden_size, self.num_key_value_heads * self.head_dim)
-        self.v_proj = nn.Linear(self.hidden_size, self.num_key_value_heads * self.head_dim)
-        self.o_proj = TransposedLinear(self.num_heads * self.head_dim, self.hidden_size)
-        self._tie_qkvo_weights()
+        self.ternary_factor_u = nn.Parameter(torch.empty(self.num_channels * self.ternary_rank, self.dim_z))
+        self.ternary_factor_v = nn.Parameter(torch.empty(self.num_channels * self.ternary_rank, self.dim_z))
+        self.dropout = nn.Dropout(config.dropout_prob_h)
+        self._init_ternary()
         self._init_rope()
+    
+    def _init_ternary(self):
+        nn.init.normal_(self.ternary_factor_u, mean=0.0, std=self.config.ternary_initializer_range)
+        nn.init.normal_(self.ternary_factor_v, mean=0.0, std=self.config.ternary_initializer_range)
 
     def _init_rope(self):
+        """we follow rope in llama"""
         if self.config.rope_scaling is None:
             self.rotary_emb = LlamaRotaryEmbedding(
-                self.head_dim,
+                self.ternary_rank,
                 max_position_embeddings=self.max_position_embeddings,
                 base=self.rope_theta,
             )
@@ -159,198 +134,398 @@ class PtAttention(nn.Module):
             scaling_factor = self.config.rope_scaling["factor"]
             if scaling_type == "linear":
                 self.rotary_emb = LlamaLinearScalingRotaryEmbedding(
-                    self.head_dim,
+                    self.ternary_rank,
                     max_position_embeddings=self.max_position_embeddings,
                     scaling_factor=scaling_factor,
                     base=self.rope_theta,
                 )
             elif scaling_type == "dynamic":
                 self.rotary_emb = LlamaDynamicNTKScalingRotaryEmbedding(
-                    self.head_dim,
+                    self.ternary_rank,
                     max_position_embeddings=self.max_position_embeddings,
                     scaling_factor=scaling_factor,
                     base=self.rope_theta,
                 )
             else:
                 raise ValueError(f"Unknown RoPE scaling type {scaling_type}")
-    
-    def _tie_qkvo_weights(self):
-        """
-        Tie the weights between the query, key, and value projections.
-        """
-        if self.config.use_shared_kv:
-            self.v_proj.weight = self.k_proj.weight
-        
-        if self.config.use_shared_qo:
-            self.o_proj.weight = self.q_proj.weight
-
-    def _shape(self, tensor: torch.Tensor, seq_len: int, bsz: int):
-        return tensor.view(bsz, seq_len, self.num_heads, self.head_dim).transpose(1, 2).contiguous()
 
     def forward(
         self,
-        hidden_states: torch.Tensor,
-        attention_mask: Optional[torch.Tensor] = None,
+        qz: torch.Tensor,
+        dependency_mask: Optional[torch.Tensor] = None,
         position_ids: Optional[torch.LongTensor] = None,
-        past_key_value: Optional[Tuple[torch.Tensor]] = None,
-        output_attentions: bool = False,
-        use_cache: bool = False,
-        **kwargs,
-    ) -> Tuple[torch.Tensor, Optional[torch.Tensor], Optional[Tuple[torch.Tensor]]]:
-        if "padding_mask" in kwargs:
-            warnings.warn(
-                "Passing `padding_mask` is deprecated and will be removed in v4.37. Please make sure use `attention_mask` instead.`"
-            )
+        output_heads: bool = False,
+    ) -> Tuple[torch.Tensor, Optional[torch.Tensor]]:
 
-        bsz, q_len, _ = hidden_states.size()
+        bsz, seq_len, _ = qz.size()
 
-        if self.config.pretraining_tp > 1:
-            key_value_slicing = (self.num_key_value_heads * self.head_dim) // self.config.pretraining_tp
-            query_slices = self.q_proj.weight.split(
-                (self.num_heads * self.head_dim) // self.config.pretraining_tp, dim=0
-            )
-            key_slices = self.k_proj.weight.split(key_value_slicing, dim=0)
-            value_slices = self.v_proj.weight.split(key_value_slicing, dim=0)
+        qz_u = nn.functional.linear(qz, self.ternary_factor_u) * self.config.ternary_factor_scaling
+        qz_v = nn.functional.linear(qz, self.ternary_factor_v) * self.config.ternary_factor_scaling
 
-            query_states = [F.linear(hidden_states, query_slices[i]) for i in range(self.config.pretraining_tp)]
-            query_states = torch.cat(query_states, dim=-1)
+        qz_u = qz_u.view(bsz, seq_len, self.num_channels, self.ternary_rank).transpose(1, 2)
+        qz_v = qz_v.view(bsz, seq_len, self.num_channels, self.ternary_rank).transpose(1, 2)
 
-            key_states = [F.linear(hidden_states, key_slices[i]) for i in range(self.config.pretraining_tp)]
-            key_states = torch.cat(key_states, dim=-1)
+        cos, sin = self.rotary_emb(qz_v, seq_len=seq_len)
+        rope_applier = RopeApplier(cos, sin, position_ids)
+        qz_uo = rope_applier.apply_o(qz_u)
+        qz_u = rope_applier.apply(qz_u)
+        qz_v = rope_applier.apply(qz_v)
 
-            value_states = [F.linear(hidden_states, value_slices[i]) for i in range(self.config.pretraining_tp)]
-            value_states = torch.cat(value_states, dim=-1)
+        message_F = torch.matmul(qz_u, qz_v.transpose(2, 3))
 
-        else:
-            query_states = self.q_proj(hidden_states)
-            key_states = self.k_proj(hidden_states)
-            value_states = self.v_proj(hidden_states)
-
-        query_states = query_states.view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
-        key_states = key_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
-        value_states = value_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
-
-        kv_seq_len = key_states.shape[-2]
-        if past_key_value is not None:
-            kv_seq_len += past_key_value[0].shape[-2]
-        cos, sin = self.rotary_emb(value_states, seq_len=kv_seq_len)
-        query_states, key_states, value_states = apply_rotary_pos_emb(query_states, key_states, value_states, cos, sin, position_ids)
-
-        if past_key_value is not None:
-            # reuse k, v, self_attention
-            key_states = torch.cat([past_key_value[0], key_states], dim=2)
-            value_states = torch.cat([past_key_value[1], value_states], dim=2)
-
-        past_key_value = (key_states, value_states) if use_cache else None
-
-        key_states = repeat_kv(key_states, self.num_key_value_groups)
-        value_states = repeat_kv(value_states, self.num_key_value_groups)
-
-        attn_weights = torch.matmul(query_states, key_states.transpose(2, 3)) / math.sqrt(self.head_dim)
-
-        if attn_weights.size() != (bsz, self.num_heads, q_len, kv_seq_len):
+        if message_F.size() != (bsz, self.num_channels, seq_len, seq_len):
             raise ValueError(
-                f"Attention weights should be of size {(bsz, self.num_heads, q_len, kv_seq_len)}, but is"
-                f" {attn_weights.size()}"
+                f"Attention weights should be of size {(bsz, self.num_channels, seq_len, seq_len)}, but is"
+                f" {message_F.size()}"
             )
 
-        if attention_mask is not None:
-            if attention_mask.size() != (bsz, 1, q_len, kv_seq_len):
+        if dependency_mask is not None:
+            if dependency_mask.size() != (bsz, 1, seq_len, seq_len):
                 raise ValueError(
-                    f"Attention mask should be of size {(bsz, 1, q_len, kv_seq_len)}, but is {attention_mask.size()}"
+                    f"Attention mask should be of size {(bsz, 1, seq_len, seq_len)}, but is {dependency_mask.size()}"
                 )
-            attn_weights = attn_weights + attention_mask
+            message_F = message_F + dependency_mask # need mask diag
 
         # upcast attention to fp32
-        attn_weights = nn.functional.softmax(attn_weights, dim=-1, dtype=torch.float32).to(query_states.dtype)
-        attn_output = torch.matmul(attn_weights, value_states)
+        qh = nn.functional.softmax(message_F / self.config.regularize_h, dim=-1, dtype=torch.float32).to(qz_u.dtype)
+
+        qh_v1 = torch.matmul(qh, qz_v)
+        qh_v2 = torch.matmul(qh.transpose(2, 3), qz_uo)
 
         # apply rotary position embedding to the output
-        attn_output = apply_rotary_pos_emb_o(attn_output, cos, sin, position_ids)
+        qh_v1 = rope_applier.apply_o(qh_v1)
+        qh_v2 = rope_applier.apply(qh_v2)
 
-        if attn_output.size() != (bsz, self.num_heads, q_len, self.head_dim):
+        if qh_v1.size() != (bsz, self.num_channels, seq_len, self.ternary_rank):
             raise ValueError(
-                f"`attn_output` should be of size {(bsz, self.num_heads, q_len, self.head_dim)}, but is"
-                f" {attn_output.size()}"
+                f"`qh_v1` should be of size {(bsz, self.num_channels, seq_len, self.ternary_rank)}, but is"
+                f" {qh_v1.size()}"
+            )
+        if qh_v2.size() != (bsz, self.num_channels, seq_len, self.ternary_rank):
+            raise ValueError(
+                f"`qh_v2` should be of size {(bsz, self.num_channels, seq_len, self.ternary_rank)}, but is"
+                f" {qh_v2.size()}"
             )
 
-        attn_output = attn_output.transpose(1, 2).contiguous()
+        qh_v1 = qh_v1.transpose(1, 2).contiguous()
+        qh_v2 = qh_v2.transpose(1, 2).contiguous()
 
-        attn_output = attn_output.reshape(bsz, q_len, self.hidden_size)
+        qh_v1 = qh_v1.reshape(bsz, seq_len, self.num_channels * self.ternary_rank)
+        qh_v2 = qh_v2.reshape(bsz, seq_len, self.num_channels * self.ternary_rank)
 
-        if self.config.pretraining_tp > 1:
-            attn_output = attn_output.split(self.hidden_size // self.config.pretraining_tp, dim=2)
-            o_proj_slices = self.o_proj.weight.split(self.hidden_size // self.config.pretraining_tp, dim=1)
-            attn_output = sum([F.linear(attn_output[i], o_proj_slices[i]) for i in range(self.config.pretraining_tp)])
-        else:
-            attn_output = self.o_proj(attn_output)
+        message_G = (torch.matmul(qh_v1, self.ternary_factor_u) + torch.matmul(qh_v2, self.ternary_factor_v)) * self.config.ternary_factor_scaling
 
-        if not output_attentions:
-            attn_weights = None
+        if not output_heads:
+            qh = None
 
-        return attn_output, attn_weights, past_key_value
+        return message_G, qh
 
 
-class PtMLP(LlamaMLP):
-    def __init__(self, config):
-        super(LlamaMLP, self).__init__()
-        self.config = config
-        self.hidden_size = config.hidden_size
-        self.intermediate_size = config.intermediate_size
-        self.gate_proj = nn.Linear(self.hidden_size, self.intermediate_size, bias=False)
-        self.up_proj = nn.Linear(self.hidden_size, self.intermediate_size, bias=False)
-        self.down_proj = TransposedLinear(self.intermediate_size, self.hidden_size, bias=False)
-        self.act_fn = ACT2FN[config.hidden_act]
-        self._tie_proj_weights()
-    
-    def _tie_proj_weights(self):
-        """
-        Tie the weights between the query, key, and value projections.
-        """
-        if self.config.use_shared_mlp:
-            self.up_proj.weight = self.down_proj.weight
-
-
-class PtDecoderLayer(LlamaDecoderLayer):
+class PtTopicModeling(nn.Module):
+    """Topic modeling w/ global nodes."""
     def __init__(self, config: PtConfig):
-        super(LlamaDecoderLayer, self).__init__()
-        self.hidden_size = config.hidden_size
-        self.self_attn = (
-            PtAttention(config=config)
+        super().__init__()
+        self.config = config
+        self.dim_z = config.dim_z
+        self.dim_g = config.dim_g
+        self.binary_factor = nn.Parameter(torch.empty(self.dim_g, self.dim_z))
+        self.act = POTENTIAL2ACT[config.potential_func_g](dim=-1, eps=config.potential_eps)
+        
+        self._init_binary()
+        
+    def _init_binary(self):
+        nn.init.normal_(self.binary_factor, mean=0.0, std=self.config.binary_initializer_range)
+
+    def forward(self, qz: torch.Tensor):
+        qg = nn.functional.linear(qz, self.binary_factor) * self.config.binary_factor_scaling
+        qg = self.act(qg / self.config.regularize_g)
+        message_G = qg @ self.binary_factor * self.config.binary_factor_scaling
+        return message_G
+
+class PtEncoderIterator(nn.Module):
+    def __init__(self, config: PtConfig):
+        super().__init__()
+        self.config = config
+        self.dim_z = config.dim_z
+        self.head_selection = (
+            PtHeadSelection(config=config)
             # if not getattr(config, "_flash_attn_2_enabled", False)
-            # else LlamaFlashAttention2(config=config)
+            # else PtFlashHeadSelection2(config=config)
         )
-        self.mlp = PtMLP(config)
-        layernorm = SquaredSoftmax if config.use_squared_softmax_pre_attn else LlamaRMSNorm
-        self.input_layernorm = layernorm(config.hidden_size, eps=config.rms_norm_eps)
-        layernorm = SquaredSoftmax if config.use_squared_softmax_post_attn else LlamaRMSNorm
-        self.post_attention_layernorm = layernorm(config.hidden_size, eps=config.rms_norm_eps)
+        self.topic_modeling = PtTopicModeling(config)
+        self.norm = POTENTIAL2ACT[config.potential_func_z](dim=-1, eps=config.potential_eps)
+    
+    def forward(
+        self,
+        unary_potentials: torch.Tensor,
+        qz: torch.Tensor,
+        dependency_mask: Optional[torch.Tensor] = None,
+        position_ids: Optional[torch.LongTensor] = None,
+        output_heads: Optional[bool] = False,
+    ) -> Tuple[torch.FloatTensor, Optional[torch.FloatTensor]]:
+        """
+        Args:
+            qz (`torch.FloatTensor`): input to the layer of shape `(batch, seq_len, embed_dim)`
+            dependency_mask (`torch.FloatTensor`, *optional*):
+                attention mask of size `(batch_size, sequence_length)` if flash attention is used or `(batch_size, 1,
+                query_sequence_length, key_sequence_length)` if default attention is used.
+            output_heads (`bool`, *optional*):
+                Whether or not to return the attentions tensors of all attention layers. See `attentions` under
+                returned tensors for more detail.
+        """
+
+        old_qz = qz
+
+        qz = self.norm(qz)
+
+        # head selection
+        m1, qh = self.head_selection(
+            qz=qz,
+            dependency_mask=dependency_mask,
+            position_ids=position_ids,
+            output_heads=output_heads,
+        )
+
+        # topic modeling
+        m2 = self.topic_modeling(qz)
+
+        # unary potentials
+        qz = (m1 + m2 + unary_potentials) / self.config.regularize_z
+
+        # damping
+        qz = (qz + old_qz) * .5
+
+        outputs = (qz,)
+
+        if output_heads:
+            outputs += (qh,)
+
+        return outputs
+    
+
+@dataclass
+class PtModelOutput(ModelOutput):
+    """qz is un-normalized logits, qh is the normalized distribution over heads."""
+    last_qz: torch.FloatTensor = None
+    all_qzs: Optional[Tuple[torch.FloatTensor]] = None
+    all_qhs: Optional[Tuple[torch.FloatTensor]] = None
+    
+
+class PtPreTrainedModel(PreTrainedModel):
+    config_class = PtConfig
+    base_model_prefix = "model"
+    supports_gradient_checkpointing = True
+    _no_split_modules = ["PtEncoderIterator"]
+    _skip_keys_device_placement = "past_key_values"
+    _supports_flash_attn_2 = True
+
+    def _init_weights(self, module):
+        std = self.config.initializer_range
+        if isinstance(module, nn.Linear):
+            module.weight.data.normal_(mean=0.0, std=std)
+            if module.bias is not None:
+                module.bias.data.zero_()
+        elif isinstance(module, nn.Embedding):
+            module.weight.data.normal_(mean=0.0, std=std)
+            if module.padding_idx is not None:
+                module.weight.data[module.padding_idx].zero_()
 
 
-class PtModel(LlamaModel):
+class PtModel(PtPreTrainedModel):
     config_class = PtConfig
     def __init__(self, config: PtConfig):
-        super(LlamaModel, self).__init__(config)
+        super().__init__(config)
         self.padding_idx = config.pad_token_id
         self.vocab_size = config.vocab_size
 
-        self.embed_tokens = nn.Embedding(config.vocab_size, config.hidden_size, self.padding_idx)
-        self.layers = nn.ModuleList([PtDecoderLayer(config) for _ in range(config.num_hidden_layers)])
-        layernorm = SquaredSoftmax if config.use_squared_softmax_final else LlamaRMSNorm
-        self.norm = layernorm(config.hidden_size, eps=config.rms_norm_eps)
+        self.unary_factors = nn.Embedding(config.vocab_size, config.dim_z, self.padding_idx)
+        self.iterator = PtEncoderIterator(config)
+        self.norm = POTENTIAL2ACT[config.potential_func_z](dim=-1, eps=config.potential_eps)
 
         self.gradient_checkpointing = False
         # Initialize weights and apply final processing
         self.post_init()
+    
+    def get_input_embeddings(self):
+        return self.unary_factors
+
+    def set_input_embeddings(self, value):
+        self.unary_factors = value
+    
+    def forward(
+        self,
+        input_ids: torch.LongTensor = None,
+        attention_mask: Optional[torch.Tensor] = None,
+        position_ids: Optional[torch.LongTensor] = None,
+        unary_potentials: Optional[torch.FloatTensor] = None,
+        output_heads: Optional[bool] = None,
+        output_qzs: Optional[bool] = None,
+        return_dict: Optional[bool] = None,
+    ) -> Union[Tuple, PtModelOutput]:
+        output_heads = output_heads if output_heads is not None else self.config.output_heads
+        output_qzs = (
+            output_qzs if output_qzs is not None else self.config.output_qzs
+        )
+
+        return_dict = return_dict if return_dict is not None else self.config.use_return_dict
+
+        # retrieve input_ids and unary_potentials
+        if input_ids is not None and unary_potentials is not None:
+            raise ValueError("You cannot specify both input_ids and unary_potentials at the same time")
+        elif input_ids is not None:
+            batch_size, seq_length = input_ids.shape[:2]
+        elif unary_potentials is not None:
+            batch_size, seq_length = unary_potentials.shape[:2]
+        else:
+            raise ValueError("You have to specify either input_ids or unary_potentials")
+
+        if position_ids is None:
+            device = input_ids.device if input_ids is not None else unary_potentials.device
+            position_ids = torch.arange(
+                0, seq_length, dtype=torch.long, device=device
+            )
+            position_ids = position_ids.unsqueeze(0)
+
+        if unary_potentials is None:
+            unary_potentials = self.unary_factors(input_ids)
+
+        if getattr(self.config, "_flash_attn_2_enabled", False):
+            # 2d mask is passed through the layers
+            raise ValueError("Flash attention 2 is not supported in PtModel when masking diagonals")
+            attention_mask = attention_mask if (attention_mask is not None and 0 in attention_mask) else None
+        else:
+            attn_mask_converter = AttentionMaskConverter(is_causal=False)
+            attention_mask = attn_mask_converter.to_4d(
+                attention_mask, seq_length, seq_length, dtype=unary_potentials.dtype
+            )
+            
+            # mask diagonals
+            diag_mask = torch.eye(seq_length, dtype=attention_mask.dtype, device=attention_mask.device).unsqueeze(0).unsqueeze(0)
+            attention_mask = attention_mask.masked_fill(diag_mask.to(torch.bool), torch.finfo(attention_mask.dtype).min)
+
+        # embed positions
+        qz = unary_potentials
+
+        # decoder layers
+        all_qzs = () if output_qzs else None
+        all_qhs = () if output_heads else None
+
+        for idx in range(self.config.num_iterations):
+            if output_qzs:
+                all_qzs += (qz,)
+
+            iter_outputs = self.iterator(
+                unary_potentials,
+                qz,
+                dependency_mask=attention_mask,
+                position_ids=position_ids,
+                output_heads=output_heads,
+            )
+
+            qz = iter_outputs[0]
+
+            if output_heads:
+                all_qhs += (iter_outputs[1],)
+
+        # add hidden states from the last decoder layer
+        if output_qzs:
+            all_qzs += (qz,)
+
+        qz = self.norm(qz)
+
+        if not return_dict:
+            return tuple(v for v in [qz, all_qzs, all_qhs] if v is not None)
+        return PtModelOutput(
+            last_qz=qz,
+            all_qzs=all_qzs,
+            all_qhs=all_qhs
+        )
 
 
-class PtForCausalLM(LlamaForCausalLM):
-    config_class = PtConfig
+class PtForMaskedLM(PtPreTrainedModel):
+    _tied_weights_keys = ["predictions.decoder.bias", "cls.predictions.decoder.weight"]
+
     def __init__(self, config):
-        super(LlamaForCausalLM, self).__init__(config)
+        super().__init__(config)
+
         self.model = PtModel(config)
-        self.vocab_size = config.vocab_size
-        self.lm_head = nn.Linear(config.hidden_size, config.vocab_size, bias=False)
+        self.cls = BertOnlyMLMHead(config)
 
         # Initialize weights and apply final processing
         self.post_init()
+
+    def get_output_embeddings(self):
+        return self.cls.predictions.decoder
+
+    def set_output_embeddings(self, new_embeddings):
+        self.cls.predictions.decoder = new_embeddings
+        self.cls.predictions.bias = new_embeddings.bias
+
+    def forward(
+        self,
+        input_ids: Optional[torch.Tensor] = None,
+        attention_mask: Optional[torch.Tensor] = None,
+        token_type_ids: Optional[torch.Tensor] = None,
+        position_ids: Optional[torch.Tensor] = None,
+        dependency_mask: Optional[torch.Tensor] = None,
+        inputs_embeds: Optional[torch.Tensor] = None,
+        encoder_hidden_states: Optional[torch.Tensor] = None,
+        encoder_attention_mask: Optional[torch.Tensor] = None,
+        labels: Optional[torch.Tensor] = None,
+        output_attentions: Optional[bool] = None,
+        output_hidden_states: Optional[bool] = None,
+        return_dict: Optional[bool] = None,
+    ) -> Union[Tuple[torch.Tensor], MaskedLMOutput]:
+        r"""
+        labels (`torch.LongTensor` of shape `(batch_size, sequence_length)`, *optional*):
+            Labels for computing the masked language modeling loss. Indices should be in `[-100, 0, ...,
+            config.vocab_size]` (see `input_ids` docstring) Tokens with indices set to `-100` are ignored (masked), the
+            loss is only computed for the tokens with labels in `[0, ..., config.vocab_size]`
+        """
+
+        return_dict = return_dict if return_dict is not None else self.config.use_return_dict
+
+        outputs = self.model(
+            input_ids,
+            attention_mask=attention_mask,
+            position_ids=position_ids,
+            unary_potentials=inputs_embeds,
+            output_heads=output_attentions,
+            output_qzs=output_hidden_states,
+            return_dict=return_dict,
+        )
+
+        sequence_output = outputs[0] * self.config.classifier_amplifier
+        prediction_scores = self.cls(sequence_output)
+
+        masked_lm_loss = None
+        if labels is not None:
+            loss_fct = CrossEntropyLoss()  # -100 index = padding token
+            masked_lm_loss = loss_fct(prediction_scores.view(-1, self.config.vocab_size), labels.view(-1))
+
+        if not return_dict:
+            output = (prediction_scores,) + outputs[1:]
+            return ((masked_lm_loss,) + output) if masked_lm_loss is not None else output
+
+        return MaskedLMOutput(
+            loss=masked_lm_loss,
+            logits=prediction_scores,
+            hidden_states=outputs.all_qzs,
+            attentions=outputs.all_qhs,
+        )
+
+    def prepare_inputs_for_generation(self, input_ids, attention_mask=None, **model_kwargs):
+        input_shape = input_ids.shape
+        effective_batch_size = input_shape[0]
+
+        #  add a dummy token
+        if self.config.pad_token_id is None:
+            raise ValueError("The PAD token should be defined for generation")
+
+        attention_mask = torch.cat([attention_mask, attention_mask.new_zeros((attention_mask.shape[0], 1))], dim=-1)
+        dummy_token = torch.full(
+            (effective_batch_size, 1), self.config.pad_token_id, dtype=torch.long, device=input_ids.device
+        )
+        input_ids = torch.cat([input_ids, dummy_token], dim=1)
+
+        return {"input_ids": input_ids, "attention_mask": attention_mask}
