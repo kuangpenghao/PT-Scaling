@@ -26,6 +26,7 @@ import math
 import os
 import sys
 import warnings
+from fractions import Fraction
 from dataclasses import dataclass, field
 from itertools import chain
 from typing import Optional
@@ -46,6 +47,7 @@ from transformers import (
     HfArgumentParser,
     Trainer,
     TrainingArguments,
+    TrainerCallback,
     is_torch_xla_available,
     set_seed,
 )
@@ -64,6 +66,80 @@ require_version("datasets>=1.8.0", "To fix: pip install -r examples/pytorch/lang
 logger = logging.getLogger(__name__)
 MODEL_CONFIG_CLASSES = list(MODEL_FOR_MASKED_LM_MAPPING.keys())
 MODEL_TYPES = tuple(conf.model_type for conf in MODEL_CONFIG_CLASSES)
+
+
+def compute_pt_parameter_count(dim_z: int, dim_g: int, num_channels: int, vocab_size: int, ternary_rank: int,
+                               tie_word_embeddings: bool = False) -> int:
+    """Approximate trainable parameter count for the PtForMaskedLM architecture."""
+    embedding_params = vocab_size * dim_z
+    ternary_params = 2 * num_channels * ternary_rank * dim_z
+    binary_params = dim_g * dim_z
+    mlm_dense_params = dim_z * dim_z + dim_z  # weight + bias
+    layernorm_params = 2 * dim_z
+    decoder_weight_params = 0 if tie_word_embeddings else dim_z * vocab_size
+    decoder_bias_params = vocab_size
+    return (
+        embedding_params
+        + ternary_params
+        + binary_params
+        + mlm_dense_params
+        + layernorm_params
+        + decoder_weight_params
+        + decoder_bias_params
+    )
+
+
+def solve_dims_and_channels(
+    ratio: float,
+    vocab_size: int,
+    ternary_rank: int,
+    tie_word_embeddings: bool,
+    target_total: int,
+    num_channels_min: int = 12,
+    num_channels_max: int = 128,
+):
+    """Search even num_channels and even (dim_z, dim_g) to match target params under a ratio.
+
+    Returns (num_channels, dim_z, dim_g, best_total, best_diff).
+    """
+    best = None
+    for ch in range(max(2, num_channels_min + num_channels_min % 2), num_channels_max + 1, 2):
+        # Solve quadratic: total ≈ (1+ratio)*dim_z^2 + (2*vocab + 2*ch*ternary_rank + 3)*dim_z + vocab
+        a = 1.0 + ratio
+        b = 2 * vocab_size + 2 * ch * ternary_rank + 3
+        c = vocab_size - target_total
+        discriminant = b * b - 4 * a * c
+        if discriminant < 0:
+            continue
+        approx_z = (-b + math.sqrt(discriminant)) / (2 * a)
+        if approx_z <= 0:
+            continue
+        
+        # Search around approx_z for even dim_z
+        base_even = int(round(approx_z / 2)) * 2
+        for radius in [50, 100, 200]:
+            start = max(2, base_even - radius)
+            end = base_even + radius
+            for dim_z in range(start, end + 1, 2):
+                dim_g_float = ratio * dim_z
+                dim_g = int(round(dim_g_float / 2)) * 2
+                if dim_g <= 0:
+                    continue
+                total = compute_pt_parameter_count(dim_z, dim_g, ch, vocab_size, ternary_rank, tie_word_embeddings)
+                diff = abs(total - target_total)
+                if best is None or diff < best[4]:
+                    best = (ch, dim_z, dim_g, total, diff)
+                    if diff <= target_total * 0.005:
+                        break
+            if best and best[4] <= target_total * 0.005:
+                break
+        if best and best[4] <= target_total * 0.005:
+            break
+    if best is None:
+        raise ValueError(
+            f"Unable to find even (num_channels, dim_z, dim_g) for ratio={ratio} within channels [{num_channels_min}, {num_channels_max}]."
+        )
+    return best
 
 
 @dataclass
@@ -267,6 +343,18 @@ def main():
         model_args, data_args, training_args = parser.parse_json_file(json_file=os.path.abspath(sys.argv[1]))
     else:
         model_args, data_args, training_args = parser.parse_args_into_dataclasses()
+    
+    # Initialize wandb early if running under wandb agent
+    import wandb
+    if wandb.run is None and "WANDB_RUN_ID" in os.environ:
+        wandb.init(reinit=True)
+    
+    # Update output_dir to include wandb run_id for parallel runs
+    if wandb.run is not None:
+        base_output_dir = training_args.output_dir
+        run_id = wandb.run.id
+        training_args.output_dir = os.path.join(base_output_dir, run_id)
+        logger.info(f"Updated output_dir to: {training_args.output_dir}")
 
     if model_args.use_auth_token is not None:
         warnings.warn(
@@ -423,6 +511,195 @@ def main():
         logger.info(f"Overriding config: {model_args.config_overrides}")
         config.update_from_string(model_args.config_overrides)
         logger.info(f"New config: {config}")
+    
+    # Apply wandb sweep parameters directly to config object
+    if wandb.run is not None:
+        logger.info("Applying wandb sweep parameters to config...")
+
+        int_config_keys = {"num_channels", "num_iterations", "ternary_rank"}
+
+        def _normalize_config_value(key, value):
+            # Booleans encoded as strings
+            if isinstance(value, str) and value.lower() in ["true", "false"]:
+                return value.lower() == "true"
+            # Try integer coercion for known int keys
+            if key in int_config_keys:
+                try:
+                    float_val = float(value)
+                    if float_val.is_integer():
+                        return int(float_val)
+                except (TypeError, ValueError):
+                    pass
+            # Generic float coercion to avoid strings like "1e-05"
+            if isinstance(value, str):
+                try:
+                    return float(value)
+                except ValueError:
+                    return value
+            return value
+
+        config_keys = [
+            "num_channels",
+            "num_iterations",
+            "ternary_rank",
+            "potential_func_z",
+            "potential_func_g",
+            "max_position_embeddings",
+            "initializer_range",
+            "binary_initializer_range",
+            "ternary_initializer_range",
+            "binary_factor_scaling",
+            "ternary_factor_scaling",
+            "classifier_amplifier",
+            "potential_eps",
+            "tie_word_embeddings",
+            "rope_theta",
+            "dropout_prob_z",
+            "dropout_prob_h",
+            "regularize_z",
+            "regularize_h",
+            "regularize_g",
+            "hidden_act",
+            "layer_norm_eps",
+            "output_heads",
+            "output_qzs",
+        ]
+
+        for key in config_keys:
+            if key in wandb.config:
+                value = _normalize_config_value(key, wandb.config[key])
+                old_value = getattr(config, key, None)
+                setattr(config, key, value)
+                logger.info(f"  {key}: {old_value} -> {value}")
+
+        ratio_value = None
+        ratio_key_used = None
+        for ratio_key in ("dim_ratio", "dim_g_dim_z_ratio", "dim_g_over_dim_z"):
+            if ratio_key in wandb.config:
+                try:
+                    ratio_value = float(wandb.config[ratio_key])
+                    ratio_key_used = ratio_key
+                    break
+                except (TypeError, ValueError):
+                    raise ValueError(f"Invalid ratio value for {ratio_key}: {wandb.config[ratio_key]}")
+
+        tie_flag = bool(config.tie_word_embeddings)
+        target_param_keys = ("total_params", "param_target", "model_param_target", "total_params_target")
+        target_total = None
+        for k in target_param_keys:
+            if k in wandb.config:
+                try:
+                    target_total = int(float(wandb.config[k]))
+                    logger.info(f"  parameter target from sweep ({k}): {target_total:,}")
+                    break
+                except (TypeError, ValueError):
+                    raise ValueError(f"Invalid total param target for {k}: {wandb.config[k]}")
+
+        if target_total is None:
+            raise ValueError("Must provide total parameter count in sweep config (e.g., total_params_target)")
+
+        if ratio_value is not None:
+            num_ch_min = int(wandb.config.get("num_channels_min", 6)) if "num_channels_min" in wandb.config else 12
+            num_ch_max = int(wandb.config.get("num_channels_max", 128)) if "num_channels_max" in wandb.config else 128
+            chosen_channels, dim_z_val, dim_g_val, total_estimate, diff_estimate = solve_dims_and_channels(
+                ratio_value,
+                config.vocab_size,
+                config.ternary_rank,
+                tie_flag,
+                target_total,
+                num_channels_min=num_ch_min,
+                num_channels_max=num_ch_max,
+            )
+            config.num_channels = chosen_channels
+
+            old_dim_z = getattr(config, "dim_z", None)
+            old_dim_g = getattr(config, "dim_g", None)
+            old_ch = getattr(config, "num_channels", None)
+            config.dim_z = dim_z_val
+            config.dim_g = dim_g_val
+            config.hidden_size = dim_z_val
+            config.classifier_amplifier = float(dim_z_val)
+            logger.info(
+                "  ratio %s=%.2f -> ch=%d, dim_z=%d, dim_g=%d (est diff %d)"
+                % (ratio_key_used, ratio_value, config.num_channels, dim_z_val, dim_g_val, diff_estimate)
+            )
+            logger.info(f"  num_channels: {old_ch} -> {config.num_channels}")
+            logger.info(f"  dim_z: {old_dim_z} -> {config.dim_z}")
+            logger.info(f"  dim_g: {old_dim_g} -> {config.dim_g}")
+            wandb.config.update(
+                {
+                    "num_channels": int(config.num_channels),
+                    "dim_z": int(dim_z_val),
+                    "dim_g": int(dim_g_val),
+                    "dim_ratio_actual": round(config.dim_g / config.dim_z, 6),
+                    "model_param_count_target": int(target_total),
+                    "model_param_count_est": int(total_estimate),
+                    "model_param_count_diff": int(diff_estimate),
+                },
+                allow_val_change=True,
+            )
+        else:
+            for key in ("dim_z", "dim_g"):
+                if key in wandb.config:
+                    raw_value = _normalize_config_value(key, wandb.config[key])
+                    old_value = getattr(config, key, None)
+                    setattr(config, key, raw_value)
+                    logger.info(f"  {key}: {old_value} -> {raw_value}")
+            if hasattr(config, "dim_z"):
+                config.hidden_size = config.dim_z
+                config.classifier_amplifier = float(config.dim_z)
+
+        if hasattr(config, "dim_z"):
+            logger.info(f"  hidden_size: -> {config.hidden_size}")
+            # classifier_amplifier 将由幂律关系计算，这里先不设置
+
+        # 根据 dim_z 和幂律指数计算缩放参数
+        if hasattr(config, "dim_z") and "ternary_scaling_exp" in wandb.config:
+            dim_z = config.dim_z
+            ternary_exp = float(wandb.config["ternary_scaling_exp"])
+            ternary_factor_scaling = 1.0 / (dim_z ** ternary_exp)
+            config.ternary_factor_scaling = ternary_factor_scaling
+            wandb.config.update({"ternary_factor_scaling": ternary_factor_scaling}, allow_val_change=True)
+            logger.info(f"  Computed ternary_factor_scaling = 1 / {dim_z}^{ternary_exp} = {ternary_factor_scaling:.6e}")
+
+        if hasattr(config, "dim_z") and "classifier_exp" in wandb.config:
+            dim_z = config.dim_z
+            classifier_exp = float(wandb.config["classifier_exp"])
+            classifier_amplifier = dim_z ** classifier_exp
+            config.classifier_amplifier = classifier_amplifier
+            wandb.config.update({"classifier_amplifier": classifier_amplifier}, allow_val_change=True)
+            logger.info(f"  Computed classifier_amplifier = {dim_z}^{classifier_exp} = {classifier_amplifier:.2f}")
+
+        # 计算 learning_rate: lr = lr_eta0 / dim_z^lr_exp
+        if hasattr(config, "dim_z") and "lr_eta0" in wandb.config and "lr_exp" in wandb.config:
+            dim_z = config.dim_z
+            lr_eta0 = float(wandb.config["lr_eta0"])
+            lr_exp = float(wandb.config["lr_exp"])
+            computed_lr = lr_eta0 / (dim_z ** lr_exp)
+            wandb.config.update({"learning_rate": computed_lr}, allow_val_change=True)
+            logger.info(f"  Computed learning_rate = {lr_eta0} / {dim_z}^{lr_exp} = {computed_lr:.6e}")
+
+        training_int_keys = {"per_device_train_batch_size", "per_device_eval_batch_size", "gradient_accumulation_steps"}
+        for key in [
+            "learning_rate",
+            "per_device_train_batch_size",
+            "per_device_eval_batch_size",
+            "gradient_accumulation_steps",
+            "num_train_epochs",
+        ]:
+            if key in wandb.config:
+                raw_value = wandb.config[key]
+                value = raw_value
+                if isinstance(raw_value, str):
+                    try:
+                        value = float(raw_value)
+                    except ValueError:
+                        value = raw_value
+                if key in training_int_keys and isinstance(value, float) and value.is_integer():
+                    value = int(value)
+                old_value = getattr(training_args, key, None)
+                setattr(training_args, key, value)
+                logger.info(f"  training_args.{key}: {old_value} -> {value}")
 
     tokenizer_kwargs = {
         "cache_dir": model_args.cache_dir,
@@ -441,10 +718,22 @@ def main():
             "You can do it from another script, save it, and load it from here, using --tokenizer_name."
         )
     
-    if tokenizer.mask_token is None:
-        tokenizer.add_special_tokens({"mask_token": "<mask>"})
+    # Avoid increasing vocab size when possible: reuse existing tokens first.
     if tokenizer.pad_token is None:
-        tokenizer.add_special_tokens({"pad_token": "<pad>"})
+        if tokenizer.eos_token is not None:
+            tokenizer.pad_token = tokenizer.eos_token
+            logger.info("Reusing eos_token as pad_token to avoid resizing embeddings.")
+        else:
+            tokenizer.add_special_tokens({"pad_token": "<pad>"})
+            logger.info("Added pad_token '<pad>' (vocab will grow).")
+
+    if tokenizer.mask_token is None:
+        if tokenizer.unk_token is not None:
+            tokenizer.mask_token = tokenizer.unk_token
+            logger.info("Reusing unk_token as mask_token to avoid resizing embeddings. MLM masking will use unk id.")
+        else:
+            tokenizer.add_special_tokens({"mask_token": "<mask>"})
+            logger.info("Added mask_token '<mask>' (vocab will grow).")
 
     if model_args.model_name_or_path:
         torch_dtype = (
@@ -471,6 +760,13 @@ def main():
         )
         logger.info("Training new model from scratch")
         model = AutoModelForMaskedLM.from_config(config, trust_remote_code=model_args.trust_remote_code, torch_dtype=torch_dtype)
+
+    if wandb.run is not None:
+        param_count = model.num_parameters() if hasattr(model, "num_parameters") else sum(p.numel() for p in model.parameters())
+        logger.info(f"Model parameter count: {param_count:,}")
+        if getattr(training_args, "process_index", 0) == 0:
+            wandb.config.update({"model_parameter_count_actual": int(param_count)}, allow_val_change=True)
+            wandb.run.summary["model_parameter_count"] = int(param_count)
 
     # We resize the embeddings only when necessary to avoid index errors. If you are creating a model from scratch
     # on a small vocab and want a smaller embedding size, remove this test.
@@ -646,6 +942,8 @@ def main():
     )
 
     # Initialize our Trainer
+    callbacks = []
+    
     trainer = Trainer(
         model=model,
         args=training_args,
@@ -657,6 +955,7 @@ def main():
         preprocess_logits_for_metrics=preprocess_logits_for_metrics
         if training_args.do_eval and not is_torch_xla_available()
         else None,
+        callbacks=callbacks,
     )
 
     # Training
