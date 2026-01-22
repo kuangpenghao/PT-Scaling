@@ -10,16 +10,15 @@ from datetime import datetime
 import os
 
 # 配置
-TMUX_WINDOWS = ["sweep2", "sweep4", "sweep5","sweep6","sweep8"]
+TMUX_WINDOWS = ["sweep4", "sweep5"]
 CHECK_INTERVAL = 30  # 检查间隔（秒）
 LOG_FILE = "log.txt"
-SWEEP_ID = "kuangpenghao-shanghaitech-university/pt-scaling-hypers/wnhcj0p7"
 
-# SLURM命令模板
-SLURM_COMMAND = (
-    "srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 "
-    f"wandb agent {SWEEP_ID}"
-)
+# 每个窗口的SLURM命令映射
+WINDOW_COMMANDS = {
+    "sweep4": "srun -N 1 -n 1 -X -u -p normal --gres=gpu:2 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm1536.sh",
+    "sweep5": "srun -N 1 -n 1 -X -u -p normal --gres=gpu:2 -c 2 --mem=1M -t 0-196:00:00 bash run_mlm2816.sh"
+}
 
 
 def check_tmux_window_active(window_name):
@@ -127,7 +126,8 @@ def main():
     log_message("🚀 TMUX监控脚本已启动")
     log_message(f"📋 监控窗口: {', '.join(TMUX_WINDOWS)}")
     log_message(f"⏰ 检查间隔: {CHECK_INTERVAL}秒")
-    log_message(f"🔍 Sweep ID: {SWEEP_ID}")
+    log_message(f"🎯 sweep4 -> run_mlm1536.sh (96h)")
+    log_message(f"🎯 sweep5 -> run_mlm2816.sh (196h)")
     print("=" * 70)
     
     cycle_count = 0
@@ -156,12 +156,19 @@ def main():
                     print(f"⚠️  {window}: 空闲 (当前: {current_cmd})")
                     print(f"   → 正在发送启动命令...")
                     
+                    # 获取该窗口对应的命令
+                    command = WINDOW_COMMANDS.get(window)
+                    if command is None:
+                        print(f"   ✗ 窗口 {window} 没有配置命令")
+                        log_message(f"窗口 {window} 没有配置命令")
+                        continue
+                    
                     # 发送命令
-                    success = send_command_to_window(window, SLURM_COMMAND)
+                    success = send_command_to_window(window, command)
                     
                     if success:
                         print(f"   ✓ 成功发送命令到窗口 {window}")
-                        log_message(f"成功发送命令到窗口 {window}")
+                        log_message(f"成功发送命令到窗口 {window}: {command}")
                     else:
                         print(f"   ✗ 发送命令到窗口 {window} 失败")
                         log_message(f"发送命令到窗口 {window} 失败")

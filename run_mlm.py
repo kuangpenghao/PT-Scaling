@@ -331,6 +331,90 @@ class DataTrainingArguments:
                     raise ValueError("`validation_file` should be a csv, a json or a txt file.")
 
 
+
+class ParameterMonitorCallback(TrainerCallback):
+    """
+    Log parameter statistics (mean, std, min, max) to a file to monitor training dynamics.
+    Appends to 'parameter_monitor.txt' in output_dir.
+    """
+    def __init__(self, output_dir):
+        self.output_file = os.path.join(output_dir, "parameter_monitor.txt")
+        self.last_eval_loss = None
+    
+    def on_evaluate(self, args, state, control, metrics=None, **kwargs):
+        # Cache eval loss
+        if metrics and "eval_loss" in metrics:
+            self.last_eval_loss = metrics["eval_loss"]
+
+    def on_save(self, args, state, control, model=None, **kwargs):
+        self._log_stats(state.global_step, model, args, phase="SAVE")
+
+    def _write_log(self, content):
+        # Only log on main process
+        if is_torch_xla_available():
+             pass
+        elif torch.distributed.is_initialized() and torch.distributed.get_rank() != 0:
+            return
+
+        try:
+            with open(self.output_file, "a") as f:
+                f.write(content)
+        except Exception as e:
+            logger.warning(f"Failed to log to parameter_monitor: {e}")
+
+    def _log_stats(self, step, model, training_args, phase=""):
+        if model is None:
+            return
+        
+        # Check process rank via _write_log logic
+        if torch.distributed.is_initialized() and torch.distributed.get_rank() != 0:
+            return
+
+        # Prepare stat string
+        lines = [f"=== {phase} Step {step} ===\n"]
+
+        # 1. Eval Loss
+        if self.last_eval_loss is not None:
+             lines.append(f"Last Eval Loss: {self.last_eval_loss}\n")
+        
+        # 2. Hyperparameters being tuned
+        if hasattr(model, "config"):
+            c = model.config
+            lines.append("Hyperparameters:\n")
+            lines.append(f"  dim_z: {getattr(c, 'dim_z', 'N/A')}\n")
+            lines.append(f"  binary_factor_scaling: {getattr(c, 'binary_factor_scaling', 'N/A')}\n")
+            lines.append(f"  ternary_factor_scaling: {getattr(c, 'ternary_factor_scaling', 'N/A')}\n")
+            lines.append(f"  classifier_amplifier: {getattr(c, 'classifier_amplifier', 'N/A')}\n")
+            lines.append(f"  regularize_z: {getattr(c, 'regularize_z', 'N/A')}\n")
+            lines.append(f"  regularize_g: {getattr(c, 'regularize_g', 'N/A')}\n")
+            lines.append(f"  regularize_h: {getattr(c, 'regularize_h', 'N/A')}\n")
+            lines.append(f"  learning_rate: {training_args.learning_rate}\n")
+            lines.append("\n")
+
+        # 3. Parameter Stats
+        for name, param in model.named_parameters():
+            if not param.requires_grad:
+                continue
+            
+            # Use float32 for stats to avoid overflow
+            data = param.data.float()
+            mean = data.mean().item()
+            std = data.std().item()
+            min_val = data.min().item()
+            max_val = data.max().item()
+            
+            lines.append(f"{name}:\n")
+            lines.append(f"  Mean: {mean:.4e} | Std: {std:.4e} | Min: {min_val:.4e} | Max: {max_val:.4e}\n")
+            
+            if torch.isnan(data).any():
+                lines.append(f"  [WARNING] NaN detected!\n")
+            if torch.isinf(data).any():
+                lines.append(f"  [WARNING] Inf detected!\n")
+        lines.append("\n")
+        
+        self._write_log("".join(lines))
+
+
 def main():
     # See all possible arguments in src/transformers/training_args.py
     # or by passing the --help flag to this script.
@@ -572,112 +656,30 @@ def main():
                 setattr(config, key, value)
                 logger.info(f"  {key}: {old_value} -> {value}")
 
-        ratio_value = None
-        ratio_key_used = None
-        for ratio_key in ("dim_ratio", "dim_g_dim_z_ratio", "dim_g_over_dim_z"):
-            if ratio_key in wandb.config:
-                try:
-                    ratio_value = float(wandb.config[ratio_key])
-                    ratio_key_used = ratio_key
-                    break
-                except (TypeError, ValueError):
-                    raise ValueError(f"Invalid ratio value for {ratio_key}: {wandb.config[ratio_key]}")
+        # muP adjustments
+        if "dim_z" in wandb.config:
+            val = int(wandb.config["dim_z"])
+            config.dim_z = val
+            config.hidden_size = val # ensure consistency
+            logger.info(f"  dim_z set to {val}")
 
-        tie_flag = bool(config.tie_word_embeddings)
-        target_param_keys = ("total_params", "param_target", "model_param_target", "total_params_target")
-        target_total = None
-        for k in target_param_keys:
-            if k in wandb.config:
-                try:
-                    target_total = int(float(wandb.config[k]))
-                    logger.info(f"  parameter target from sweep ({k}): {target_total:,}")
-                    break
-                except (TypeError, ValueError):
-                    raise ValueError(f"Invalid total param target for {k}: {wandb.config[k]}")
+        if "dim_ratio" in wandb.config:
+            ratio = float(wandb.config["dim_ratio"])
+            config.dim_g = int(config.dim_z * ratio)
+            logger.info(f"  dim_g set to {config.dim_g} (ratio {ratio})")
+        elif "dim_g" in wandb.config:
+            config.dim_g = int(wandb.config["dim_g"])
 
-        if target_total is None:
-            raise ValueError("Must provide total parameter count in sweep config (e.g., total_params_target)")
+        if "ternary_rank_ratio" in wandb.config:
+            ratio = float(wandb.config["ternary_rank_ratio"])
+            # ternary_rank = dim_z * ratio
+            # Must be even for RoPE
+            raw_rank = int(config.dim_z * ratio)
+            config.ternary_rank = max(2, raw_rank + (raw_rank % 2))
+            logger.info(f"  ternary_rank set to {config.ternary_rank} (dim_z * {ratio}, rounded to even)")
 
-        if ratio_value is not None:
-            num_ch_min = int(wandb.config.get("num_channels_min", 6)) if "num_channels_min" in wandb.config else 12
-            num_ch_max = int(wandb.config.get("num_channels_max", 128)) if "num_channels_max" in wandb.config else 128
-            chosen_channels, dim_z_val, dim_g_val, total_estimate, diff_estimate = solve_dims_and_channels(
-                ratio_value,
-                config.vocab_size,
-                config.ternary_rank,
-                tie_flag,
-                target_total,
-                num_channels_min=num_ch_min,
-                num_channels_max=num_ch_max,
-            )
-            config.num_channels = chosen_channels
-
-            old_dim_z = getattr(config, "dim_z", None)
-            old_dim_g = getattr(config, "dim_g", None)
-            old_ch = getattr(config, "num_channels", None)
-            config.dim_z = dim_z_val
-            config.dim_g = dim_g_val
-            config.hidden_size = dim_z_val
-            config.classifier_amplifier = float(dim_z_val)
-            logger.info(
-                "  ratio %s=%.2f -> ch=%d, dim_z=%d, dim_g=%d (est diff %d)"
-                % (ratio_key_used, ratio_value, config.num_channels, dim_z_val, dim_g_val, diff_estimate)
-            )
-            logger.info(f"  num_channels: {old_ch} -> {config.num_channels}")
-            logger.info(f"  dim_z: {old_dim_z} -> {config.dim_z}")
-            logger.info(f"  dim_g: {old_dim_g} -> {config.dim_g}")
-            wandb.config.update(
-                {
-                    "num_channels": int(config.num_channels),
-                    "dim_z": int(dim_z_val),
-                    "dim_g": int(dim_g_val),
-                    "dim_ratio_actual": round(config.dim_g / config.dim_z, 6),
-                    "model_param_count_target": int(target_total),
-                    "model_param_count_est": int(total_estimate),
-                    "model_param_count_diff": int(diff_estimate),
-                },
-                allow_val_change=True,
-            )
-        else:
-            for key in ("dim_z", "dim_g"):
-                if key in wandb.config:
-                    raw_value = _normalize_config_value(key, wandb.config[key])
-                    old_value = getattr(config, key, None)
-                    setattr(config, key, raw_value)
-                    logger.info(f"  {key}: {old_value} -> {raw_value}")
-            if hasattr(config, "dim_z"):
-                config.hidden_size = config.dim_z
-                config.classifier_amplifier = float(config.dim_z)
-
-        if hasattr(config, "dim_z"):
-            logger.info(f"  hidden_size: -> {config.hidden_size}")
-            # classifier_amplifier 将由幂律关系计算，这里先不设置
-
-        # 根据 dim_z 和幂律指数计算缩放参数
-        if hasattr(config, "dim_z") and "ternary_scaling_exp" in wandb.config:
-            dim_z = config.dim_z
-            ternary_exp = float(wandb.config["ternary_scaling_exp"])
-            ternary_factor_scaling = 1.0 / (dim_z ** ternary_exp)
-            config.ternary_factor_scaling = ternary_factor_scaling
-            wandb.config.update({"ternary_factor_scaling": ternary_factor_scaling}, allow_val_change=True)
-            logger.info(f"  Computed ternary_factor_scaling = 1 / {dim_z}^{ternary_exp} = {ternary_factor_scaling:.6e}")
-
-        if hasattr(config, "dim_z") and "classifier_exp" in wandb.config:
-            dim_z = config.dim_z
-            classifier_exp = float(wandb.config["classifier_exp"])
-            classifier_amplifier = dim_z ** classifier_exp
-            config.classifier_amplifier = classifier_amplifier
-            wandb.config.update({"classifier_amplifier": classifier_amplifier}, allow_val_change=True)
-            logger.info(f"  Computed classifier_amplifier = {dim_z}^{classifier_exp} = {classifier_amplifier:.2f}")
-
-        # 计算 learning_rate: lr = lr_eta0 / dim_z^lr_exp
-        if hasattr(config, "dim_z") and "lr_eta0" in wandb.config and "lr_exp" in wandb.config:
-            dim_z = config.dim_z
-            lr_eta0 = float(wandb.config["lr_eta0"])
-            lr_exp = float(wandb.config["lr_exp"])
-            computed_lr = lr_eta0 / (dim_z ** lr_exp)
-            wandb.config.update({"learning_rate": computed_lr}, allow_val_change=True)
-            logger.info(f"  Computed learning_rate = {lr_eta0} / {dim_z}^{lr_exp} = {computed_lr:.6e}")
+        # Update other derived config if needed
+        # ...
 
         training_int_keys = {"per_device_train_batch_size", "per_device_eval_batch_size", "gradient_accumulation_steps"}
         for key in [
@@ -944,6 +946,54 @@ def main():
     # Initialize our Trainer
     callbacks = []
     
+    if training_args.local_rank in [-1, 0]:
+        callbacks.append(ParameterMonitorCallback(training_args.output_dir))
+
+    # Custom Optimizer for muP
+    from torch.optim import AdamW
+    
+    optimizer_grouped_parameters = []
+    base_lr = training_args.learning_rate
+    # If training_args.learning_rate is default (5e-5), hopefully user set it in sweep or args.
+    
+    dim_z = config.dim_z
+
+    # Scale max_grad_norm by dim_z / 256
+    if training_args.max_grad_norm is not None:
+        old_norm = training_args.max_grad_norm
+        training_args.max_grad_norm = old_norm * (dim_z / 256.0)
+        logger.info(f"muP: Scaled max_grad_norm from {old_norm} to {training_args.max_grad_norm} (dim_z={dim_z})")
+    
+    group1_params = [] # Base LR: Input/Bias/LN
+    group2_params = [] # Scaled LR: Hidden/Output (Matrices)
+    
+    for name, param in model.named_parameters():
+        if not param.requires_grad:
+            continue
+        
+        # Heuristic for Input/Bias/Scalar
+        is_group1 = False
+        if param.ndim < 2:
+            is_group1 = True
+        elif "unary_factors" in name or "embeddings" in name:
+            is_group1 = True
+        elif "bias" in name: 
+            is_group1 = True
+            
+        if is_group1:
+            group1_params.append(param)
+        else:
+            group2_params.append(param)
+    
+    optimizer = AdamW(
+        [
+            {"params": group1_params, "weight_decay": training_args.weight_decay, "lr": base_lr},
+            {"params": group2_params, "weight_decay": training_args.weight_decay, "lr": base_lr / dim_z},
+        ],
+        betas=(training_args.adam_beta1, training_args.adam_beta2),
+        eps=training_args.adam_epsilon,
+    )
+
     trainer = Trainer(
         model=model,
         args=training_args,
@@ -956,6 +1006,7 @@ def main():
         if training_args.do_eval and not is_torch_xla_available()
         else None,
         callbacks=callbacks,
+        optimizers=(optimizer, None), # Pass custom optimizer
     )
 
     # Training

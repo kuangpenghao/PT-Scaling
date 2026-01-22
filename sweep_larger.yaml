@@ -48,47 +48,33 @@ parameters:
 
   # 架构维度 - Fixed dim_z for muP sweep (128)
   dim_z:
-    value: 256
+    value: 96
   
   dim_ratio:  # dim_g = dim_z * dim_ratio
     values: [5.5]
 
   ternary_rank_ratio: # ternary_rank = dim_z * (value)
-    values: [0.25] # 调整倍数
+    values: [0.5] # 调整倍数
 
   # 缩放因子 (Scalars - Constant in muP)
   binary_factor_scaling:
-    distribution: log_uniform_values
-    min: 0.1
-    max: 30
+    values: [5.615]
   ternary_factor_scaling:
-    distribution: log_uniform_values
-    min: 0.1
-    max: 1
+    values: [1.02858]
   classifier_amplifier:
-    distribution: log_uniform_values
-    min: 100
-    max: 2000
+    values: [164.93668]
 
   # 正则化强度 (Invariant)
   regularize_z:
-    distribution: log_uniform_values
-    min: 0.1
-    max: 5
+    values: [1.62087]
   regularize_g:
-    distribution: log_uniform_values
-    min: 0.2
-    max: 5
+    values: [4.21161]
   regularize_h:
-    distribution: log_uniform_values
-    min: 0.02
-    max: 1.25
+    values: [0.18722]
 
   # 学习率 (Base LR)
   learning_rate:
-    distribution: log_uniform_values
-    min: 0.02
-    max: 0.08
+    values: [0.041861]
 
   # Dropout (设为0)
   dropout_prob_z:
@@ -143,7 +129,7 @@ parameters:
   gradient_accumulation_steps:
     values: [1]
   num_train_epochs:
-    values: [0.3]
+    values: [4]
 
 early_terminate:
   type: hyperband

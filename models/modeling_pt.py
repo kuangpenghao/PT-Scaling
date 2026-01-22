@@ -64,7 +64,8 @@ class SquaredSoftmax(nn.Module):
         input_dtype = hidden_states.dtype
         hidden_states = hidden_states.to(torch.float32)
         hidden_states = hidden_states.pow(2)
-        hidden_states = F.normalize(hidden_states, p=1, dim=self.dim, eps=self.eps)
+        # Energy Recovery: scale by dim
+        hidden_states = F.normalize(hidden_states, p=1, dim=self.dim, eps=self.eps) * hidden_states.shape[self.dim]
         return hidden_states.to(input_dtype)
 
 
@@ -78,7 +79,8 @@ class AbsNormalization(nn.Module):
         input_dtype = hidden_states.dtype
         hidden_states = hidden_states.to(torch.float32)
         hidden_states = F.relu(hidden_states)
-        hidden_states = F.normalize(hidden_states, p=1, dim=self.dim, eps=self.eps)
+        # Energy Recovery: scale by dim
+        hidden_states = F.normalize(hidden_states, p=1, dim=self.dim, eps=self.eps) * hidden_states.shape[self.dim]
         return hidden_states.to(input_dtype)
 
 
@@ -114,8 +116,10 @@ class PtHeadSelection(nn.Module):
         self._init_ternary()
     
     def _init_ternary(self):
-        nn.init.normal_(self.ternary_factor_u, mean=0.0, std=self.config.ternary_initializer_range)
-        nn.init.normal_(self.ternary_factor_v, mean=0.0, std=self.config.ternary_initializer_range)
+        # Hidden Weights initialization: std = 1 / sqrt(dim_z)
+        std = 1.0 / math.sqrt(self.config.dim_z)
+        nn.init.normal_(self.ternary_factor_u, mean=0.0, std=std)
+        nn.init.normal_(self.ternary_factor_v, mean=0.0, std=std)
 
     def forward(
         self,
@@ -141,6 +145,9 @@ class PtHeadSelection(nn.Module):
         qz_v = rope_applier.apply(qz_v)
 
         message_F = torch.matmul(qz_u, qz_v.transpose(2, 3))
+        
+        # Rank Scaling: divide by ternary_rank
+        message_F = message_F / self.ternary_rank
 
         if message_F.size() != (bsz, self.num_channels, seq_len, seq_len):
             raise ValueError(
@@ -200,7 +207,9 @@ class PtTopicModeling(nn.Module):
         self.binary_factor = nn.Parameter(torch.empty(self.dim_g, self.dim_z))
         self.act = POTENTIAL2ACT[config.potential_func_g](dim=-1, eps=config.potential_eps)
         
-        self._init_binary()
+        # Hidden Weights initialization: std = 1 / sqrt(dim_z)
+        std = 1.0 / math.sqrt(self.config.dim_z)
+        nn.init.normal_(self.binary_factor, mean=0.0, std=std)
         
     def _init_binary(self):
         nn.init.normal_(self.binary_factor, mean=0.0, std=self.config.binary_initializer_range)
@@ -287,12 +296,15 @@ class PtPreTrainedModel(PreTrainedModel):
     _supports_flash_attn_2 = True
 
     def _init_weights(self, module):
-        std = self.config.initializer_range
+        # Input Weights (Embedding) -> std=1.0
+        # Hidden Weights (Linear) -> std=1/sqrt(dim_z)
         if isinstance(module, nn.Linear):
+            std = 1.0 / math.sqrt(self.config.dim_z)
             module.weight.data.normal_(mean=0.0, std=std)
             if module.bias is not None:
                 module.bias.data.zero_()
         elif isinstance(module, nn.Embedding):
+            std = 1.0
             module.weight.data.normal_(mean=0.0, std=std)
             if module.padding_idx is not None:
                 module.weight.data[module.padding_idx].zero_()
@@ -432,6 +444,10 @@ class PtForMaskedLM(PtPreTrainedModel):
 
         # Initialize weights and apply final processing
         self.post_init()
+
+        # Output Weights initialization: std = 1 / dim_z
+        self.cls.predictions.decoder.weight.data.normal_(mean=0.0, std=1.0 / config.dim_z)
+        # transform.dense is hidden weight, already handled by _init_weights with 1/sqrt(dim_z)
 
     def get_output_embeddings(self):
         return self.cls.predictions.decoder

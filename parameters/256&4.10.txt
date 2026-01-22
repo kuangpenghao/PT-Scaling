@@ -1,0 +1,33 @@
+=== SAVE Step 136928 ===
+Last Eval Loss: 2.9680047035217285
+Hyperparameters:
+dim_z: 96
+binary_factor_scaling: 5.615
+ternary_factor_scaling: 1.02858
+classifier_amplifier: 164.93668
+regularize_z: 1.62087
+regularize_g: 4.21161
+regularize_h: 0.18722
+learning_rate: 0.041861
+
+
+model.unary_factors.weight:
+Mean: -5.9336e-01 | Std: 6.8593e+00 | Min: -3.4269e+01 | Max: 3.2649e+01
+model.iterator.head_selection.ternary_factor_u:
+Mean: -1.4439e-03 | Std: 1.6452e-01 | Min: -8.3068e-01 | Max: 9.7441e-01
+model.iterator.head_selection.ternary_factor_v:
+Mean: -1.2012e-03 | Std: 1.6802e-01 | Min: -1.0203e+00 | Max: 1.0812e+00
+model.iterator.topic_modeling.binary_factor:
+Mean: -8.5754e-03 | Std: 1.5814e-01 | Min: -2.0272e+00 | Max: 5.3273e-01
+cls.predictions.bias:
+Mean: -9.7865e+00 | Std: 4.3324e+00 | Min: -1.6760e+01 | Max: 4.4806e+00
+cls.predictions.transform.dense.weight:
+Mean: 5.0335e-03 | Std: 1.6292e-01 | Min: -1.1021e+00 | Max: 8.8505e-01
+cls.predictions.transform.dense.bias:
+Mean: 2.4050e-01 | Std: 1.9100e+00 | Min: -2.7643e+00 | Max: 6.4370e+00
+cls.predictions.transform.LayerNorm.weight:
+Mean: 8.9494e+00 | Std: 4.7316e+00 | Min: -1.2991e+01 | Max: 2.1395e+01
+cls.predictions.transform.LayerNorm.bias:
+Mean: -1.5669e-01 | Std: 4.8085e+00 | Min: -1.8726e+01 | Max: 6.3100e+00
+cls.predictions.decoder.weight:
+Mean: -5.5245e-02 | Std: 9.7295e-02 | Min: -8.6430e-01 | Max: 5.8028e-01
