@@ -61,3 +61,1194 @@
 [2026-01-22 21:12:43] 成功发送命令到窗口 sweep5: srun -N 1 -n 1 -X -u -p normal --gres=gpu:2 -c 2 --mem=1M -t 0-196:00:00 bash run_mlm2816.sh
 [2026-01-22 21:18:43] 成功发送命令到窗口 sweep5: srun -N 1 -n 1 -X -u -p normal --gres=gpu:2 -c 2 --mem=1M -t 0-196:00:00 bash run_mlm2816.sh
 [2026-01-22 21:24:13] 成功发送命令到窗口 sweep5: srun -N 1 -n 1 -X -u -p normal --gres=gpu:2 -c 2 --mem=1M -t 0-196:00:00 bash run_mlm2816.sh
+[2026-01-23 12:43:25] ⛔ 收到中断信号，监控脚本停止
+[2026-01-23 12:43:46] 🚀 TMUX监控脚本已启动
+[2026-01-23 12:43:46] 📋 监控窗口: sweep4
+[2026-01-23 12:43:46] ⏰ 检查间隔: 30秒
+[2026-01-23 12:43:46] 🎯 sweep4 -> run_mlm1536.sh (96h)
+[2026-01-23 12:43:46] 🎯 sweep5 -> run_mlm2816.sh (196h)
+[2026-01-23 12:43:46] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:2 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm1536.sh
+[2026-01-23 12:43:50] ⛔ 收到中断信号，监控脚本停止
+[2026-01-23 12:57:14] 🚀 TMUX监控脚本已启动
+[2026-01-23 12:57:14] 📋 监控窗口: sweep5
+[2026-01-23 12:57:14] ⏰ 检查间隔: 30秒
+[2026-01-23 12:57:14] 🎯 sweep4 -> run_mlm1536.sh (96h)
+[2026-01-23 12:57:14] 🎯 sweep5 -> run_mlm2816.sh (196h)
+[2026-01-23 23:16:20] 成功发送命令到窗口 sweep5: srun -N 1 -n 1 -X -u -p normal --gres=gpu:4 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm2816.sh
+[2026-01-23 23:41:20] 成功发送命令到窗口 sweep5: srun -N 1 -n 1 -X -u -p normal --gres=gpu:4 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm2816.sh
+[2026-01-24 19:09:04] 成功发送命令到窗口 sweep5: srun -N 1 -n 1 -X -u -p normal --gres=gpu:4 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm2816.sh
+[2026-01-24 19:24:34] 成功发送命令到窗口 sweep5: srun -N 1 -n 1 -X -u -p normal --gres=gpu:4 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm2816.sh
+[2026-01-24 19:32:34] 成功发送命令到窗口 sweep5: srun -N 1 -n 1 -X -u -p normal --gres=gpu:4 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm2816.sh
+[2026-01-24 20:33:05] 成功发送命令到窗口 sweep5: srun -N 1 -n 1 -X -u -p normal --gres=gpu:4 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm2816.sh
+[2026-01-24 20:46:05] 成功发送命令到窗口 sweep5: srun -N 1 -n 1 -X -u -p normal --gres=gpu:4 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm2816.sh
+[2026-01-24 21:01:35] 成功发送命令到窗口 sweep5: srun -N 1 -n 1 -X -u -p normal --gres=gpu:4 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm2816.sh
+[2026-01-24 21:04:35] 成功发送命令到窗口 sweep5: srun -N 1 -n 1 -X -u -p normal --gres=gpu:4 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm2816.sh
+[2026-01-24 21:09:35] 成功发送命令到窗口 sweep5: srun -N 1 -n 1 -X -u -p normal --gres=gpu:4 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm2816.sh
+[2026-01-24 21:11:05] 成功发送命令到窗口 sweep5: srun -N 1 -n 1 -X -u -p normal --gres=gpu:4 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm2816.sh
+[2026-01-24 21:17:35] 成功发送命令到窗口 sweep5: srun -N 1 -n 1 -X -u -p normal --gres=gpu:4 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm2816.sh
+[2026-01-24 21:23:35] 成功发送命令到窗口 sweep5: srun -N 1 -n 1 -X -u -p normal --gres=gpu:4 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm2816.sh
+[2026-01-24 21:27:35] 成功发送命令到窗口 sweep5: srun -N 1 -n 1 -X -u -p normal --gres=gpu:4 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm2816.sh
+[2026-01-24 21:36:05] 成功发送命令到窗口 sweep5: srun -N 1 -n 1 -X -u -p normal --gres=gpu:4 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm2816.sh
+[2026-01-24 21:58:41] ⛔ 收到中断信号，监控脚本停止
+[2026-01-24 21:58:42] 🚀 TMUX监控脚本已启动
+[2026-01-24 21:58:42] 📋 监控窗口: sweep5
+[2026-01-24 21:58:42] ⏰ 检查间隔: 30秒
+[2026-01-24 21:58:42] 🎯 sweep4 -> run_mlm1536.sh (96h)
+[2026-01-24 21:58:42] 🎯 sweep5 -> run_mlm2816.sh (196h)
+[2026-01-24 21:58:43] ⛔ 收到中断信号，监控脚本停止
+[2026-01-24 22:13:00] 🚀 TMUX监控脚本已启动
+[2026-01-24 22:13:00] 📋 监控窗口: sweep1, sweep2, sweep3, sweep4, sweep6, sweep7, sweep8
+[2026-01-24 22:13:00] ⏰ 检查间隔: 30秒
+[2026-01-24 22:13:00] 🎯 sweep4 -> run_mlm1536.sh (96h)
+[2026-01-24 22:13:00] 🎯 sweep5 -> run_mlm2816.sh (196h)
+[2026-01-24 22:13:00] 成功发送命令到窗口 sweep1: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-24 22:13:00] 成功发送命令到窗口 sweep2: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-24 22:13:00] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-24 22:13:00] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-24 22:13:00] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-24 22:13:00] 成功发送命令到窗口 sweep7: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-24 22:13:00] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-24 23:29:34] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-24 23:37:34] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-24 23:41:04] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-24 23:47:35] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-24 23:48:05] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-24 23:49:05] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-24 23:49:35] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-24 23:50:05] 成功发送命令到窗口 sweep7: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-24 23:52:05] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-24 23:55:35] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-24 23:56:05] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-24 23:56:35] 成功发送命令到窗口 sweep7: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-24 23:57:05] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-24 23:58:05] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 00:10:06] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 00:10:36] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:13:44] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:14:14] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:15:45] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:17:45] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:18:15] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:18:45] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:19:45] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:20:45] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:21:15] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:21:45] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:22:45] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:23:45] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:24:15] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:25:15] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:25:45] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:26:45] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:27:15] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:28:15] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:28:45] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:29:45] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:30:15] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:31:15] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:31:45] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:32:45] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:33:45] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:34:15] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:34:46] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:35:46] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:36:46] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:37:16] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:37:46] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:39:16] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:39:46] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:40:16] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:40:46] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:42:16] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:42:46] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:43:16] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:43:46] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:45:16] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:45:46] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:46:16] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:46:46] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:48:16] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:48:46] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:49:46] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:51:16] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:51:46] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:52:16] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:52:46] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:54:17] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:54:47] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:55:17] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:56:17] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:57:17] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:57:47] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:58:17] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 03:59:17] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:00:17] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:00:47] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:01:47] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:02:17] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:03:17] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:03:47] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:04:47] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:05:17] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:06:47] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:07:17] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:07:47] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:08:17] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:09:47] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:10:17] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:10:47] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:11:17] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:12:48] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:13:18] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:13:48] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:14:18] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:15:48] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:16:18] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:16:48] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:17:48] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:18:48] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:19:18] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:19:48] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:20:48] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:21:48] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:22:18] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:23:18] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:23:48] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:24:48] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:25:18] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:26:18] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:26:48] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:27:48] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:28:48] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:29:18] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:29:48] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:30:48] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:31:49] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:32:19] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:32:49] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:34:19] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:34:49] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:35:19] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:35:49] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:37:19] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:37:49] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:38:19] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:38:49] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:40:19] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:40:49] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:41:19] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:41:49] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:43:19] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:43:49] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:44:19] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:44:49] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:46:19] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:46:49] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:47:19] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:48:19] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:48:49] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:49:19] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:49:49] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:50:19] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:51:20] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:51:50] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:52:20] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:52:50] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:53:50] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:54:20] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:54:50] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:55:20] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:55:50] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:56:50] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:57:20] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:57:50] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:58:20] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:59:20] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 04:59:50] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:00:20] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:00:50] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:01:20] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:02:20] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:02:50] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:03:20] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:03:50] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:04:20] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:05:20] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:05:50] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:06:20] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:06:50] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:07:50] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:08:20] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:08:50] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:09:21] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:09:51] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:10:51] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:11:21] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:11:51] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:12:21] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:13:21] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:13:51] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:14:21] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:14:51] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:15:21] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:16:21] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:16:51] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:17:21] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:17:51] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:18:51] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:19:21] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:19:51] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:20:21] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:20:51] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:21:51] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:22:21] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:22:51] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:23:21] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:24:21] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:24:51] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:25:21] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:25:51] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:26:21] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:27:21] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:27:52] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:28:22] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:28:52] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:29:22] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:30:22] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:30:52] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:31:22] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:31:52] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:32:52] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:33:22] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:33:52] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:34:22] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:34:52] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:35:52] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:36:22] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:36:52] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:37:22] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:38:22] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:38:52] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:39:22] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:39:52] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:40:22] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:41:22] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:41:52] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:42:22] 成功发送命令到窗口 sweep3: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:42:52] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:43:52] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:44:22] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:44:52] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:45:53] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:46:23] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:46:53] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:47:23] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:47:53] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:48:53] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:49:23] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:49:53] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:50:23] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:51:23] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:51:53] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:52:23] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:52:53] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:53:23] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:54:23] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:54:53] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:55:23] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:55:53] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:56:23] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:57:23] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:57:53] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:58:23] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:58:53] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 05:59:53] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:00:23] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:00:53] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:01:23] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:01:53] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:02:53] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:03:23] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:03:53] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:04:24] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:05:24] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:05:54] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:06:24] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:06:54] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:07:24] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:08:24] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:08:54] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:09:24] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:09:54] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:10:54] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:11:24] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:11:54] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:12:24] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:12:54] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:13:54] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:14:24] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:14:54] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:15:24] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:16:24] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:16:54] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:17:24] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:17:54] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:18:24] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:19:24] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:19:54] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:20:24] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:20:54] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:21:24] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:22:24] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:22:54] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:23:25] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:23:55] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:24:55] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:25:25] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:25:55] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:26:25] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:26:55] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:27:55] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:28:25] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:28:55] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:29:25] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:30:25] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:30:55] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:31:25] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:31:55] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:32:25] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:33:25] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:33:55] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:34:25] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:34:55] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:35:55] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:36:25] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:36:55] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:37:25] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:37:55] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:38:55] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:39:25] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:39:55] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:40:25] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:41:25] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:41:55] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:42:26] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:42:56] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:43:26] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:44:26] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:44:56] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:45:26] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:45:56] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:46:26] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:47:26] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:47:56] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:48:26] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:48:56] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:49:56] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:50:26] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:50:56] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:51:26] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:51:56] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:52:56] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:53:26] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:53:56] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:54:26] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:55:26] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:55:56] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:56:26] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:56:56] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:57:26] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:58:26] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:58:56] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:59:26] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 06:59:56] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:00:57] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:01:27] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:01:57] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:02:27] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:02:57] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:03:57] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:04:27] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:04:57] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:05:27] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:06:27] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:06:57] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:07:27] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:07:57] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:08:27] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:09:27] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:09:57] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:10:27] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:10:57] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:11:27] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:12:27] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:12:57] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:13:27] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:13:57] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:14:57] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:15:27] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:15:57] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:16:27] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:16:57] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:17:57] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:18:27] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:18:57] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:19:27] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:20:28] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:20:58] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:21:28] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:21:58] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:22:28] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:23:28] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:23:58] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:24:28] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:24:58] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:25:58] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:26:28] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:26:58] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:27:28] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:27:58] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:28:58] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:29:28] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:29:58] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:30:28] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:31:28] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:31:58] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:32:28] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:32:58] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:33:28] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:34:28] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:34:58] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:35:28] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:35:58] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:36:58] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:37:28] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:37:58] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:38:29] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:38:59] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:39:59] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:40:29] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:40:59] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:41:29] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:41:59] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:42:59] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:43:29] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:43:59] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:44:29] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:45:29] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:45:59] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:46:29] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:46:59] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:47:29] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:48:29] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:48:59] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:49:29] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:49:59] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:50:59] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:51:29] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:51:59] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:52:29] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:52:59] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:53:59] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:54:29] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:54:59] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:55:29] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:56:29] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:57:00] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:57:30] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:58:00] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:58:30] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 07:59:30] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:00:00] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:00:30] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:01:00] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:02:00] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:02:30] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:03:00] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:03:30] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:04:00] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:05:00] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:05:30] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:06:00] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:06:30] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:07:00] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:08:00] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:08:30] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:09:00] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:09:30] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:10:30] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:11:00] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:11:30] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:12:00] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:12:30] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:13:30] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:14:00] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:14:30] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:15:00] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:16:01] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:16:31] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:17:01] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:17:31] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:18:01] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:19:01] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:19:31] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:20:01] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:20:31] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:21:31] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:22:01] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:22:31] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:23:01] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:23:31] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:24:31] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:25:01] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:25:31] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:26:01] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:27:01] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:27:31] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:28:01] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:28:31] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:29:01] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:30:01] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:30:31] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:31:01] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:31:31] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:32:31] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:33:01] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:33:32] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:34:02] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:34:32] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:35:32] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:36:02] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:36:32] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:37:02] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:37:32] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:38:32] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:39:02] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:39:32] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:40:02] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:41:02] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:41:32] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:42:02] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:42:32] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:43:02] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:44:02] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:44:32] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:45:02] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:45:32] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:46:32] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:47:02] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:47:32] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:48:02] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:48:32] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:49:32] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:50:02] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:50:32] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:51:02] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:52:02] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:52:33] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:53:03] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:53:33] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:54:03] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:55:03] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:55:33] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:56:03] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:56:33] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:57:33] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:58:03] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:58:33] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:59:03] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 08:59:33] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:00:33] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:01:03] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:01:33] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:02:03] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:02:33] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:03:33] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:04:03] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:04:33] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:05:03] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:06:03] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:06:33] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:07:03] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:07:33] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:08:03] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:09:03] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:09:33] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:10:03] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:10:33] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:11:34] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:12:04] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:12:34] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:13:04] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:13:34] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:14:34] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:15:04] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:15:34] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:16:04] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:17:04] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:17:34] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:18:04] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:18:34] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:19:04] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:20:04] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:20:34] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:21:04] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:21:34] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:22:34] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:23:04] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:23:34] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:24:04] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:24:34] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:25:34] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:26:04] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:26:34] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:27:04] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:28:04] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:28:34] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:29:04] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:29:34] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:30:05] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:31:05] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:31:35] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:32:05] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:32:35] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:33:05] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:34:05] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:34:35] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:35:35] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:36:05] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:36:35] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:37:05] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:38:05] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:38:35] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:39:05] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:39:35] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:40:05] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:41:05] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:41:35] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:42:05] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:42:35] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:43:35] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:44:05] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:44:35] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:45:05] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:45:35] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:46:35] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:47:05] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:47:35] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:48:05] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:49:06] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:49:36] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:50:06] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:50:36] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:51:06] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:52:06] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:52:36] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:53:06] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:53:36] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:54:06] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:55:06] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:55:36] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:56:06] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:56:36] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:57:36] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:58:06] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:58:36] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:59:06] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 09:59:36] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:00:36] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:01:06] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:01:36] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:02:06] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:03:06] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:03:36] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:04:06] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:04:36] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:05:06] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:06:06] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:06:36] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:07:07] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:07:37] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:08:37] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:09:07] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:09:37] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:10:07] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:10:37] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:11:37] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:12:07] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:12:37] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:13:07] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:14:07] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:14:37] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:15:07] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:15:37] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:16:07] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:17:07] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:17:37] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:18:07] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:18:37] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:19:07] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:20:07] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:20:37] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:21:07] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:21:37] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:22:37] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:23:07] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:23:37] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:24:07] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:24:37] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:25:38] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:26:08] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:26:38] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:27:08] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:28:08] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:28:38] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:29:08] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:29:38] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:30:08] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:31:08] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:31:38] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:32:08] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:32:38] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:33:38] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:34:08] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:34:38] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:35:08] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:35:38] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:36:38] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:37:08] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:37:38] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:38:08] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:39:08] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:39:38] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:40:08] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:40:38] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:41:08] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:42:08] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:42:38] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:43:08] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:43:39] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:44:39] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:45:09] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:45:39] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:46:09] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:46:39] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:47:39] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:48:09] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:48:39] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:49:09] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:49:39] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:50:39] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:51:09] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:51:39] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:52:09] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:53:09] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:53:39] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:54:09] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:54:39] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:55:09] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:56:09] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:56:39] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:57:09] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:57:39] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:58:39] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:59:09] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 10:59:39] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:00:09] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:00:39] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:01:40] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:02:10] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:02:40] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:03:10] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:04:10] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:04:40] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:05:10] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:05:40] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:06:10] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:07:10] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:07:40] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:08:10] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:08:40] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:09:40] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:10:10] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:10:40] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:11:10] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:11:40] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:12:40] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:13:10] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:13:40] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:14:10] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:14:40] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:15:40] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:16:10] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:16:40] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:17:10] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:18:10] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:18:40] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:19:10] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:19:40] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:20:11] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:21:11] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:21:41] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:22:11] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:22:41] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:23:41] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:24:11] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:24:41] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:25:11] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:25:41] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:26:41] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:27:11] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:27:41] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:28:11] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:29:11] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:29:41] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:30:11] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:30:41] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:31:11] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:32:11] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:32:41] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:33:11] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:33:41] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:34:11] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:35:11] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:35:41] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:36:11] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:36:41] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:37:41] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:38:12] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:38:42] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:39:12] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:39:42] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:40:42] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:41:12] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:41:42] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:42:12] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:43:12] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:43:42] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:44:12] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:44:42] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:45:12] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:46:12] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:46:42] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:47:12] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:47:42] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:48:42] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:49:12] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:49:42] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:50:12] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:50:42] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:51:42] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:52:12] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:52:42] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:53:12] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:54:12] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:54:42] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:55:12] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:55:42] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:56:13] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:57:13] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:57:43] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:58:13] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:58:43] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 11:59:43] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:00:13] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:00:43] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:01:13] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:01:43] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:02:43] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:03:13] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:03:43] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:04:13] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:04:43] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:05:43] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:06:13] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:06:43] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:07:13] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:08:13] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:08:43] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:09:13] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:09:43] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:10:13] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:11:13] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:11:43] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:12:13] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:12:43] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:13:43] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:14:13] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:14:44] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:15:14] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:15:44] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:16:44] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:17:14] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:17:44] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:18:14] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:19:14] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:19:44] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:20:14] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:20:44] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:21:14] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:22:14] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:22:44] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:23:14] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:23:44] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:24:14] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:25:14] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:25:44] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:26:14] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:26:44] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:27:44] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:28:14] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:28:44] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:29:14] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:29:44] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:30:44] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:31:14] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:31:44] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:32:14] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:33:15] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:33:45] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:34:15] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:34:45] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:35:15] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:36:15] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:36:45] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:37:15] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:37:45] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:38:45] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:39:15] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:39:45] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:40:15] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:40:45] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:41:45] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:42:15] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:42:45] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:43:15] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:43:45] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:44:45] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:45:15] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:45:45] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:46:15] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:47:15] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:47:45] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:48:15] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:48:45] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:49:15] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:50:15] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:50:46] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:51:16] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:51:46] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:52:46] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:53:16] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:53:46] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:54:16] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:54:46] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:55:46] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:56:16] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:56:46] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:57:16] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:57:46] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:58:46] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:59:16] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 12:59:46] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 13:00:16] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 13:01:16] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 13:03:46] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 13:04:16] 成功发送命令到窗口 sweep4: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0
+[2026-01-25 13:46:25] ⛔ 收到中断信号，监控脚本停止
+[2026-01-25 13:47:13] 🚀 TMUX监控脚本已启动
+[2026-01-25 13:47:13] 📋 监控窗口: sweep5
+[2026-01-25 13:47:13] ⏰ 检查间隔: 30秒
+[2026-01-25 13:47:13] 🎯 sweep4 -> run_mlm1536.sh (96h)
+[2026-01-25 13:47:13] 🎯 sweep5 -> run_mlm2816.sh (196h)
+[2026-01-25 13:47:13] 成功发送命令到窗口 sweep5: srun -N 1 -n 1 -X -u -p normal --gres=gpu:4 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm2816.sh
+[2026-01-25 14:46:44] 成功发送命令到窗口 sweep5: srun -N 1 -n 1 -X -u -p normal --gres=gpu:4 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm2816.sh
+[2026-01-25 17:35:15] 成功发送命令到窗口 sweep5: srun -N 1 -n 1 -X -u -p normal --gres=gpu:4 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm2816.sh
+[2026-01-25 20:30:39] ⛔ 收到中断信号，监控脚本停止
+[2026-01-25 20:36:09] 🚀 TMUX监控脚本已启动
+[2026-01-25 20:36:09] 📋 监控窗口: sweep5
+[2026-01-25 20:36:09] ⏰ 检查间隔: 30秒
+[2026-01-25 20:36:09] 🎯 sweep4 -> run_mlm1536.sh (96h)
+[2026-01-25 20:36:09] 🎯 sweep5 -> run_mlm2816.sh (196h)
+[2026-01-25 20:36:09] 成功发送命令到窗口 sweep5: srun -N 1 -n 1 -X -u -p normal --gres=gpu:2 -c 2 --mem=1M -t 0-196:00:00 bash run_mlm2816.sh
+[2026-01-25 20:40:09] 成功发送命令到窗口 sweep5: srun -N 1 -n 1 -X -u -p normal --gres=gpu:2 -c 2 --mem=1M -t 0-196:00:00 bash run_mlm2816.sh
+[2026-01-25 20:40:11] ⛔ 收到中断信号，监控脚本停止
+[2026-01-25 20:45:43] 🚀 TMUX监控脚本已启动
+[2026-01-25 20:45:43] 📋 监控窗口: sweep5
+[2026-01-25 20:45:43] ⏰ 检查间隔: 30秒
+[2026-01-25 20:45:43] 🎯 sweep4 -> run_mlm1536.sh (96h)
+[2026-01-25 20:45:43] 🎯 sweep5 -> run_mlm2816.sh (196h)
+[2026-01-25 20:45:43] 成功发送命令到窗口 sweep5: srun -N 1 -n 1 -X -u -p normal --gres=gpu:2 -c 2 --mem=1M -t 0-196:00:00 bash run_mlm2816.sh
+[2026-01-25 20:47:37] ⛔ 收到中断信号，监控脚本停止
+[2026-01-25 20:47:56] 🚀 TMUX监控脚本已启动
+[2026-01-25 20:47:56] 📋 监控窗口: sweep5
+[2026-01-25 20:47:56] ⏰ 检查间隔: 30秒
+[2026-01-25 20:47:56] 🎯 sweep4 -> run_mlm1536.sh (96h)
+[2026-01-25 20:47:56] 🎯 sweep5 -> run_mlm2816.sh (196h)
+[2026-01-25 20:47:56] 成功发送命令到窗口 sweep5: srun -N 1 -n 1 -X -u -p normal --gres=gpu:2 -c 2 --mem=1M -t 0-196:00:00 bash run_mlm2816.sh
+[2026-01-25 22:10:13] ⛔ 收到中断信号，监控脚本停止
+[2026-01-25 22:10:15] 🚀 TMUX监控脚本已启动
+[2026-01-25 22:10:15] 📋 监控窗口: sweep5, sweep6
+[2026-01-25 22:10:15] ⏰ 检查间隔: 30秒
+[2026-01-25 22:10:15] 🎯 sweep4 -> run_mlm1536.sh (96h)
+[2026-01-25 22:10:15] 🎯 sweep5 -> run_mlm2816.sh (196h)
+[2026-01-25 22:10:15] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm256.sh
+[2026-01-26 00:26:15] ⛔ 收到中断信号，监控脚本停止
+[2026-01-26 00:36:38] 🚀 TMUX监控脚本已启动
+[2026-01-26 00:36:38] 📋 监控窗口: sweep5, sweep6
+[2026-01-26 00:36:38] ⏰ 检查间隔: 30秒
+[2026-01-26 00:36:38] 🎯 sweep4 -> run_mlm1536.sh (96h)
+[2026-01-26 00:36:38] 🎯 sweep5 -> run_mlm2816.sh (196h)
+[2026-01-26 00:36:42] ⛔ 收到中断信号，监控脚本停止
+[2026-01-26 00:36:55] 🚀 TMUX监控脚本已启动
+[2026-01-26 00:36:55] 📋 监控窗口: sweep5, sweep6, sweep7
+[2026-01-26 00:36:55] ⏰ 检查间隔: 30秒
+[2026-01-26 00:36:55] 🎯 sweep4 -> run_mlm1536.sh (96h)
+[2026-01-26 00:36:55] 🎯 sweep5 -> run_mlm2816.sh (196h)
+[2026-01-26 00:36:55] 成功发送命令到窗口 sweep7: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm1536.sh
+[2026-01-26 02:28:58] 成功发送命令到窗口 sweep7: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm1536.sh
+[2026-01-26 02:38:59] 成功发送命令到窗口 sweep7: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm1536.sh
+[2026-01-26 02:45:59] 成功发送命令到窗口 sweep7: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm1536.sh
+[2026-01-26 02:47:29] 成功发送命令到窗口 sweep7: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm1536.sh
+[2026-01-26 08:47:38] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm256.sh
+[2026-01-26 10:47:41] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm256.sh
+[2026-01-26 10:58:11] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm256.sh
+[2026-01-26 11:06:11] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm256.sh
+[2026-01-26 11:06:41] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm256.sh
+[2026-01-26 11:07:11] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm256.sh
+[2026-01-26 11:16:11] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm256.sh
+[2026-01-26 11:23:12] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm256.sh
+[2026-01-26 11:30:12] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm256.sh
+[2026-01-26 11:37:12] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm256.sh
+[2026-01-26 11:44:12] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm256.sh
+[2026-01-26 11:51:12] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm256.sh
+[2026-01-26 11:58:12] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm256.sh
+[2026-01-26 12:05:13] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm256.sh
+[2026-01-26 12:12:13] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm256.sh
+[2026-01-26 12:19:43] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm256.sh
+[2026-01-26 12:27:13] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm256.sh
+[2026-01-26 12:35:13] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm256.sh
+[2026-01-26 13:01:14] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm256.sh
+[2026-01-26 13:43:45] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm256.sh
+[2026-01-26 14:06:41] ⛔ 收到中断信号，监控脚本停止
+[2026-01-26 14:10:29] 🚀 TMUX监控脚本已启动
+[2026-01-26 14:10:29] 📋 监控窗口: sweep5, sweep7
+[2026-01-26 14:10:29] ⏰ 检查间隔: 30秒
+[2026-01-26 14:10:29] 🎯 sweep4 -> run_mlm1536.sh (96h)
+[2026-01-26 14:10:29] 🎯 sweep5 -> run_mlm2816.sh (196h)
+[2026-01-26 14:15:40] ⛔ 收到中断信号，监控脚本停止
+[2026-01-26 14:15:41] 🚀 TMUX监控脚本已启动
+[2026-01-26 14:15:41] 📋 监控窗口: sweep5, sweep7
+[2026-01-26 14:15:41] ⏰ 检查间隔: 30秒
+[2026-01-26 14:15:41] 🎯 sweep4 -> run_mlm1536.sh (96h)
+[2026-01-26 14:15:41] 🎯 sweep5 -> run_mlm2816.sh (196h)
+[2026-01-26 14:15:42] ⛔ 收到中断信号，监控脚本停止
+[2026-01-26 14:15:51] 🚀 TMUX监控脚本已启动
+[2026-01-26 14:15:51] 📋 监控窗口: sweep5, sweep6, sweep7
+[2026-01-26 14:15:51] ⏰ 检查间隔: 30秒
+[2026-01-26 14:15:51] 🎯 sweep4 -> run_mlm1536.sh (96h)
+[2026-01-26 14:15:51] 🎯 sweep5 -> run_mlm2816.sh (196h)
+[2026-01-26 14:15:51] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm2816.sh
+[2026-01-26 14:17:21] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm2816.sh
+[2026-01-26 14:17:26] ⛔ 收到中断信号，监控脚本停止
+[2026-01-26 14:18:04] 🚀 TMUX监控脚本已启动
+[2026-01-26 14:18:04] 📋 监控窗口: sweep5, sweep6, sweep7
+[2026-01-26 14:18:04] ⏰ 检查间隔: 30秒
+[2026-01-26 14:18:04] 🎯 sweep4 -> run_mlm1536.sh (96h)
+[2026-01-26 14:18:04] 🎯 sweep5 -> run_mlm2816.sh (196h)
+[2026-01-26 14:18:04] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm2816.sh
+[2026-01-26 14:23:12] ⛔ 收到中断信号，监控脚本停止
+[2026-01-26 15:57:25] 🚀 TMUX监控脚本已启动
+[2026-01-26 15:57:25] 📋 监控窗口: sweep5, sweep6, sweep7
+[2026-01-26 15:57:25] ⏰ 检查间隔: 30秒
+[2026-01-26 15:57:25] 🎯 sweep4 -> run_mlm1536.sh (96h)
+[2026-01-26 15:57:25] 🎯 sweep5 -> run_mlm2816.sh (196h)
+[2026-01-26 15:57:25] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:2 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm5632.sh
+[2026-01-26 15:59:33] ⛔ 收到中断信号，监控脚本停止
+[2026-01-26 16:00:09] 🚀 TMUX监控脚本已启动
+[2026-01-26 16:00:09] 📋 监控窗口: sweep5, sweep6, sweep7
+[2026-01-26 16:00:09] ⏰ 检查间隔: 30秒
+[2026-01-26 16:00:09] 🎯 sweep4 -> run_mlm1536.sh (96h)
+[2026-01-26 16:00:09] 🎯 sweep5 -> run_mlm2816.sh (196h)
+[2026-01-26 16:00:09] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:2 -c 2 --mem=1M -t 0-196:00:00 bash run_mlm5632.sh
+[2026-01-26 16:19:43] ⛔ 收到中断信号，监控脚本停止
+[2026-01-26 16:19:52] 🚀 TMUX监控脚本已启动
+[2026-01-26 16:19:52] 📋 监控窗口: sweep5, sweep7
+[2026-01-26 16:19:52] ⏰ 检查间隔: 30秒
+[2026-01-26 16:19:52] 🎯 sweep4 -> run_mlm1536.sh (96h)
+[2026-01-26 16:19:52] 🎯 sweep5 -> run_mlm2816.sh (196h)
+[2026-01-26 19:39:34] ⛔ 收到中断信号，监控脚本停止
+[2026-01-26 19:39:34] 🚀 TMUX监控脚本已启动
+[2026-01-26 19:39:34] 📋 监控窗口: sweep5, sweep6, sweep7
+[2026-01-26 19:39:34] ⏰ 检查间隔: 30秒
+[2026-01-26 19:39:34] 🎯 sweep4 -> run_mlm1536.sh (96h)
+[2026-01-26 19:39:34] 🎯 sweep5 -> run_mlm2816.sh (196h)
+[2026-01-26 19:39:34] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:2 -c 2 --mem=1M -t 0-196:00:00 bash run_mlm2816_15.sh
+[2026-01-26 19:42:00] ⛔ 收到中断信号，监控脚本停止
+[2026-01-26 19:42:37] 🚀 TMUX监控脚本已启动
+[2026-01-26 19:42:37] 📋 监控窗口: sweep5, sweep6, sweep7
+[2026-01-26 19:42:37] ⏰ 检查间隔: 30秒
+[2026-01-26 19:42:37] 🎯 sweep4 -> run_mlm1536.sh (96h)
+[2026-01-26 19:42:37] 🎯 sweep5 -> run_mlm2816.sh (196h)
+[2026-01-26 19:42:37] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:2 -c 2 --mem=1M -t 0-196:00:00 bash run_mlm2816_15.sh
+[2026-01-26 21:30:40] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:2 -c 2 --mem=1M -t 0-196:00:00 bash run_mlm2816_15.sh
+[2026-01-26 22:40:12] 成功发送命令到窗口 sweep6: srun -N 1 -n 1 -X -u -p normal --gres=gpu:2 -c 2 --mem=1M -t 0-196:00:00 bash run_mlm2816_15.sh
+[2026-01-26 22:47:04] ⛔ 收到中断信号，监控脚本停止
+[2026-01-26 22:47:11] 🚀 TMUX监控脚本已启动
+[2026-01-26 22:47:11] 📋 监控窗口: sweep5, sweep7
+[2026-01-26 22:47:11] ⏰ 检查间隔: 30秒
+[2026-01-26 22:47:11] 🎯 sweep4 -> run_mlm1536.sh (96h)
+[2026-01-26 22:47:11] 🎯 sweep5 -> run_mlm2816.sh (196h)
+[2026-01-27 09:19:53] ⛔ 收到中断信号，监控脚本停止
+[2026-01-27 09:19:54] 🚀 TMUX监控脚本已启动
+[2026-01-27 09:19:54] 📋 监控窗口: sweep5, sweep6, sweep7, sweep8
+[2026-01-27 09:19:54] ⏰ 检查间隔: 30秒
+[2026-01-27 09:19:54] 🎯 sweep4 -> run_mlm1536.sh (96h)
+[2026-01-27 09:19:54] 🎯 sweep5 -> run_mlm2816.sh (196h)
+[2026-01-27 09:19:54] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm96.sh
+[2026-01-27 09:57:15] ⛔ 收到中断信号，监控脚本停止
+[2026-01-27 12:27:21] 🚀 TMUX监控脚本已启动
+[2026-01-27 12:27:21] 📋 监控窗口: sweep5, sweep7
+[2026-01-27 12:27:21] ⏰ 检查间隔: 30秒
+[2026-01-27 12:27:21] 🎯 sweep4 -> run_mlm1536.sh (96h)
+[2026-01-27 12:27:21] 🎯 sweep5 -> run_mlm2816.sh (196h)
+[2026-01-27 12:28:29] ⛔ 收到中断信号，监控脚本停止
+[2026-01-27 12:30:41] 🚀 TMUX监控脚本已启动
+[2026-01-27 12:30:41] 📋 监控窗口: sweep5, sweep7
+[2026-01-27 12:30:41] ⏰ 检查间隔: 30秒
+[2026-01-27 12:30:41] 🎯 sweep4 -> run_mlm1536.sh (96h)
+[2026-01-27 12:30:41] 🎯 sweep5 -> run_mlm2816.sh (196h)
+[2026-01-27 17:05:24] ⛔ 收到中断信号，监控脚本停止
+[2026-01-27 17:07:08] 🚀 TMUX监控脚本已启动
+[2026-01-27 17:07:08] 📋 监控窗口: sweep5, sweep7
+[2026-01-27 17:07:08] ⏰ 检查间隔: 30秒
+[2026-01-27 17:07:08] 🎯 sweep4 -> run_mlm1536.sh (96h)
+[2026-01-27 17:07:08] 🎯 sweep5 -> run_mlm2816.sh (196h)
+[2026-01-27 17:07:08] 成功发送命令到窗口 sweep5: srun -N 1 -n 1 -X -u -p normal --gres=gpu:3 -c 2 --mem=1M -t 0-196:00:00 bash run_mlm2816.sh
+[2026-01-27 17:55:50] ⛔ 收到中断信号，监控脚本停止
+[2026-01-27 17:59:18] 🚀 TMUX监控脚本已启动
+[2026-01-27 17:59:18] 📋 监控窗口: sweep5, sweep7
+[2026-01-27 17:59:18] ⏰ 检查间隔: 30秒
+[2026-01-27 17:59:18] 🎯 sweep4 -> run_mlm1536.sh (96h)
+[2026-01-27 17:59:18] 🎯 sweep5 -> run_mlm2816.sh (196h)
+[2026-01-27 18:41:03] ⛔ 收到中断信号，监控脚本停止
+[2026-01-27 23:03:58] 🚀 TMUX监控脚本已启动
+[2026-01-27 23:03:58] 📋 监控窗口: sweep7, sweep8
+[2026-01-27 23:03:58] ⏰ 检查间隔: 30秒
+[2026-01-27 23:03:58] 🎯 sweep4 -> run_mlm1536.sh (96h)
+[2026-01-27 23:03:58] 🎯 sweep5 -> run_mlm2816.sh (196h)
+[2026-01-27 23:08:28] 成功发送命令到窗口 sweep7: srun -N 1 -n 1 -X -u -p normal --gres=gpu:2 -c 2 --mem=1M -t 0-196:00:00 bash run_mlm1536.sh
+[2026-01-27 23:08:58] 成功发送命令到窗口 sweep7: srun -N 1 -n 1 -X -u -p normal --gres=gpu:2 -c 2 --mem=1M -t 0-196:00:00 bash run_mlm1536.sh
+[2026-01-27 23:08:58] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:3 -c 2 --mem=1M -t 0-196:00:00 bash run_mlm2816.sh
+[2026-01-27 23:09:20] ⛔ 收到中断信号，监控脚本停止
+[2026-01-27 23:29:10] 🚀 TMUX监控脚本已启动
+[2026-01-27 23:29:10] 📋 监控窗口: sweep7, sweep8
+[2026-01-27 23:29:10] ⏰ 检查间隔: 30秒
+[2026-01-27 23:29:10] 🎯 sweep4 -> run_mlm1536.sh (96h)
+[2026-01-27 23:29:10] 🎯 sweep5 -> run_mlm2816.sh (196h)
+[2026-01-27 23:29:10] 成功发送命令到窗口 sweep7: srun -N 1 -n 1 -X -u -p normal --gres=gpu:2 -c 2 --mem=1M -t 0-196:00:00 bash run_mlm1536.sh
+[2026-01-27 23:29:10] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:3 -c 2 --mem=1M -t 0-196:00:00 bash run_mlm2816.sh
+[2026-01-27 23:58:41] 成功发送命令到窗口 sweep8: srun -N 1 -n 1 -X -u -p normal --gres=gpu:3 -c 2 --mem=1M -t 0-196:00:00 bash run_mlm2816.sh
+[2026-01-27 23:59:41] 成功发送命令到窗口 sweep7: srun -N 1 -n 1 -X -u -p normal --gres=gpu:2 -c 2 --mem=1M -t 0-196:00:00 bash run_mlm1536.sh
+[2026-01-28 10:26:51] 成功发送命令到窗口 sweep7: srun -N 1 -n 1 -X -u -p normal --gres=gpu:2 -c 2 --mem=1M -t 0-196:00:00 bash run_mlm1536.sh
+[2026-01-28 15:40:28] 成功发送命令到窗口 sweep7: srun -N 1 -n 1 -X -u -p normal --gres=gpu:2 -c 2 --mem=1M -t 0-196:00:00 bash run_mlm1536.sh

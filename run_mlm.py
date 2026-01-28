@@ -313,6 +313,10 @@ class DataTrainingArguments:
         },
     )
     streaming: bool = field(default=False, metadata={"help": "Enable streaming mode"})
+    target_total_batch_size: Optional[int] = field(
+        default=None,
+        metadata={"help": "Target total batch size. If set, will auto-calculate gradient_accumulation_steps based on n_gpu and per_device_batch_size."}
+    )
 
     def __post_init__(self):
         if self.streaming:
@@ -415,6 +419,146 @@ class ParameterMonitorCallback(TrainerCallback):
         self._write_log("".join(lines))
 
 
+class ActivationMonitorCallback(TrainerCallback):
+    """
+    Log max/min/mean/var of activations and logits every 30 steps.
+    Also logs the numerical change of single elements compared to 30 steps ago.
+    """
+    def __init__(self, output_dir, model):
+        self.output_file = os.path.join(output_dir, "activation_monitor.txt")
+        self.model = model
+        self.step_interval = 30
+        self.history = {}
+        self.current_activations = {}
+        self.should_log_step = False
+        
+        # Ensure output dir exists
+        if hasattr(os, "makedirs"):
+            os.makedirs(output_dir, exist_ok=True)
+            
+        self._register_hooks()
+
+    def _register_hooks(self):
+        # Handle wrapping
+        m = self.model
+        if hasattr(m, "module"): m = m.module
+        
+        # 1. Hidden Layers (PtEncoderIterator)
+        iterator = None
+        if hasattr(m, "model") and hasattr(m.model, "iterator"):
+            iterator = m.model.iterator
+        elif hasattr(m, "iterator"):
+            iterator = m.iterator
+            
+        if iterator is not None:
+             iterator.register_forward_hook(self.hook_iterator)
+        
+        # 2. Logits (PtForMaskedLM -> cls)
+        # PtForMaskedLM has .cls which is PtLMPredictionHead
+        if hasattr(m, "cls"):
+            m.cls.register_forward_hook(self.hook_logits)
+            
+    def hook_iterator(self, module, input, output):
+        if not self.should_log_step: return
+        # Filter for main device if possible to avoid clutter generally, but simple approach:
+        # PtEncoderIterator returns (qz, ...)
+        qz = output[0] if isinstance(output, tuple) else output
+        if "hidden" not in self.current_activations:
+            self.current_activations["hidden"] = []
+        
+        # We only want to log one batch (usually the first one that runs on this gpu)
+        # But this hook runs multiple times (for iterations)
+        # We need to distinguish iterations.
+        # But hook doesn't know iteration index easily.
+        # However, forward is called sequentially.
+        self.current_activations["hidden"].append(qz.detach().cpu())
+
+    def hook_logits(self, module, input, output):
+        if not self.should_log_step: return
+        self.current_activations["logits"] = output.detach().cpu()
+
+    def on_step_begin(self, args, state, control, **kwargs):
+        self.current_activations = {}
+        # Log at steps 1, 31, 61... 
+        # state.global_step is 0 at start of step 1.
+        if state.global_step % self.step_interval == 0:
+            self.should_log_step = True
+        else:
+            self.should_log_step = False
+
+    def on_step_end(self, args, state, control, **kwargs):
+        # After step 1 finished, state.global_step is 1.
+        # (1-1) % 30 == 0 -> True.
+        if (state.global_step - 1) % self.step_interval == 0:
+            self._log_and_rotate(state.global_step)
+            
+    def _log_and_rotate(self, step_num):
+        # Only log on main process
+        if torch.distributed.is_initialized() and torch.distributed.get_rank() != 0:
+            return
+            
+        lines = [f"=== Activation Stats Step {step_num} ===\n"]
+        
+        def compute_stats(name, current_tensor, prev_tensor=None):
+            # Input: tensor of shape (batch, seq, dim)
+            f = current_tensor.float()
+            mean = f.mean().item()
+            var = f.var().item()
+            min_val = f.min().item()
+            max_val = f.max().item()
+            
+            stat_str = f"{name}: Mean: {mean:.4e} | Var: {var:.4e} | Min: {min_val:.4e} | Max: {max_val:.4e}\n"
+            
+            # Delta
+            if prev_tensor is not None:
+                # Check shapes
+                if prev_tensor.shape == current_tensor.shape:
+                    diff = (current_tensor.float() - prev_tensor.float())
+                    d_mean = diff.mean().item()
+                    d_var = diff.var().item()
+                    d_min = diff.min().item()
+                    d_max = diff.max().item()
+                    stat_str += f"  Delta(30): Mean: {d_mean:.4e} | Var: {d_var:.4e} | Min: {d_min:.4e} | Max: {d_max:.4e}\n"
+                else:
+                    stat_str += f"  Delta(30): Shape mismatch ({prev_tensor.shape} vs {current_tensor.shape})\n"
+            
+            return stat_str, current_tensor
+
+        # Process Logits
+        logits = self.current_activations.get("logits", None)
+        if logits is not None:
+            prev_logits = self.history.get("logits", None)
+            s, stored = compute_stats("Logits", logits, prev_logits)
+            lines.append(s)
+            self.history["logits"] = stored
+        else:
+            lines.append("Logits: Not captured\n")
+
+        # Process Hidden
+        hidden_list = self.current_activations.get("hidden", [])
+        if hidden_list:
+            if "hidden" not in self.history:
+                self.history["hidden"] = []
+            
+            new_history_hidden = []
+            for i, h in enumerate(hidden_list):
+                prev_h = self.history["hidden"][i] if i < len(self.history["hidden"]) else None
+                s, stored = compute_stats(f"Hidden Iter {i}", h, prev_h)
+                lines.append(s)
+                new_history_hidden.append(stored)
+            self.history["hidden"] = new_history_hidden
+        else:
+             lines.append("Hidden: Not captured\n")
+
+        lines.append("\n")
+        
+        try:
+            with open(self.output_file, "a") as f:
+                f.write("".join(lines))
+        except Exception as e:
+            logger.warning(f"Failed to write activations: {e}")
+
+
 def main():
     # See all possible arguments in src/transformers/training_args.py
     # or by passing the --help flag to this script.
@@ -427,7 +571,32 @@ def main():
         model_args, data_args, training_args = parser.parse_json_file(json_file=os.path.abspath(sys.argv[1]))
     else:
         model_args, data_args, training_args = parser.parse_args_into_dataclasses()
-    
+
+    # Auto-calculate gradient_accumulation_steps if target_total_batch_size is set
+    if data_args.target_total_batch_size is not None:
+        # Determine world size (n_gpus)
+        from transformers.training_args import ParallelMode
+        if training_args.parallel_mode == ParallelMode.DISTRIBUTED:
+             n_gpus = training_args.world_size
+        else:
+             n_gpus = training_args.n_gpu
+        
+        # Avoid division by zero
+        n_gpus = max(1, n_gpus)
+        
+        per_device = training_args.per_device_train_batch_size
+        target = data_args.target_total_batch_size
+        
+        # Calculate accumulation steps
+        new_accum_steps = max(1, target // (n_gpus * per_device))
+        
+        # Update training_args
+        # Create a logger locally since the global one might not be fully configured yet, 
+        # or use print to ensure visibility.
+        print(f"Auto-Scaling Info: Target BS={target} | GPUs={n_gpus} | Per-Device BS={per_device}")
+        print(f"  -> Setting gradient_accumulation_steps to {new_accum_steps}")
+        training_args.gradient_accumulation_steps = new_accum_steps
+
     # Initialize wandb early if running under wandb agent
     import wandb
     if wandb.run is None and "WANDB_RUN_ID" in os.environ:
@@ -507,34 +676,49 @@ def main():
     # In distributed training, the load_dataset function guarantee that only one local process can concurrently
     # download the dataset.
     if data_args.dataset_name is not None:
-        # Downloading and loading a dataset from the hub.
-        raw_datasets = load_dataset(
-            data_args.dataset_name,
-            data_args.dataset_config_name,
-            cache_dir=model_args.cache_dir,
-            token=model_args.token,
-            streaming=data_args.streaming,
-            trust_remote_code=model_args.trust_remote_code,
-        )
+        # Check if it is a local dataset saved via save_to_disk
+        if os.path.isdir(data_args.dataset_name) and os.path.exists(os.path.join(data_args.dataset_name, "dataset_dict.json")):
+            from datasets import load_from_disk
+            logger.info(f"Loading dataset from local disk: {data_args.dataset_name}")
+            raw_datasets = load_from_disk(data_args.dataset_name)
+        else:
+            # Downloading and loading a dataset from the hub.
+            raw_datasets = load_dataset(
+                data_args.dataset_name,
+                data_args.dataset_config_name,
+                cache_dir=model_args.cache_dir,
+                token=model_args.token,
+                streaming=data_args.streaming,
+                trust_remote_code=model_args.trust_remote_code,
+            )
+        
         if "validation" not in raw_datasets.keys():
-            raw_datasets["validation"] = load_dataset(
-                data_args.dataset_name,
-                data_args.dataset_config_name,
-                split=f"train[:{data_args.validation_split_percentage}%]",
-                cache_dir=model_args.cache_dir,
-                token=model_args.token,
-                streaming=data_args.streaming,
-                trust_remote_code=model_args.trust_remote_code,
-            )
-            raw_datasets["train"] = load_dataset(
-                data_args.dataset_name,
-                data_args.dataset_config_name,
-                split=f"train[{data_args.validation_split_percentage}%:]",
-                cache_dir=model_args.cache_dir,
-                token=model_args.token,
-                streaming=data_args.streaming,
-                trust_remote_code=model_args.trust_remote_code,
-            )
+            # If load_from_disk was used, raw_datasets has keys from dataset_dict.json (usually train, test, validation)
+            # If load_dataset was used, it might only have 'train' if no split logic was applied yet for some datasets without config
+            if data_args.streaming:
+                # Streaming split logic is different or not fully supported in this snippet, 
+                # but user turned off streaming for local disk
+                pass
+            else:
+                 # Standard logic from original script
+                 raw_datasets["validation"] = load_dataset(
+                    data_args.dataset_name,
+                    data_args.dataset_config_name,
+                    split=f"train[:{data_args.validation_split_percentage}%]",
+                    cache_dir=model_args.cache_dir,
+                    token=model_args.token,
+                    streaming=data_args.streaming,
+                    trust_remote_code=model_args.trust_remote_code,
+                )
+                 raw_datasets["train"] = load_dataset(
+                    data_args.dataset_name,
+                    data_args.dataset_config_name,
+                    split=f"train[{data_args.validation_split_percentage}%:]",
+                    cache_dir=model_args.cache_dir,
+                    token=model_args.token,
+                    streaming=data_args.streaming,
+                    trust_remote_code=model_args.trust_remote_code,
+                )
     else:
         data_files = {}
         if data_args.train_file is not None:
@@ -948,6 +1132,7 @@ def main():
     
     if training_args.local_rank in [-1, 0]:
         callbacks.append(ParameterMonitorCallback(training_args.output_dir))
+        # callbacks.append(ActivationMonitorCallback(training_args.output_dir, model))
 
     # Custom Optimizer for muP
     from torch.optim import AdamW
@@ -994,7 +1179,38 @@ def main():
         eps=training_args.adam_epsilon,
     )
 
-    trainer = Trainer(
+    # Define custom Trainer to fix DataParallel loss summing issue
+    class PtTrainer(Trainer):
+        def compute_loss(self, model, inputs, return_outputs=False, **kwargs):
+            outputs = model(**inputs)
+            loss = outputs["loss"] if isinstance(outputs, dict) else outputs[0]
+            # Fix for DataParallel summing: ensure mean reduction if loss is a vector
+            if loss.dim() > 0:
+                loss = loss.mean()
+            return (loss, outputs) if return_outputs else loss
+
+        def training_step(self, model, inputs, num_items_in_batch=None):
+            model.train()
+            inputs = self._prepare_inputs(inputs)
+
+            with self.compute_loss_context_manager():
+                loss = self.compute_loss(model, inputs)
+
+            if self.args.n_gpu > 1:
+                loss = loss.mean()
+
+            # Manual gradient accumulation handling to ensure loss scaling/logging is correct
+            if self.args.gradient_accumulation_steps > 1 and not self.deepspeed:
+                loss = loss / self.args.gradient_accumulation_steps
+
+            if self.deepspeed:
+                self.deepspeed.backward(loss)
+            else:
+                self.accelerator.backward(loss)
+
+            return loss.detach()
+
+    trainer = PtTrainer(
         model=model,
         args=training_args,
         train_dataset=train_dataset if training_args.do_train else None,

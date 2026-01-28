@@ -1,0 +1,24 @@
+python run_mlm.py \
+    --tokenizer_name TinyLlama/TinyLlama-1.1B-intermediate-step-955k-token-2T \
+    --config_name configs/pt_base.json \
+    --config_overrides potential_func_g=square \
+    --dataset_name wikitext \
+    --dataset_config_name wikitext-103-raw-v1 \
+    --per_device_train_batch_size 8 \
+    --per_device_eval_batch_size 8 \
+    --gradient_accumulation_steps 1 \
+    --do_train \
+    --do_eval \
+    --learning_rate 3e-4 \
+    --num_train_epochs 1 \
+    --save_total_limit 1 \
+    --logging_steps 50 \
+    --save_strategy steps \
+    --save_steps 500 \
+    --evaluation_strategy steps \
+    --eval_steps 500 \
+    --load_best_model_at_end True \
+    --metric_for_best_model eval_loss \
+    --report_to none \
+    --overwrite_output_dir \
+    --output_dir outputs/pt-test-mlm

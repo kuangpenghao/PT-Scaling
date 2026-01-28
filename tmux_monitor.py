@@ -10,14 +10,20 @@ from datetime import datetime
 import os
 
 # 配置
-TMUX_WINDOWS = ["sweep4", "sweep5"]
+TMUX_WINDOWS = ["sweep7","sweep8"]
 CHECK_INTERVAL = 30  # 检查间隔（秒）
 LOG_FILE = "log.txt"
 
 # 每个窗口的SLURM命令映射
 WINDOW_COMMANDS = {
-    "sweep4": "srun -N 1 -n 1 -X -u -p normal --gres=gpu:2 -c 2 --mem=1M -t 0-96:00:00 bash run_mlm1536.sh",
-    "sweep5": "srun -N 1 -n 1 -X -u -p normal --gres=gpu:2 -c 2 --mem=1M -t 0-196:00:00 bash run_mlm2816.sh"
+    "sweep1": "srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0",
+    "sweep2": "srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0",
+    "sweep3": "srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0",
+    "sweep4": "srun -N 1 -n 1 -X -u -p normal --gres=gpu:1 -c 2 --mem=1M -t 0-96:00:00 wandb agent kuangpenghao-shanghaitech-university/pt-scaling-mup/vgsec2t0",
+    "sweep5": "srun -N 1 -n 1 -X -u -p normal --gres=gpu:3 -c 2 --mem=1M -t 0-196:00:00 bash run_mlm2816.sh",
+    "sweep6": "srun -N 1 -n 1 -X -u -p normal --gres=gpu:3 -c 2 --mem=1M -t 0-196:00:00 bash run_mlm2816_10.sh",
+    "sweep7": "srun -N 1 -n 1 -X -u -p normal --gres=gpu:2 -c 2 --mem=1M -t 0-196:00:00 bash run_mlm1536.sh",
+    "sweep8": "srun -N 1 -n 1 -X -u -p normal --gres=gpu:3 -c 2 --mem=1M -t 0-196:00:00 bash run_mlm2816.sh"
 }
 
 

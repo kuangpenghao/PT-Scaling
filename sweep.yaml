@@ -51,10 +51,10 @@ parameters:
     value: 256
   
   dim_ratio:  # dim_g = dim_z * dim_ratio
-    values: [5.5]
+    values: [5]
 
   ternary_rank_ratio: # ternary_rank = dim_z * (value)
-    values: [0.25] # 调整倍数
+    values: [0.2] # 调整倍数
 
   # 缩放因子 (Scalars - Constant in muP)
   binary_factor_scaling:
