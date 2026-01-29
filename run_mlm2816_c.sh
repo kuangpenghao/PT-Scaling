@@ -6,7 +6,7 @@ export WANDB_PROJECT=pt-single-test
 
 python run_mlm.py \
     --tokenizer_name TinyLlama/TinyLlama-1.1B-intermediate-step-955k-token-2T \
-    --config_name configs/pt_1536_2.json \
+    --config_name configs/pt_2816.json \
     --dataset_name ./local_datasets/minipile \
     --do_train \
     --do_eval \
@@ -21,10 +21,14 @@ python run_mlm.py \
     --lr_scheduler_type cosine \
     --warmup_ratio 0.05 \
     --report_to wandb \
-    --run_name pt-resume-1536-260127-64 \
-    --output_dir outputs/pt-single-test/1536-260127-64 \
+    --run_name pt-resume-2816-260127-channel \
+    --output_dir outputs/pt-single-test/2816-260127-channel \
     --per_device_train_batch_size 4 \
     --per_device_eval_batch_size 4 \
     --target_total_batch_size 64 \
     --num_train_epochs 1.5 \
     --learning_rate 0.076203 \
+
+
+#   --run_name pt-resume-2816-260123 \
+#   --output_dir outputs/pt-single-test/2816-260123 \
