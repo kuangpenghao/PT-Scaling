@@ -3,3 +3,4 @@ accelerate >= 0.34.2
 datasets
 evaluate
 scikit-learn
+torch

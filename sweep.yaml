@@ -14,9 +14,7 @@ command:
   - --config_name
   - configs/pt_base.json
   - --dataset_name
-  - wikitext
-  - --dataset_config_name
-  - wikitext-103-raw-v1
+  - ./local_datasets/minipile
   - --do_train
   - --do_eval
   - --save_total_limit
@@ -51,10 +49,10 @@ parameters:
     value: 256
   
   dim_ratio:  # dim_g = dim_z * dim_ratio
-    values: [5]
+    values: [4]
 
   ternary_rank_ratio: # ternary_rank = dim_z * (value)
-    values: [0.2] # 调整倍数
+    values: [0.25] # 调整倍数
 
   # 缩放因子 (Scalars - Constant in muP)
   binary_factor_scaling:
@@ -103,8 +101,10 @@ parameters:
     values: ["abs"]
 
   # 其他
+  num_channels:
+    values: [10]
   num_iterations:
-    values: [8]
+    values: [6]
   # ternary_rank: computed from ratio
   max_position_embeddings:
     values: [1024]
@@ -143,7 +143,7 @@ parameters:
   gradient_accumulation_steps:
     values: [1]
   num_train_epochs:
-    values: [0.3]
+    values: [0.1]
 
 early_terminate:
   type: hyperband

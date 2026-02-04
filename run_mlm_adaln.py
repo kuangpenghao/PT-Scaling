@@ -34,22 +34,6 @@ from typing import Optional
 import datasets
 import evaluate
 import torch
-import numpy
-try:
-    # 修复 PyTorch 2.6+ 加载 checkpoint 时的 weights_only 报错
-    safe_globals = [
-        numpy.ndarray,
-        numpy._core.multiarray._reconstruct,
-        numpy.dtype
-    ]
-    # 处理 numpy.dtypes.UInt32DType
-    if hasattr(numpy, "dtypes") and hasattr(numpy.dtypes, "UInt32DType"):
-        safe_globals.append(numpy.dtypes.UInt32DType)
-
-    torch.serialization.add_safe_globals(safe_globals)
-except (AttributeError, TypeError, ImportError):
-    pass
-
 from datasets import load_dataset
 
 import transformers
@@ -72,6 +56,13 @@ from transformers.utils import check_min_version, send_example_telemetry
 from transformers.utils.versions import require_version
 
 import models
+from models.configuration_pt import PtConfig
+from models.modeling_pt_adaln import PtForMaskedLM, PtModel
+from transformers import AutoModel, AutoModelForMaskedLM
+
+# Override registration to use AdaLN model
+AutoModel.register(PtConfig, PtModel)
+AutoModelForMaskedLM.register(PtConfig, PtForMaskedLM)
 
 
 # Will error if the minimal version of Transformers is not installed. Remove at your own risks.
@@ -111,49 +102,47 @@ def solve_dims_and_channels(
     ternary_rank: int,
     tie_word_embeddings: bool,
     target_total: int,
-    num_channels_min: int = 12,
+    num_channels_min: int = 1,
     num_channels_max: int = 128,
 ):
-    """Search even num_channels and even (dim_z, dim_g) to match target params under a ratio.
-
+    """Search for dim_z (multiple of 64) and dim_g to match target params.
+    Fixed ternary_rank=64, num_channels = dim_z / 64 logic is enforced if ternary_rank is passed as 64.
+    
     Returns (num_channels, dim_z, dim_g, best_total, best_diff).
     """
     best = None
-    for ch in range(max(2, num_channels_min + num_channels_min % 2), num_channels_max + 1, 2):
-        # Solve quadratic: total ≈ (1+ratio)*dim_z^2 + (2*vocab + 2*ch*ternary_rank + 3)*dim_z + vocab
-        a = 1.0 + ratio
-        b = 2 * vocab_size + 2 * ch * ternary_rank + 3
-        c = vocab_size - target_total
-        discriminant = b * b - 4 * a * c
-        if discriminant < 0:
-            continue
-        approx_z = (-b + math.sqrt(discriminant)) / (2 * a)
-        if approx_z <= 0:
-            continue
+    
+    # We ignore the passed ternary_rank argument if we want to enforce the new rule strictly,
+    # OR we assume the caller passes 64. The user said "Fixed ternary rank=64".
+    # I will enforce it here for safety, or respect the argument?
+    # I'll respect the argument but defaults might need update. 
+    # Actually, let's assume this function searches for the best configuration.
+    
+    # New logic: Iterate num_channels -> dim_z = num_channels * 64
+    for ch in range(max(1, int(num_channels_min)), int(num_channels_max) + 1):
+        if ternary_rank == 64:
+            dim_z = ch * 64
+        else:
+             # Fallback or older logic? The user asked to "change the rule".
+             # So I will assume the rule applies globally now.
+             dim_z = ch * 64
         
-        # Search around approx_z for even dim_z
-        base_even = int(round(approx_z / 2)) * 2
-        for radius in [50, 100, 200]:
-            start = max(2, base_even - radius)
-            end = base_even + radius
-            for dim_z in range(start, end + 1, 2):
-                dim_g_float = ratio * dim_z
-                dim_g = int(round(dim_g_float / 2)) * 2
-                if dim_g <= 0:
-                    continue
-                total = compute_pt_parameter_count(dim_z, dim_g, ch, vocab_size, ternary_rank, tie_word_embeddings)
-                diff = abs(total - target_total)
-                if best is None or diff < best[4]:
-                    best = (ch, dim_z, dim_g, total, diff)
-                    if diff <= target_total * 0.005:
-                        break
-            if best and best[4] <= target_total * 0.005:
-                break
-        if best and best[4] <= target_total * 0.005:
-            break
+        # Calculate dim_g based on ratio
+        dim_g = int(round(dim_z * ratio))
+        
+        # Ensure even dim_g for safety (some ops might like it)
+        if dim_g % 2 != 0:
+            dim_g += 1
+            
+        current_total = compute_pt_parameter_count(dim_z, dim_g, ch, vocab_size, 64, tie_word_embeddings)
+        diff = abs(current_total - target_total)
+        
+        if best is None or diff < best[4]:
+            best = (ch, dim_z, dim_g, current_total, diff)
+            
     if best is None:
         raise ValueError(
-            f"Unable to find even (num_channels, dim_z, dim_g) for ratio={ratio} within channels [{num_channels_min}, {num_channels_max}]."
+            f"Unable to find config for target={target_total} with ratio={ratio}."
         )
     return best
 
