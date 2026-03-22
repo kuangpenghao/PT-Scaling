@@ -84,6 +84,21 @@ class AbsNormalization(nn.Module):
         return hidden_states.to(input_dtype)
 
 
+class SigmoidNormalization(nn.Module):
+    def __init__(self, dim=-1, eps=1e-6):
+        super().__init__()
+        self.dim = dim
+        self.eps = eps
+    
+    def forward(self, hidden_states: torch.Tensor):
+        input_dtype = hidden_states.dtype
+        hidden_states = hidden_states.to(torch.float32)
+        hidden_states = torch.sigmoid(hidden_states)
+        # Energy Recovery: scale by dim
+        hidden_states = F.normalize(hidden_states, p=1, dim=self.dim, eps=self.eps) * hidden_states.shape[self.dim]
+        return hidden_states.to(input_dtype)
+
+
 class Softmax(nn.Softmax):
     # This is a workaround to allow passing the eps
     def __init__(self, dim=-1, eps=None):
@@ -94,6 +109,7 @@ POTENTIAL2ACT = {
     "exp": Softmax,
     "abs": AbsNormalization,
     "square": SquaredSoftmax,
+    "sigmoid": SigmoidNormalization,
 }
 
 
@@ -489,8 +505,8 @@ class PtForMaskedLM(PtPreTrainedModel):
             return_dict=return_dict,
         )
 
-        sequence_output = outputs[0] * self.config.classifier_amplifier
-        prediction_scores = self.cls(sequence_output)
+        sequence_output = outputs[0]
+        prediction_scores = self.cls(sequence_output) * self.config.classifier_amplifier
 
         masked_lm_loss = None
         if labels is not None:

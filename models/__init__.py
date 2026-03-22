@@ -13,3 +13,9 @@ AutoModelForMaskedLM.register(PtConfig, PtForMaskedLM)
 
 from .modeling_llama import LlamaConfig, LlamaForMaskedLM
 AutoModelForMaskedLM.register(LlamaConfig, LlamaForMaskedLM)
+
+from .configuration_ut import UtConfig
+from .modeling_ut import UtModel, UtForMaskedLM
+AutoConfig.register("ut", UtConfig)
+AutoModel.register(UtConfig, UtModel)
+AutoModelForMaskedLM.register(UtConfig, UtForMaskedLM)

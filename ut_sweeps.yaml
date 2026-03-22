@@ -1,0 +1,87 @@
+program: run_mlm.py
+project: ut_sweeps
+method: bayes
+metric:
+  name: eval/loss
+  goal: minimize
+
+command:
+  - ${env}
+  - python
+  - ${program}
+  - --tokenizer_name
+  - TinyLlama/TinyLlama-1.1B-intermediate-step-955k-token-2T
+  - --config_name
+  - configs/ut_mini.json
+  - --dataset_name
+  - ./local_datasets/minipile
+  - --do_train
+  - --do_eval
+  - --num_train_epochs
+  - "1"
+  - --per_device_train_batch_size
+  - "32"
+  - --per_device_eval_batch_size
+  - "32"
+  - --target_total_batch_size
+  - "128"
+  - --lr_scheduler_type
+  - cosine
+  - ${args}
+  - --weight_decay
+  - "0"
+  - --logging_steps
+  - "50"
+  - --evaluation_strategy
+  - steps
+  - --eval_steps
+  - "500"
+  - --save_strategy
+  - steps
+  - --save_steps
+  - "500"
+  - --save_total_limit
+  - "1"
+  - --overwrite_output_dir
+  - --output_dir
+  - outputs/ut-sweeps-run
+  - --report_to
+  - wandb
+
+parameters:
+  learning_rate:
+    distribution: log_uniform_values
+    min: 0.0004
+    max: 0.0012
+
+  act_epsilon:
+    distribution: log_uniform_values
+    min: 0.001
+    max: 0.1
+
+  ponder_weight:
+    distribution: log_uniform_values
+    min: 0.00005
+    max: 0.01
+
+  act_bias_init:
+    distribution: uniform
+    min: -5.0
+    max: -0.5
+
+  hidden_dropout_prob:
+    distribution: uniform
+    min: 0.0
+    max: 0.15
+
+  attention_probs_dropout_prob:
+    distribution: uniform
+    min: 0.0
+    max: 0.15
+
+  warmup_ratio:
+    values: [0.05, 0.1, 0.15]
+
+early_terminate:
+  type: hyperband
+  min_iter: 10

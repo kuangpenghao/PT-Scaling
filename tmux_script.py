@@ -109,9 +109,9 @@ if __name__ == "__main__":
         "sweep3",
         "sweep4",
         "sweep5",
-        #"sweep6",
-        #"sweep7",
-        #"sweep8",
+        "sweep6",
+        "sweep7",
+        "sweep8",
         "monitor"
     ]
 

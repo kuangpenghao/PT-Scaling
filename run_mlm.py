@@ -248,11 +248,12 @@ class ModelArguments:
         },
     )
 
-    # def __post_init__(self):
-    #     if self.config_overrides is not None and (self.config_name is not None or self.model_name_or_path is not None):
-    #         raise ValueError(
-    #             "--config_overrides can't be used in combination with --config_name or --model_name_or_path"
-    #         )
+    # UT Sweep Parameters (added to allow command line passing)
+    act_epsilon: Optional[float] = field(default=None, metadata={"help": "ACT epsilon"})
+    ponder_weight: Optional[float] = field(default=None, metadata={"help": "Ponder cost weight"})
+    act_bias_init: Optional[float] = field(default=None, metadata={"help": "ACT bias initialization"})
+    hidden_dropout_prob: Optional[float] = field(default=None, metadata={"help": "Hidden dropout prob"})
+    attention_probs_dropout_prob: Optional[float] = field(default=None, metadata={"help": "Attention dropout prob"})
 
 
 @dataclass
@@ -332,6 +333,10 @@ class DataTrainingArguments:
     target_total_batch_size: Optional[int] = field(
         default=None,
         metadata={"help": "Target total batch size. If set, will auto-calculate gradient_accumulation_steps based on n_gpu and per_device_batch_size."}
+    )
+    decay_factor: float = field(
+        default=0.0,
+        metadata={"help": "Exponent factor for scaling weight decay based on model size (dim_z)."}
     )
 
     def __post_init__(self):
@@ -793,8 +798,44 @@ def main():
     
     if model_args.config_overrides is not None:
         logger.info(f"Overriding config: {model_args.config_overrides}")
-        config.update_from_string(model_args.config_overrides)
-        logger.info(f"New config: {config}")
+        for config_str in model_args.config_overrides.replace(" ", "").split(","):
+            key, value = config_str.split("=")
+            if key == "hidden_size":
+                config.hidden_size = int(value)
+            elif key == "num_hidden_layers":
+                config.num_hidden_layers = int(value)
+            elif key == "num_attention_heads":
+                config.num_attention_heads = int(value)
+            else:
+                try:
+                    # try int
+                    val = int(value)
+                except ValueError:
+                    try:
+                        # try float
+                        val = float(value)
+                    except ValueError:
+                        val = value
+                setattr(config, key, val)
+
+    # -------------------------------------------------------------------------
+    # Update config from ModelArguments (for UT sweeps w/ direct args)
+    # -------------------------------------------------------------------------
+    if model_args.act_epsilon is not None:
+        config.act_epsilon = model_args.act_epsilon
+        logger.info(f"Updated config.act_epsilon from args: {config.act_epsilon}")
+    if model_args.ponder_weight is not None:
+        config.ponder_weight = model_args.ponder_weight
+        logger.info(f"Updated config.ponder_weight from args: {config.ponder_weight}")
+    if model_args.act_bias_init is not None:
+        config.act_bias_init = model_args.act_bias_init
+        logger.info(f"Updated config.act_bias_init from args: {config.act_bias_init}")
+    if model_args.hidden_dropout_prob is not None:
+        config.hidden_dropout_prob = model_args.hidden_dropout_prob
+        logger.info(f"Updated config.hidden_dropout_prob from args: {config.hidden_dropout_prob}")
+    if model_args.attention_probs_dropout_prob is not None:
+        config.attention_probs_dropout_prob = model_args.attention_probs_dropout_prob
+        logger.info(f"Updated config.attention_probs_dropout_prob from args: {config.attention_probs_dropout_prob}")
     
     # Apply wandb sweep parameters directly to config object
     if wandb.run is not None:
@@ -1165,6 +1206,14 @@ def main():
         training_args.max_grad_norm = old_norm * (dim_z / 256.0)
         logger.info(f"muP: Scaled max_grad_norm from {old_norm} to {training_args.max_grad_norm} (dim_z={dim_z})")
     
+    # Scale weight_decay
+    weight_decay = training_args.weight_decay
+    if data_args.decay_factor != 0.0:
+        weight_decay = weight_decay * ((dim_z / 256.0) ** data_args.decay_factor)
+        logger.info(f"muP: Scaled weight_decay from {training_args.weight_decay} to {weight_decay} (dim_z={dim_z}, decay_factor={data_args.decay_factor})")
+        # Explicitly update training_args so it reflects in logs and checks
+        training_args.weight_decay = weight_decay
+
     group1_params = [] # Base LR: Input/Bias/LN
     group2_params = [] # Scaled LR: Hidden/Output (Matrices)
     
@@ -1188,8 +1237,8 @@ def main():
     
     optimizer = AdamW(
         [
-            {"params": group1_params, "weight_decay": training_args.weight_decay, "lr": base_lr},
-            {"params": group2_params, "weight_decay": training_args.weight_decay, "lr": base_lr / dim_z},
+            {"params": group1_params, "weight_decay": weight_decay, "lr": base_lr},
+            {"params": group2_params, "weight_decay": weight_decay, "lr": base_lr / dim_z},
         ],
         betas=(training_args.adam_beta1, training_args.adam_beta2),
         eps=training_args.adam_epsilon,

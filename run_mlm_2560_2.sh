@@ -4,14 +4,14 @@ export WANDB_PROJECT=pt-single-test
 # Resume from: outputs/pt-sweep-run/yyztqil6
 # (请根据实际检查点编号调整)
 
-python run_mlm_adaln.py \
+python run_mlm.py \
     --tokenizer_name TinyLlama/TinyLlama-1.1B-intermediate-step-955k-token-2T \
-    --config_name configs/pt_256.json \
+    --config_name configs/pt_2560_2.json \
     --dataset_name ./local_datasets/minipile \
     --do_train \
     --do_eval \
     --save_total_limit 1 \
-    --logging_steps 5 \
+    --logging_steps 25 \
     --save_strategy steps \
     --save_steps 800 \
     --evaluation_strategy steps \
@@ -21,10 +21,12 @@ python run_mlm_adaln.py \
     --lr_scheduler_type cosine \
     --warmup_ratio 0.05 \
     --report_to wandb \
-    --run_name pt-adaln-256 \
-    --output_dir outputs/pt-single-test/pt-adaln-256 \
-    --per_device_train_batch_size 4 \
-    --per_device_eval_batch_size 4 \
+    --run_name pt-2560-2-0.5 \
+    --output_dir outputs/pt-single-test/pt-2560-2-0.5 \
+    --per_device_train_batch_size 2 \
+    --per_device_eval_batch_size 2 \
     --target_total_batch_size 128 \
     --num_train_epochs 1 \
-    --learning_rate 0.078205 \
+    --learning_rate 0.18 \
+    --weight_decay 0.002 \
+    --decay_factor 0.5 \

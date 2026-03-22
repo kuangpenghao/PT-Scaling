@@ -34,6 +34,22 @@ from typing import Optional
 import datasets
 import evaluate
 import torch
+import numpy
+try:
+    # 修复 PyTorch 2.6+ 加载 checkpoint 时的 weights_only 报错
+    safe_globals = [
+        numpy.ndarray,
+        numpy._core.multiarray._reconstruct,
+        numpy.dtype
+    ]
+    # 处理 numpy.dtypes.UInt32DType
+    if hasattr(numpy, "dtypes") and hasattr(numpy.dtypes, "UInt32DType"):
+        safe_globals.append(numpy.dtypes.UInt32DType)
+
+    torch.serialization.add_safe_globals(safe_globals)
+except (AttributeError, TypeError, ImportError):
+    pass
+
 from datasets import load_dataset
 
 import transformers
@@ -56,13 +72,6 @@ from transformers.utils import check_min_version, send_example_telemetry
 from transformers.utils.versions import require_version
 
 import models
-from models.configuration_pt import PtConfig
-from models.modeling_pt_adaln import PtForMaskedLM, PtModel
-from transformers import AutoModel, AutoModelForMaskedLM
-
-# Override registration to use AdaLN model
-AutoModel.register(PtConfig, PtModel)
-AutoModelForMaskedLM.register(PtConfig, PtForMaskedLM)
 
 
 # Will error if the minimal version of Transformers is not installed. Remove at your own risks.
@@ -102,47 +111,49 @@ def solve_dims_and_channels(
     ternary_rank: int,
     tie_word_embeddings: bool,
     target_total: int,
-    num_channels_min: int = 1,
+    num_channels_min: int = 12,
     num_channels_max: int = 128,
 ):
-    """Search for dim_z (multiple of 64) and dim_g to match target params.
-    Fixed ternary_rank=64, num_channels = dim_z / 64 logic is enforced if ternary_rank is passed as 64.
-    
+    """Search even num_channels and even (dim_z, dim_g) to match target params under a ratio.
+
     Returns (num_channels, dim_z, dim_g, best_total, best_diff).
     """
     best = None
-    
-    # We ignore the passed ternary_rank argument if we want to enforce the new rule strictly,
-    # OR we assume the caller passes 64. The user said "Fixed ternary rank=64".
-    # I will enforce it here for safety, or respect the argument?
-    # I'll respect the argument but defaults might need update. 
-    # Actually, let's assume this function searches for the best configuration.
-    
-    # New logic: Iterate num_channels -> dim_z = num_channels * 64
-    for ch in range(max(1, int(num_channels_min)), int(num_channels_max) + 1):
-        if ternary_rank == 64:
-            dim_z = ch * 64
-        else:
-             # Fallback or older logic? The user asked to "change the rule".
-             # So I will assume the rule applies globally now.
-             dim_z = ch * 64
+    for ch in range(max(2, num_channels_min + num_channels_min % 2), num_channels_max + 1, 2):
+        # Solve quadratic: total ≈ (1+ratio)*dim_z^2 + (2*vocab + 2*ch*ternary_rank + 3)*dim_z + vocab
+        a = 1.0 + ratio
+        b = 2 * vocab_size + 2 * ch * ternary_rank + 3
+        c = vocab_size - target_total
+        discriminant = b * b - 4 * a * c
+        if discriminant < 0:
+            continue
+        approx_z = (-b + math.sqrt(discriminant)) / (2 * a)
+        if approx_z <= 0:
+            continue
         
-        # Calculate dim_g based on ratio
-        dim_g = int(round(dim_z * ratio))
-        
-        # Ensure even dim_g for safety (some ops might like it)
-        if dim_g % 2 != 0:
-            dim_g += 1
-            
-        current_total = compute_pt_parameter_count(dim_z, dim_g, ch, vocab_size, 64, tie_word_embeddings)
-        diff = abs(current_total - target_total)
-        
-        if best is None or diff < best[4]:
-            best = (ch, dim_z, dim_g, current_total, diff)
-            
+        # Search around approx_z for even dim_z
+        base_even = int(round(approx_z / 2)) * 2
+        for radius in [50, 100, 200]:
+            start = max(2, base_even - radius)
+            end = base_even + radius
+            for dim_z in range(start, end + 1, 2):
+                dim_g_float = ratio * dim_z
+                dim_g = int(round(dim_g_float / 2)) * 2
+                if dim_g <= 0:
+                    continue
+                total = compute_pt_parameter_count(dim_z, dim_g, ch, vocab_size, ternary_rank, tie_word_embeddings)
+                diff = abs(total - target_total)
+                if best is None or diff < best[4]:
+                    best = (ch, dim_z, dim_g, total, diff)
+                    if diff <= target_total * 0.005:
+                        break
+            if best and best[4] <= target_total * 0.005:
+                break
+        if best and best[4] <= target_total * 0.005:
+            break
     if best is None:
         raise ValueError(
-            f"Unable to find config for target={target_total} with ratio={ratio}."
+            f"Unable to find even (num_channels, dim_z, dim_g) for ratio={ratio} within channels [{num_channels_min}, {num_channels_max}]."
         )
     return best
 
@@ -237,11 +248,12 @@ class ModelArguments:
         },
     )
 
-    # def __post_init__(self):
-    #     if self.config_overrides is not None and (self.config_name is not None or self.model_name_or_path is not None):
-    #         raise ValueError(
-    #             "--config_overrides can't be used in combination with --config_name or --model_name_or_path"
-    #         )
+    # UT Sweep Parameters (added to allow command line passing)
+    act_epsilon: Optional[float] = field(default=None, metadata={"help": "ACT epsilon"})
+    ponder_weight: Optional[float] = field(default=None, metadata={"help": "Ponder cost weight"})
+    act_bias_init: Optional[float] = field(default=None, metadata={"help": "ACT bias initialization"})
+    hidden_dropout_prob: Optional[float] = field(default=None, metadata={"help": "Hidden dropout prob"})
+    attention_probs_dropout_prob: Optional[float] = field(default=None, metadata={"help": "Attention dropout prob"})
 
 
 @dataclass
@@ -321,6 +333,10 @@ class DataTrainingArguments:
     target_total_batch_size: Optional[int] = field(
         default=None,
         metadata={"help": "Target total batch size. If set, will auto-calculate gradient_accumulation_steps based on n_gpu and per_device_batch_size."}
+    )
+    decay_factor: float = field(
+        default=0.0,
+        metadata={"help": "Exponent factor for scaling weight decay based on model size (dim_z)."}
     )
 
     def __post_init__(self):
@@ -782,8 +798,44 @@ def main():
     
     if model_args.config_overrides is not None:
         logger.info(f"Overriding config: {model_args.config_overrides}")
-        config.update_from_string(model_args.config_overrides)
-        logger.info(f"New config: {config}")
+        for config_str in model_args.config_overrides.replace(" ", "").split(","):
+            key, value = config_str.split("=")
+            if key == "hidden_size":
+                config.hidden_size = int(value)
+            elif key == "num_hidden_layers":
+                config.num_hidden_layers = int(value)
+            elif key == "num_attention_heads":
+                config.num_attention_heads = int(value)
+            else:
+                try:
+                    # try int
+                    val = int(value)
+                except ValueError:
+                    try:
+                        # try float
+                        val = float(value)
+                    except ValueError:
+                        val = value
+                setattr(config, key, val)
+
+    # -------------------------------------------------------------------------
+    # Update config from ModelArguments (for UT sweeps w/ direct args)
+    # -------------------------------------------------------------------------
+    if model_args.act_epsilon is not None:
+        config.act_epsilon = model_args.act_epsilon
+        logger.info(f"Updated config.act_epsilon from args: {config.act_epsilon}")
+    if model_args.ponder_weight is not None:
+        config.ponder_weight = model_args.ponder_weight
+        logger.info(f"Updated config.ponder_weight from args: {config.ponder_weight}")
+    if model_args.act_bias_init is not None:
+        config.act_bias_init = model_args.act_bias_init
+        logger.info(f"Updated config.act_bias_init from args: {config.act_bias_init}")
+    if model_args.hidden_dropout_prob is not None:
+        config.hidden_dropout_prob = model_args.hidden_dropout_prob
+        logger.info(f"Updated config.hidden_dropout_prob from args: {config.hidden_dropout_prob}")
+    if model_args.attention_probs_dropout_prob is not None:
+        config.attention_probs_dropout_prob = model_args.attention_probs_dropout_prob
+        logger.info(f"Updated config.attention_probs_dropout_prob from args: {config.attention_probs_dropout_prob}")
     
     # Apply wandb sweep parameters directly to config object
     if wandb.run is not None:
@@ -1139,50 +1191,60 @@ def main():
         callbacks.append(ParameterMonitorCallback(training_args.output_dir))
         # callbacks.append(ActivationMonitorCallback(training_args.output_dir, model))
 
-    # Custom Optimizer for muP
-    from torch.optim import AdamW
-    
-    optimizer_grouped_parameters = []
-    base_lr = training_args.learning_rate
-    # If training_args.learning_rate is default (5e-5), hopefully user set it in sweep or args.
-    
-    dim_z = config.dim_z
-
-    # Scale max_grad_norm by dim_z / 256
-    if training_args.max_grad_norm is not None:
-        old_norm = training_args.max_grad_norm
-        training_args.max_grad_norm = old_norm * (dim_z / 256.0)
-        logger.info(f"muP: Scaled max_grad_norm from {old_norm} to {training_args.max_grad_norm} (dim_z={dim_z})")
-    
-    group1_params = [] # Base LR: Input/Bias/LN
-    group2_params = [] # Scaled LR: Hidden/Output (Matrices)
-    
-    for name, param in model.named_parameters():
-        if not param.requires_grad:
-            continue
+    # Conditional Custom Optimizer (muP only for PT)
+    optimizer = None
+    if getattr(config, "model_type", None) == "pt":
+        from torch.optim import AdamW
         
-        # Heuristic for Input/Bias/Scalar
-        is_group1 = False
-        if param.ndim < 2:
-            is_group1 = True
-        elif "unary_factors" in name or "embeddings" in name:
-            is_group1 = True
-        elif "bias" in name: 
-            is_group1 = True
+        base_lr = training_args.learning_rate
+        dim_z = config.dim_z
+
+        # Scale max_grad_norm by dim_z / 256
+        if training_args.max_grad_norm is not None:
+            old_norm = training_args.max_grad_norm
+            training_args.max_grad_norm = old_norm * (dim_z / 256.0)
+            logger.info(f"muP: Scaled max_grad_norm from {old_norm} to {training_args.max_grad_norm} (dim_z={dim_z})")
+        
+        # Scale weight_decay
+        weight_decay = training_args.weight_decay
+        if data_args.decay_factor != 0.0:
+            weight_decay = weight_decay * ((dim_z / 256.0) ** data_args.decay_factor)
+            logger.info(f"muP: Scaled weight_decay from {training_args.weight_decay} to {weight_decay} (dim_z={dim_z}, decay_factor={data_args.decay_factor})")
+            # Explicitly update training_args so it reflects in logs and checks
+            training_args.weight_decay = weight_decay
+
+        group1_params = [] # Base LR: Input/Bias/LN
+        group2_params = [] # Scaled LR: Hidden/Output (Matrices)
+        
+        for name, param in model.named_parameters():
+            if not param.requires_grad:
+                continue
             
-        if is_group1:
-            group1_params.append(param)
-        else:
-            group2_params.append(param)
-    
-    optimizer = AdamW(
-        [
-            {"params": group1_params, "weight_decay": training_args.weight_decay, "lr": base_lr},
-            {"params": group2_params, "weight_decay": training_args.weight_decay, "lr": base_lr / dim_z},
-        ],
-        betas=(training_args.adam_beta1, training_args.adam_beta2),
-        eps=training_args.adam_epsilon,
-    )
+            # Heuristic for Input/Bias/Scalar
+            is_group1 = False
+            if param.ndim < 2:
+                is_group1 = True
+            elif "unary_factors" in name or "embeddings" in name:
+                is_group1 = True
+            elif "bias" in name: 
+                is_group1 = True
+                
+            if is_group1:
+                group1_params.append(param)
+            else:
+                group2_params.append(param)
+        
+        optimizer = AdamW(
+            [
+                {"params": group1_params, "weight_decay": weight_decay, "lr": base_lr},
+                {"params": group2_params, "weight_decay": weight_decay, "lr": base_lr / dim_z},
+            ],
+            betas=(training_args.adam_beta1, training_args.adam_beta2),
+            eps=training_args.adam_epsilon,
+        )
+        logger.info("Initialized custom muP optimizer for PT.")
+    else:
+        logger.info(f"Model type is {getattr(config, 'model_type', None)}, skipping muP custom optimizer.")
 
     # Define custom Trainer to fix DataParallel loss summing issue
     class PtTrainer(Trainer):

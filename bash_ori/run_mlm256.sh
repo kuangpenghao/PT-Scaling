@@ -28,3 +28,4 @@ python run_mlm.py \
     --target_total_batch_size 64 \
     --num_train_epochs 1.5 \
     --learning_rate 0.076203 \
+    --weight_decay 0.01

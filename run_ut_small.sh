@@ -1,30 +1,29 @@
 #!/bin/bash
 export WANDB_PROJECT=pt-single-test
 
-# Resume from: outputs/pt-sweep-run/yyztqil6
-# (请根据实际检查点编号调整)
-
 python run_mlm.py \
     --tokenizer_name TinyLlama/TinyLlama-1.1B-intermediate-step-955k-token-2T \
-    --config_name configs/pt_512_1.json \
+    --config_name configs/ut_small.json \
     --dataset_name ./local_datasets/minipile \
     --do_train \
     --do_eval \
     --save_total_limit 1 \
-    --logging_steps 5 \
+    --logging_steps 25 \
     --save_strategy steps \
-    --save_steps 800 \
-    --evaluation_strategy steps \
-    --eval_steps 800 \
+    --save_steps 500 \
+    --eval_strategy steps \
+    --eval_steps 500 \
     --load_best_model_at_end \
     --metric_for_best_model eval_loss \
     --lr_scheduler_type cosine \
-    --warmup_ratio 0.05 \
+    --warmup_ratio 0.1 \
     --report_to wandb \
-    --run_name pt-512-1 \
-    --output_dir outputs/pt-single-test/pt-512-1 \
-    --per_device_train_batch_size 4 \
-    --per_device_eval_batch_size 4 \
+    --run_name ut-small-run-0.006 \
+    --output_dir outputs/ut-small-0.006 \
+    --per_device_train_batch_size 32 \
+    --per_device_eval_batch_size 32 \
     --target_total_batch_size 128 \
+    --learning_rate 0.006 \
     --num_train_epochs 1 \
-    --learning_rate 0.078205 \
+    --max_seq_length 1024 \
+    --bf16

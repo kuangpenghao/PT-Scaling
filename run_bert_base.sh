@@ -1,30 +1,29 @@
 #!/bin/bash
 export WANDB_PROJECT=pt-single-test
 
-# Resume from: outputs/pt-sweep-run/yyztqil6
-# (请根据实际检查点编号调整)
-
-python run_mlm_adaln.py \
+python run_bert.py \
     --tokenizer_name TinyLlama/TinyLlama-1.1B-intermediate-step-955k-token-2T \
-    --config_name configs/pt_512_2.json \
+    --config_name configs/bert_base.json \
     --dataset_name ./local_datasets/minipile \
     --do_train \
     --do_eval \
     --save_total_limit 1 \
-    --logging_steps 5 \
+    --logging_steps 10 \
     --save_strategy steps \
-    --save_steps 800 \
-    --evaluation_strategy steps \
-    --eval_steps 800 \
+    --save_steps 2000 \
+    --eval_strategy steps \
+    --eval_steps 2000 \
     --load_best_model_at_end \
     --metric_for_best_model eval_loss \
     --lr_scheduler_type cosine \
-    --warmup_ratio 0.05 \
+    --warmup_ratio 0.15 \
     --report_to wandb \
-    --run_name pt-adaln-512-2 \
-    --output_dir outputs/pt-single-test/pt-adaln-512-2 \
+    --run_name bert-base-run-4.4e-4-flash \
+    --output_dir outputs/bert-base-4.4e-4-flash \
     --per_device_train_batch_size 16 \
     --per_device_eval_batch_size 16 \
     --target_total_batch_size 128 \
+    --learning_rate 0.00044 \
     --num_train_epochs 1 \
-    --learning_rate 0.078205 \
+    --max_seq_length 1024 \
+    --bf16
