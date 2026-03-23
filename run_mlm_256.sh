@@ -21,12 +21,12 @@ python run_mlm.py \
     --lr_scheduler_type cosine \
     --warmup_ratio 0.05 \
     --report_to wandb \
-    --run_name pt-256-sigmoid-ite4 \
-    --output_dir outputs/pt-single-test/pt-256-sigmoid-ite4 \
+    --run_name pt-256-ece \
+    --output_dir outputs/pt-single-test/pt-256-ece \
     --per_device_train_batch_size 16 \
     --per_device_eval_batch_size 16 \
     --target_total_batch_size 128 \
     --num_train_epochs 1 \
-    --learning_rate 0.12 \
+    --learning_rate 0.18 \
     --weight_decay 0.002 \
     --decay_factor 0.5 \

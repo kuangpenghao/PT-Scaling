@@ -1,7 +1,7 @@
 #!/bin/bash
 export WANDB_PROJECT=pt-single-test
 
-python run_ut_mlm.py \
+python run_mlm.py \
     --tokenizer_name TinyLlama/TinyLlama-1.1B-intermediate-step-955k-token-2T \
     --config_name configs/ut_base.json \
     --dataset_name ./local_datasets/minipile \
@@ -18,12 +18,12 @@ python run_ut_mlm.py \
     --lr_scheduler_type cosine \
     --warmup_ratio 0.1 \
     --report_to wandb \
-    --run_name ut-base-run-0.002 \
-    --output_dir outputs/ut-base-0.002 \
-    --per_device_train_batch_size 32 \
-    --per_device_eval_batch_size 32 \
+    --run_name ut-base-run-0.005 \
+    --output_dir outputs/ut-base-0.005 \
+    --per_device_train_batch_size 16 \
+    --per_device_eval_batch_size 16 \
     --target_total_batch_size 128 \
-    --learning_rate 0.002 \
+    --learning_rate 0.005 \
     --num_train_epochs 1 \
     --max_seq_length 1024 \
     --bf16

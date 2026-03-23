@@ -18,12 +18,12 @@ python run_mlm.py \
     --lr_scheduler_type cosine \
     --warmup_ratio 0.1 \
     --report_to wandb \
-    --run_name ut-mini-run-7e-3 \
-    --output_dir outputs/tuning/ut-mini-7e-3 \
+    --run_name ut-mini-run-1e-3-unbind \
+    --output_dir outputs/tuning/ut-mini-1e-3-unbind \
     --per_device_train_batch_size 32 \
     --per_device_eval_batch_size 32 \
-    --target_total_batch_size 128 \
-    --learning_rate 0.007 \
+    --target_total_batch_size 256 \
+    --learning_rate 0.001 \
     --num_train_epochs 1 \
     --max_seq_length 1024 \
     --bf16

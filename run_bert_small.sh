@@ -10,20 +10,20 @@ python run_bert.py \
     --save_total_limit 1 \
     --logging_steps 25 \
     --save_strategy steps \
-    --save_steps 2000 \
+    --save_steps 800 \
     --eval_strategy steps \
-    --eval_steps 2000 \
+    --eval_steps 800 \
     --load_best_model_at_end \
     --metric_for_best_model eval_loss \
     --lr_scheduler_type cosine \
     --warmup_ratio 0.15 \
     --report_to wandb \
-    --run_name bert-small-run-3.5e-4-0.15 \
-    --output_dir outputs/bert-small-3.5e-4-0.15 \
+    --run_name bert-small-run-untie-0.000315 \
+    --output_dir outputs/bert-small-untie-0.000315 \
     --per_device_train_batch_size 32 \
     --per_device_eval_batch_size 32 \
     --target_total_batch_size 128 \
-    --learning_rate 0.00035 \
+    --learning_rate 0.000315 \
     --num_train_epochs 1 \
     --max_seq_length 1024 \
     --bf16

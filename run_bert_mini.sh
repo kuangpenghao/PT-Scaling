@@ -8,22 +8,22 @@ python run_bert.py \
     --do_train \
     --do_eval \
     --save_total_limit 1 \
-    --logging_steps 10 \
+    --logging_steps 25 \
     --save_strategy steps \
-    --save_steps 2000 \
+    --save_steps 800 \
     --eval_strategy steps \
-    --eval_steps 2000 \
+    --eval_steps 800 \
     --load_best_model_at_end \
     --metric_for_best_model eval_loss \
     --lr_scheduler_type cosine \
-    --warmup_ratio 0.2 \
+    --warmup_ratio 0.15 \
     --report_to wandb \
-    --run_name bert-mini-run-5e-4-0.2 \
-    --output_dir outputs/bert-mini-5e-4-0.2 \
+    --run_name bert-mini-run-untie-0.0005 \
+    --output_dir outputs/bert-mini-untie-0.0005 \
     --per_device_train_batch_size 32 \
     --per_device_eval_batch_size 32 \
     --target_total_batch_size 128 \
-    --learning_rate 5e-4 \
+    --learning_rate 0.0005 \
     --num_train_epochs 1 \
     --max_seq_length 1024 \
     --bf16

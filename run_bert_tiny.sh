@@ -3,12 +3,12 @@ export WANDB_PROJECT=pt-single-test
 
 python run_bert.py \
     --tokenizer_name TinyLlama/TinyLlama-1.1B-intermediate-step-955k-token-2T \
-    --config_name configs/bert_base.json \
+    --config_name configs/bert_tiny.json \
     --dataset_name ./local_datasets/minipile \
     --do_train \
     --do_eval \
     --save_total_limit 1 \
-    --logging_steps 25 \
+    --logging_steps 10 \
     --save_strategy steps \
     --save_steps 800 \
     --eval_strategy steps \
@@ -18,12 +18,12 @@ python run_bert.py \
     --lr_scheduler_type cosine \
     --warmup_ratio 0.15 \
     --report_to wandb \
-    --run_name bert-base-run-ece \
-    --output_dir outputs/bert-base-ece \
-    --per_device_train_batch_size 16 \
-    --per_device_eval_batch_size 16 \
+    --run_name bert-tiny-run-untie-0.000325 \
+    --output_dir outputs/bert-tiny-untie-0.000325 \
+    --per_device_train_batch_size 32 \
+    --per_device_eval_batch_size 32 \
     --target_total_batch_size 128 \
-    --learning_rate 0.00048 \
+    --learning_rate 0.000325 \
     --num_train_epochs 1 \
     --max_seq_length 1024 \
     --bf16

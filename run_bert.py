@@ -89,17 +89,19 @@ class BertTrainer(Trainer):
             loss = self.compute_loss(model, inputs)
 
         if self.args.n_gpu > 1:
-            loss = loss.mean()  # mean() to average on multi-gpu parallel training
+            loss = loss.mean()
 
-        if self.args.gradient_accumulation_steps > 1 and not self.deepspeed:
+        if self.args.gradient_accumulation_steps > 1 and not getattr(self, "deepspeed", False):
+            # We are doing custom scalar loss division corresponding to target total batch size logic
             loss = loss / self.args.gradient_accumulation_steps
 
-        if self.deepspeed:
+        if getattr(self, "deepspeed", False):
             self.deepspeed.backward(loss)
         else:
             self.accelerator.backward(loss)
 
         return loss.detach()
+
 from transformers.utils import check_min_version
 from transformers.utils.versions import require_version
 from transformers.trainer_utils import get_last_checkpoint
@@ -476,6 +478,8 @@ def main():
             config.update_from_string(model_args.config_overrides)
             logger.info(f"New config: {config}")
 
+    config.tie_word_embeddings = False
+
     tokenizer_kwargs = {
         "cache_dir": model_args.cache_dir,
         "use_fast": model_args.use_fast_tokenizer,
@@ -662,24 +666,29 @@ def main():
             eval_dataset = eval_dataset.select(range(max_eval_samples))
 
         def preprocess_logits_for_metrics(logits, labels):
+            import torch
             if isinstance(logits, tuple):
-                # Depending on the model and config, logits may contain extra tensors,
-                # like past_key_values, but logits always come first
                 logits = logits[0]
-            return logits.argmax(dim=-1)
+            probs = torch.softmax(logits, dim=-1)
+            confidences, preds = probs.max(dim=-1)
+            return (preds, confidences)
 
         metric = evaluate.load("accuracy", cache_dir=model_args.cache_dir)
 
         def compute_metrics(eval_preds):
-            preds, labels = eval_preds
-            # preds have the same shape as the labels, after the argmax(-1) has been calculated
-            # by preprocess_logits_for_metrics
+            preds, confidences = eval_preds.predictions
+            labels = eval_preds.label_ids
             labels = labels.reshape(-1)
             preds = preds.reshape(-1)
+            confidences = confidences.reshape(-1)
             mask = labels != -100
             labels = labels[mask]
             preds = preds[mask]
-            return metric.compute(predictions=preds, references=labels)
+            confidences = confidences[mask]
+            
+            res = metric.compute(predictions=preds, references=labels)
+            
+            return res
 
     # Data collator
     # This one will take care of randomly masking the tokens.

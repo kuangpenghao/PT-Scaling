@@ -1246,14 +1246,6 @@ def main():
 
     # Define custom Trainer to fix DataParallel loss summing issue
     class PtTrainer(Trainer):
-        def compute_loss(self, model, inputs, return_outputs=False, **kwargs):
-            outputs = model(**inputs)
-            loss = outputs["loss"] if isinstance(outputs, dict) else outputs[0]
-            # Fix for DataParallel summing: ensure mean reduction if loss is a vector
-            if loss.dim() > 0:
-                loss = loss.mean()
-            return (loss, outputs) if return_outputs else loss
-
         def training_step(self, model, inputs, num_items_in_batch=None):
             model.train()
             inputs = self._prepare_inputs(inputs)

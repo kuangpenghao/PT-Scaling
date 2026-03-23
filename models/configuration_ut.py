@@ -20,9 +20,10 @@ class UtConfig(PretrainedConfig):
         layer_norm_eps=1e-12,
         pad_token_id=0,
         position_embedding_type="absolute",
+        tie_word_embeddings=False,
         **kwargs
     ):
-        super().__init__(pad_token_id=pad_token_id, **kwargs)
+        super().__init__(pad_token_id=pad_token_id, tie_word_embeddings=tie_word_embeddings, **kwargs)
         self.vocab_size = vocab_size
         self.hidden_size = hidden_size
         self.dim_z = dim_z if dim_z is not None else hidden_size

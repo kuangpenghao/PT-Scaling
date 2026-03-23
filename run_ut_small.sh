@@ -18,12 +18,12 @@ python run_mlm.py \
     --lr_scheduler_type cosine \
     --warmup_ratio 0.1 \
     --report_to wandb \
-    --run_name ut-small-run-0.006 \
-    --output_dir outputs/ut-small-0.006 \
+    --run_name ut-small-run-0.00008 \
+    --output_dir outputs/ut-small-0.00008 \
     --per_device_train_batch_size 32 \
     --per_device_eval_batch_size 32 \
     --target_total_batch_size 128 \
-    --learning_rate 0.006 \
+    --learning_rate 0.0008 \
     --num_train_epochs 1 \
     --max_seq_length 1024 \
     --bf16
