@@ -108,11 +108,11 @@ if __name__ == "__main__":
         "sweep2",
         "sweep3",
         "sweep4",
-        "sweep5"#,
-        #"sweep6",
-        #"sweep7",
-        #"sweep8",
-        #"monitor"
+        "sweep5",
+        "sweep6",
+        "sweep7",
+        "sweep8",
+        "monitor"
     ]
 
     for i,session in enumerate(sessions):

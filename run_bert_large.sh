@@ -8,22 +8,22 @@ python run_bert.py \
     --do_train \
     --do_eval \
     --save_total_limit 1 \
-    --logging_steps 10 \
+    --logging_steps 25 \
     --save_strategy steps \
-    --save_steps 2000 \
+    --save_steps 800 \
     --eval_strategy steps \
-    --eval_steps 2000 \
+    --eval_steps 800 \
     --load_best_model_at_end \
     --metric_for_best_model eval_loss \
     --lr_scheduler_type cosine \
     --warmup_ratio 0.15 \
     --report_to wandb \
-    --run_name bert-large-1.75e-4 \
-    --output_dir outputs/bert-large-1.75e-4 \
+    --run_name bert-large-untie-0.00014 \
+    --output_dir outputs/bert-large-untie-0.00014 \
     --per_device_train_batch_size 8 \
     --per_device_eval_batch_size 8 \
     --target_total_batch_size 128 \
-    --learning_rate 0.000175 \
+    --learning_rate 0.00014 \
     --num_train_epochs 1 \
     --max_seq_length 1024 \
     --bf16

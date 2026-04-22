@@ -21,8 +21,8 @@ python run_mlm.py \
     --lr_scheduler_type cosine \
     --warmup_ratio 0.05 \
     --report_to wandb \
-    --run_name pt-1024-2-ece \
-    --output_dir outputs/pt-single-test/pt-1024-2-ece \
+    --run_name pt-1024-final \
+    --output_dir outputs/pt-single-test/pt-1024-final \
     --per_device_train_batch_size 8 \
     --per_device_eval_batch_size 8 \
     --target_total_batch_size 128 \

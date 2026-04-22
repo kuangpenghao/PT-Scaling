@@ -21,12 +21,12 @@ python run_mlm.py \
     --lr_scheduler_type cosine \
     --warmup_ratio 0.05 \
     --report_to wandb \
-    --run_name pt-1536-2-0.425 \
-    --output_dir outputs/pt-single-test/pt-1536-2-0.425 \
+    --run_name pt-1536-2-0.22 \
+    --output_dir outputs/pt-single-test/pt-1536-2-0.22 \
     --per_device_train_batch_size 4 \
     --per_device_eval_batch_size 4 \
     --target_total_batch_size 128 \
     --num_train_epochs 1 \
-    --learning_rate 0.18 \
+    --learning_rate 0.22 \
     --weight_decay 0.002 \
-    --decay_factor 0.425 \
+    --decay_factor 0.35 \

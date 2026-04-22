@@ -21,8 +21,8 @@ python run_mlm.py \
     --lr_scheduler_type cosine \
     --warmup_ratio 0.05 \
     --report_to wandb \
-    --run_name pt-3840-0.35-2 \
-    --output_dir outputs/pt-single-test/pt-3840-0.35-2 \
+    --run_name pt-3840-0.35 \
+    --output_dir outputs/pt-single-test/pt-3840-0.35 \
     --per_device_train_batch_size 2 \
     --per_device_eval_batch_size 2 \
     --target_total_batch_size 128 \

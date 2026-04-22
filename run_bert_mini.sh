@@ -18,12 +18,12 @@ python run_bert.py \
     --lr_scheduler_type cosine \
     --warmup_ratio 0.15 \
     --report_to wandb \
-    --run_name bert-mini-run-untie-0.0005 \
-    --output_dir outputs/bert-mini-untie-0.0005 \
+    --run_name bert-mini-run-untie-0.000395 \
+    --output_dir outputs/bert-mini-untie-0.000395 \
     --per_device_train_batch_size 32 \
     --per_device_eval_batch_size 32 \
     --target_total_batch_size 128 \
-    --learning_rate 0.0005 \
+    --learning_rate 0.000395 \
     --num_train_epochs 1 \
     --max_seq_length 1024 \
     --bf16

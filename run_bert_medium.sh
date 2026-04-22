@@ -18,12 +18,12 @@ python run_bert.py \
     --lr_scheduler_type cosine \
     --warmup_ratio 0.15 \
     --report_to wandb \
-    --run_name bert-medium-run-untie-0.00028 \
-    --output_dir outputs/bert-medium-untie-0.00028 \
+    --run_name bert-medium-run-untie-0.000275 \
+    --output_dir outputs/bert-medium-untie-0.000275 \
     --per_device_train_batch_size 16 \
     --per_device_eval_batch_size 16 \
     --target_total_batch_size 128 \
-    --learning_rate 0.00028 \
+    --learning_rate 0.000275 \
     --num_train_epochs 1 \
     --max_seq_length 1024 \
     --bf16

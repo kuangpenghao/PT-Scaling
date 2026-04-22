@@ -1,0 +1,86 @@
+program: run_mlm.py
+project: pt-noise-test
+name: pt-1024-sweep-7params
+method: random
+metric:
+  goal: minimize
+  name: eval_loss
+parameters:
+  learning_rate:
+    distribution: uniform
+    min: 0.144
+    max: 0.216
+  binary_factor_scaling:
+    distribution: uniform
+    min: 0.146688
+    max: 0.220032
+  ternary_factor_scaling:
+    distribution: uniform
+    min: 0.675536
+    max: 1.013304
+  classifier_amplifier:
+    distribution: uniform
+    min: 0.4
+    max: 0.6
+  regularize_z:
+    distribution: uniform
+    min: 0.646736
+    max: 0.970104
+  regularize_g:
+    distribution: uniform
+    min: 2.099632
+    max: 3.149448
+  regularize_h:
+    distribution: uniform
+    min: 0.12
+    max: 0.18
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - "--tokenizer_name"
+  - "TinyLlama/TinyLlama-1.1B-intermediate-step-955k-token-2T"
+  - "--config_name"
+  - "configs/pt_1024_2.json"
+  - "--dataset_name"
+  - "./local_datasets/minipile"
+  - "--do_train"
+  - "--do_eval"
+  - "--save_total_limit"
+  - "1"
+  - "--logging_steps"
+  - "25"
+  - "--save_strategy"
+  - "steps"
+  - "--save_steps"
+  - "800"
+  - "--evaluation_strategy"
+  - "steps"
+  - "--eval_steps"
+  - "800"
+  - "--load_best_model_at_end"
+  - "--metric_for_best_model"
+  - "eval_loss"
+  - "--lr_scheduler_type"
+  - "cosine"
+  - "--warmup_ratio"
+  - "0.05"
+  - "--report_to"
+  - "wandb"
+  - "--output_dir"
+  - "outputs/tuning/pt-1024-sweep"
+  - "--per_device_train_batch_size"
+  - "8"
+  - "--per_device_eval_batch_size"
+  - "8"
+  - "--target_total_batch_size"
+  - "128"
+  - "--weight_decay"
+  - "0.002"
+  - "--decay_factor"
+  - "0.35"
+  - "--num_train_epochs"
+  - "0.3"
+  - "--bf16"
+  - "--config_overrides"
+  - "binary_factor_scaling=${binary_factor_scaling},ternary_factor_scaling=${ternary_factor_scaling},classifier_amplifier=${classifier_amplifier},regularize_z=${regularize_z},regularize_g=${regularize_g},regularize_h=${regularize_h}"
